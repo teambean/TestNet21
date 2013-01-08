@@ -314,7 +314,8 @@ HEADERS += src/qt/bitbeangui.h \
     src/chainparams.h \
     src/hash.h \
     src/rpcprotocol.h \
-    src/tinyformat.h
+    src/tinyformat.h \
+    src/core.h
 
 SOURCES += src/qt/beancash.cpp \
     src/qt/bitbeangui.cpp \
@@ -381,7 +382,8 @@ SOURCES += src/qt/beancash.cpp \
     src/noui.cpp \
     src/kernel.cpp \
     src/pbkdf2.cpp \
-    src/qt/intro.cpp
+    src/qt/intro.cpp \
+    src/core.cpp
 
 RESOURCES += \
     src/qt/beancash.qrc

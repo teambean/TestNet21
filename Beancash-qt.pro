@@ -313,7 +313,8 @@ HEADERS += src/qt/bitbeangui.h \
     src/limitedmap.h \
     src/chainparams.h \
     src/hash.h \
-    src/rpcprotocol.h
+    src/rpcprotocol.h \
+    src/tinyformat.h
 
 SOURCES += src/qt/beancash.cpp \
     src/qt/bitbeangui.cpp \

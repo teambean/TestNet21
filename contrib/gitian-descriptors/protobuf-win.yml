@@ -1,0 +1,56 @@
+---
+name: "protobuf-win32"
+suites:
+- "precise"
+architectures:
+- "amd64"
+packages:
+- "mingw-w64"
+- "g++-mingw-w64"
+- "zip"
+- "faketime"
+reference_datetime: "2020-02-13 00:00:00"
+remotes: []
+files:
+- "protobuf-cpp-3.14.0-rc-2.tar.gz"
+script: |
+  #
+  export TZ=UTC
+  INDIR=$HOME/build
+  OPTFLAGS="-O2"
+  # Integrity Check
+  echo "ba053601931b57eb5eb754f218c6630f8f6c18e8ca26ec6b49dce07716844c09  protobuf-cpp-3.14.0-rc-2.tar.gz" | sha256sum -c
+
+  for BITS in 32 64; do # for architectures
+    #
+    INSTALLPREFIX=$HOME/staging${BITS}
+    BUILDDIR=$HOME/build${BITS}
+    if [ "$BITS" == "32" ]; then
+      HOST=i686-w64-mingw32
+    else
+      HOST=x86_64-w64-mingw32
+    fi
+    #
+    mkdir -p $INSTALLPREFIX $BUILDDIR
+    cd $BUILDDIR
+    #
+    tar xjf $INDIR/protobuf-cpp-3.14.0-rc-2.tar.gz
+    cd protobuf-cpp-3.14.0-rc-2
+    # First: build a native (linux) protoc
+    ./configure --enable-shared=no --disable-dependency-tracking
+    make
+    mkdir -p $INSTALLPREFIX/host/bin
+    cp src/protoc $INSTALLPREFIX/host/bin
+    # Now recompile with the mingw cross-compiler:
+    make distclean
+    ./configure --prefix=$INSTALLPREFIX --enable-shared=no --disable-dependency-tracking --with-protoc=$INSTALLPREFIX/host/bin/protoc --host=$HOST CXXFLAGS="-frandom-seed=11 ${OPTFLAGS}"
+    make
+    make install
+    #
+    cd $INSTALLPREFIX
+    export LD_PRELOAD=/usr/lib/faketime/libfaketime.so.1
+    export FAKETIME=$REFERENCE_DATETIME
+    zip -r $OUTDIR/protobuf-win$BITS-3.14.0-rc-2.zip include lib host
+    unset LD_PRELOAD
+    unset FAKETIME
+  done # for BITS in

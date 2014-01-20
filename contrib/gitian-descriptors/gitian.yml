@@ -18,25 +18,25 @@ packages:
 - "unzip"
 - "pkg-config"
 - "libpng12-dev"
-reference_datetime: "2015-02-13 00:00:00"
+reference_datetime: "2020-02-13 00:00:00"
 remotes:
 - "url": "https://github.com/teambean/BeanCash.git"
   "dir": ""
 files:
-- "qrencode-4.0.2.tar.gz"
-- "protobuf-2.5.0.tar.gz"
+- "qrencode-4.1.1.tar.gz"
+- "protobuf-cpp-3.14.0-rc-2.tar.gz"
 script: |
   INSTDIR="$HOME/install"
   export LIBRARY_PATH="$INSTDIR/lib"
   #
-  tar xzfm qrencode-4.0.2.tar.gz
-  cd qrencode-4.0.2
+  tar xzfm qrencode-4.1.1.tar.gz
+  cd qrencode-4.1.1
   ./configure --prefix=$INSTDIR --enable-static --disable-shared
   make $MAKEOPTS install
   cd ..
   #
-  tar xzfm protobuf-2.5.0.tar.gz
-  cd protobuf-2.5.0
+  tar xzfm protobuf-cpp-3.14.0-rc-2.tar.gz
+  cd protobuf-cpp-3.14.0-rc-2
   ./configure --prefix=$INSTDIR --enable-static --disable-shared
   make $MAKEOPTS install
   cd ..

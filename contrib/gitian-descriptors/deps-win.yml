@@ -1,0 +1,94 @@
+---
+name: "beancash-deps"
+suites:
+- "precise"
+architectures:
+- "amd64"
+packages:
+- "mingw-w64"
+- "g++-mingw-w64"
+- "git-core"
+- "zip"
+- "faketime"
+- "psmisc"
+reference_datetime: "2020-02-13 00:00:00"
+remotes: []
+files:
+- "openssl-1.0.2o.tar.gz"
+- "db-5.3.28.tar.gz"
+- "zlib-1.2.11.tar.gz"
+- "libpng-1.6.37.tar.gz"
+- "qrencode-4.1.1.tar.gz"
+script: |
+  #
+  export LD_PRELOAD=/usr/lib/faketime/libfaketime.so.1
+  export FAKETIME=$REFERENCE_DATETIME
+  export TZ=UTC
+  INDIR=$HOME/build
+  # Input Integrity Check
+  echo "ec3f5c9714ba0fd45cb4e087301eb1336c317e0d20b575a125050470e8089e4d  openssl-1.0.2o.tar.gz"  | sha256sum -c
+  echo "e0a992d740709892e81f9d93f06daf305cf73fb81b545afe72478043172c3628  db-5.3.28.tar.gz" 	  | sha256sum -c
+  echo "c3e5e9fdd5004dcb542feda5ee4f0ff0744628baf8ed2dd5d66f8ca1197cb1a1  zlib-1.2.11.tar.gz"     | sha256sum -c
+  echo "daeb2620d829575513e35fecc83f0d3791a620b9b93d800b763542ece9390fb4  libpng-1.6.37.tar.gz"   | sha256sum -c
+  echo "da448ed4f52aba6bcb0cd48cac0dd51b8692bccc4cd127431402fca6f8171e8e  qrencode-4.1.1.tar.gz"  | sha256sum -c
+
+  for BITS in 32 64; do # for architectures
+    #
+    INSTALLPREFIX=$HOME/staging${BITS}
+    BUILDDIR=$HOME/build${BITS}
+    if [ "$BITS" == "32" ]; then
+      HOST=i686-w64-mingw32
+    else
+      HOST=x86_64-w64-mingw32
+    fi
+    #
+    mkdir -p $INSTALLPREFIX $BUILDDIR
+    cd $BUILDDIR
+    #
+    tar xzf $INDIR/openssl-1.0.2o.tar.gz
+    cd openssl-1.0.2o
+    if [ "$BITS" == "32" ]; then
+      OPENSSL_TGT=mingw
+    else
+      OPENSSL_TGT=mingw64
+    fi
+    ./Configure --cross-compile-prefix=$HOST- ${OPENSSL_TGT} no-shared no-dso --openssldir=$INSTALLPREFIX
+    make
+    make install_sw
+    cd ..
+    #
+    tar xzf $INDIR/db-5.3.28.tar.gz
+    cd db-5.3.28/build_unix
+    ../dist/configure --prefix=$INSTALLPREFIX --enable-mingw --enable-cxx --host=$HOST --disable-shared
+    make $MAKEOPTS library_build
+    make install_lib install_include
+    cd ../..
+    #
+
+  @@ -67,8 +67,8 @@
+    #
+    tar xzf $INDIR/zlib-1.2.11.tar.gz
+    cd zlib-1.2.11
+    CROSS_PREFIX=$HOST- ./configure --prefix=$INSTALLPREFIX --static
+    make
+    make install
+    cd ..
+    #
+    tar xzf $INDIR/libpng-1.6.37.tar.gz
+    cd libpng-1.6.37
+    OPT="-O2"
+    CPPFLAGS="${OPT} -I$INSTALLPREFIX/include" CFLAGS="${OPT} -I$INSTALLPREFIX/include" LDFLAGS="${OPT} -L$INSTALLPREFIX/lib" ./configure --disable-shared --prefix=$INSTALLPREFIX --host=$HOST
+    make $MAKEOPTS
+    make install
+    cd ..
+    #
+    tar xjf $INDIR/qrencode-4.1.1.tar.gz
+    cd qrencode-4.1.1
+    png_CFLAGS="-I$INSTALLPREFIX/include" png_LIBS="-L$INSTALLPREFIX/lib -lpng" ./configure --prefix=$INSTALLPREFIX --host=$HOST
+    make
+    make install
+    cd ..
+    #
+    cd $INSTALLPREFIX
+    zip -r $OUTDIR/beancash-deps-win$BITS-gitian-r13.zip include lib
+  done # for BITS in

@@ -1,4 +1,4 @@
-// Copyright (c) 2018 Bean Core www.beancash.org
+// Copyright (c) 2018-2020 Bean Core www.beancash.org
 //
 // Alert system
 //

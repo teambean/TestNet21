@@ -204,7 +204,7 @@ bool AppInit(int argc, char* argv[])
     }
     if (!fRet) {
         if (detectShutdownThread)
-            detectShutdownThread->interrupted();
+            detectShutdownThread->interrupt();
         threadGroup.interrupt_all();
     }
 

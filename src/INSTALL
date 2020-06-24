@@ -1,0 +1,9 @@
+Building Bean Cash
+
+See doc/readme-qt.rst for instructions on building Beancash-QT,
+the intended-for-end-users, nice-graphical-interface, reference
+implementation of Bean Cash Core.
+
+See doc/build-*.txt for instructions on building Beancashd,
+the intended-for-services, no-graphical-interface, reference
+implementation of Bean Cash Core daemon.

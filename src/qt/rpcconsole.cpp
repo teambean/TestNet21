@@ -210,7 +210,8 @@ RPCConsole::RPCConsole(QWidget *parent) :
 
     // set library version labels
     ui->openSSLVersion->setText(SSLeay_version(SSLEAY_VERSION));
-    ui->berkeleyDBVersion->setText(DbEnv::version(0, 0, 0));
+    // ui->berkeleyDBVersion->setText(DbEnv::version(0, 0, 0));
+    ui->berkeleyDBVersion->setText(DbEnv::full_version(0, 0, 0, 0, 0));
 
     startExecutor();
     setTrafficGraphRange(INITIAL_TRAFFIC_GRAPH_MINS);

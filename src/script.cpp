@@ -269,6 +269,7 @@ static bool IsCanonicalPubKey(const valtype &vchPubKey) {
 }
 
 static bool IsCanonicalSignature(const valtype &vchSig) {
+
     // See https://bitbeantalk.org/index.php?topic=8392.msg127623#msg127623
     // A canonical signature exists of: <30> <total len> <02> <len R> <R> <02> <len S> <S> <hashtype>
     // Where R and S are not negative (their first byte has its highest bit not set), and not
@@ -312,9 +313,7 @@ static bool IsCanonicalSignature(const valtype &vchSig) {
     if (nLenS > 1 && (S[0] == 0x00) && !(S[1] & 0x80))
         return error("Non-canonical signature: S value excessively padded");
 
-    // If the S value is above the order of the curve divided by two, its
-    // complement modulo the order could have been used instead, which is
-    // one byte shorter when encoded correctly.
+    // If the S value is above the order of the curve divided by two, its complement modulo the order could have been used instead, which is one byte shorter when encoded correctly.
     if (!CKey::CheckSignatureElement(S, nLenS, true))
         return error("Non-canonical signature: S value is unnecessarily high");
 

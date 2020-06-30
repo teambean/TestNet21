@@ -251,21 +251,19 @@ static bool GetKernelStakeModifier(uint256 hashBlockFrom, uint64_t& nStakeModifi
     return true;
 }
 
-// beancash kernel protocol
+// Bean Cash Sprouting kernel protocol
 // beans sprouting must meet hash target according to the protocol:
 // kernel (input 0) must meet the formula
 //     hash(nStakeModifier + txPrev.block.nTime + txPrev.offset + txPrev.nTime + txPrev.vout.n + nTime) < bnTarget * nBeanDayWeight
-// this ensures that the chance of getting a newly sprouted bean is proportional to the
-// amount of bean age one owns.
+// this ensures that the chance of getting a newly sprouted bean is proportional to the amount of bean age one owns.
 // The reason this hash is chosen is the following:
 //   nStakeModifier: scrambles computation to make it very difficult to precompute
-//                  future proof-of-stake at the time of the bean's confirmation
+//                  future proof-of-bean at the time of the bean's confirmation
 //   txPrev.block.nTime: prevent nodes from guessing a good timestamp to
 //                       generate transaction for future advantage
 //   txPrev.offset: offset of txPrev inside block, to reduce the chance of
 //                  nodes generating beansprout at the same time
-//   txPrev.nTime: reduce the chance of nodes generating beamstake at the same
-//                 time
+//   txPrev.nTime: reduce the chance of nodes generating bean-sprout at the same time
 //   txPrev.vout.n: output number of txPrev, to reduce the chance of nodes
 //                  generating beansprout at the same time
 //   block/tx hash should not be used here as they can be generated in vast
@@ -315,7 +313,7 @@ bool CheckStakeKernelHash(unsigned int nBits, const CBlock& blockFrom, unsigned 
             hashProofOfStake.ToString().c_str());
     }
 
-    // Now check if proof-of-stake hash meets target protocol
+    // Now check if proof-of-bean hash meets target protocol
     if (CBigNum(hashProofOfStake) > bnBeanDayWeight * bnTargetPerBeanDay)
         return false;
     if (fDebug && !fPrintProofOfStake)
@@ -389,7 +387,8 @@ unsigned int GetStakeModifierChecksum(const CBlockIndex* pindex)
 bool CheckStakeModifierCheckpoints(int nHeight, unsigned int nStakeModifierChecksum)
 {
     if (fTestNet) return true; // Testnet has no checkpoints; Testnet Genesis computed a StakeModifier, when it shouldn't have
-    MapModifierCheckpoints& checkpoints = (fTestNet ? mapStakeModifierCheckpointsTestNet : mapStakeModifierCheckpoints);
+    // MapModifierCheckpoints& checkpoints = (fTestNet ? mapStakeModifierCheckpointsTestNet : mapStakeModifierCheckpoints);
+    MapModifierCheckpoints& checkpoints = mapStakeModifierCheckpoints;
 
     if (checkpoints.count(nHeight))
         return nStakeModifierChecksum == checkpoints[nHeight];

@@ -35,6 +35,9 @@ Q_IMPORT_PLUGIN(qkrcodecs)
 Q_IMPORT_PLUGIN(qtaccessiblewidgets)
 #endif
 
+// Declare meta types used for QMetaObject::invokeMethod
+Q_DECLARE_METATYPE(bool*)
+
 // Need a global reference for the notifications to find the GUI
 static BitbeanGUI *guiref;
 static QSplashScreen *splashref;
@@ -146,22 +149,59 @@ static void initTranslations(QTranslator &qtTranslatorBase, QTranslator &qtTrans
 #ifndef BEANCASH_QT_TEST
 int main(int argc, char *argv[])
 {
+    bool fMissingDatadir = false;
+    bool fSelParFromCLFailed = false;
+
+    // Command-line options take precedence:
+    ParseParameters(argc, argv);
+
+    // ... then Beancash.conf:
+    if (!boost::filesystem::is_directory(GetDataDir(false)))
+    {
+        fprintf(stderr, "Error: Specified data directory \"%s\" does not exist.\n", mapArgs["-datadir"].c_str());
+        fMissingDatadir = true;
+        return false;
+    }
+    ReadConfigFile(mapArgs, mapMultiArgs);
+    // Check for -testnet parameter
+    // TestNet() calls are only valid after this clause.
+    if (!SelectParamsFromCommandLine())
+    {
+        fSelParFromCLFailed = true;
+        fprintf(stderr, "Error: Invalid commandline combination.\n");
+        return false;
+    }
+    // Show help message immediately after parsing command-line options (for "-lang") and setting locale,
+    // but before showing splash screen.
+    if (mapArgs.count("-?") || mapArgs.count("--help"))
+    {
+        GUIUtil::HelpMessageBox help;
+        help.showOrPrint();
+        return 1;
+    }
+
+
 #if QT_VERSION < 0x050000
     // Internal string conversion is all UTF-8
     QTextCodec::setCodecForTr(QTextCodec::codecForName("UTF-8"));
     QTextCodec::setCodecForCStrings(QTextCodec::codecForTr());
 #endif
 
-    QApplication app(argc, argv);
     // Doesn't need to be defined
-    //    Q_INIT_RESOURCE(beancash);
+    Q_INIT_RESOURCE(beancash);
+
+    QApplication app(argc, argv);
+
+    // Register meta types used for QMetaobject::invokeMethod
+    qRegisterMetaType< bool* >();
+
     app.setWindowIcon(QIcon("./icons/icon.png"));
 
     // Application identification (must be set before OptionsModel is initialized,
     // as it is used to locate QSettings)
     app.setOrganizationName("Bean Core");
-    //XXX app.setOrganizationDomain("beancash.org");
-    if(GetBoolArg("-testnet")) // Separate UI settings for testnet
+    app.setOrganizationDomain("beancash.org");
+    if (TestNet()) // Separate UI settings for testnet
         app.setApplicationName("Beancash-qt-testnet");
     else
         app.setApplicationName("Beancash-qt");
@@ -170,8 +210,21 @@ int main(int argc, char *argv[])
     QTranslator qtTranslatorBase, qtTranslator, translatorBase, translator;
     initTranslations(qtTranslatorBase, qtTranslator, translatorBase, translator);
 
+    // Now that translations are initialized, check for errors and allow a translatable error message
+    if (fMissingDataDir)
+    {
+        QMessageBox::critical(0, QObject::tr("Bean Cash"),
+                              QObject::tr("Error: Specified data directory \"%1\" does not exist.").arg(QString::fromStdString(mapArgs["-datadir"])));
+        return 1;
+    }
+    else if (fSelParFromCLFailed)
+    {
+        QMessageBox::critical(0, QObject::tr("Bean Cash"),
+                              QObject::tr("Error: Invalid combination used for commandline parameters."));
+    }
+
     // User language is set up: pick a data directory
-    Intro::pickDataDirectory();
+    Intro::pickDataDirectory(TestNet());
 
     // Do this early as we don't want to bother initializing if we are just calling IPC
     // ... but do it after creating app, so QCoreApplication::arguments is initialized:
@@ -183,58 +236,7 @@ int main(int argc, char *argv[])
     // Install global event filter that makes sure that long tooltips can be word-wrapped
     app.installEventFilter(new GUIUtil::ToolTipToRichTextFilter(TOOLTIP_WRAP_THRESHOLD, &app));
 
-    // Command-line options take precedence:
-    ParseParameters(argc, argv);
-
-    // ... then Beancash.conf:
-    if (!boost::filesystem::is_directory(GetDataDir(false)))
-    {
-        // This message can not be translated, as translation is not initialized yet
-        // (which not yet possible because lang=XX can be overridden in Beancash.conf in the data directory)
-
-        QMessageBox::critical(0, QObject::tr("Bean Cash"),
-                              QObject::tr("Error: Specified data directory \"%1\" does not exist.").arg(QString::fromStdString(mapArgs["-datadir"])));
-
-        return 1;
-    }
-    ReadConfigFile(mapArgs, mapMultiArgs);
-
-    // Application identification (must be set before OptionsModel is initialized,
-    // as it is used to locate QSettings)
-    app.setOrganizationName("Bean Core");
-    app.setOrganizationDomain("beancash.org");
-    if(GetBoolArg("-testnet")) // Separate UI settings for testnet
-        app.setApplicationName("Beancash-qt-testnet");
-    else
-        app.setApplicationName("Beancash-qt");
-
-    // Get desired locale (e.g. "de_DE") from command line or use system locale
-    QString lang_territory = QString::fromStdString(GetArg("-lang", QLocale::system().name().toStdString()));
-    QString lang = lang_territory;
-    // Convert to "de" only by truncating "_DE"
-    lang.truncate(lang_territory.lastIndexOf('_'));
-
-    // Load language files for configured locale:
-    // - First load the translator for the base language, without territory
-    // - Then load the more specific locale translator
-
-    // Load e.g. qt_de.qm
-    if (qtTranslatorBase.load("qt_" + lang, QLibraryInfo::location(QLibraryInfo::TranslationsPath)))
-        app.installTranslator(&qtTranslatorBase);
-
-    // Load e.g. qt_de_DE.qm
-    if (qtTranslator.load("qt_" + lang_territory, QLibraryInfo::location(QLibraryInfo::TranslationsPath)))
-        app.installTranslator(&qtTranslator);
-
-    // Load e.g. beancash_de.qm (shortcut "de" needs to be defined in beancash.qrc)
-    if (translatorBase.load(lang, ":/translations/"))
-        app.installTranslator(&translatorBase);
-
-    // Load e.g. beancash_de_DE.qm (shortcut "de_DE" needs to be defined in beancash.qrc)
-    if (translator.load(lang_territory, ":/translations/"))
-        app.installTranslator(&translator);
-
-    // ... then GUI settings:
+    // ... now GUI settings:
     OptionsModel optionsModel;
 
     // Subscribe to global signals from core
@@ -242,15 +244,6 @@ int main(int argc, char *argv[])
     uiInterface.ThreadSafeAskFee.connect(ThreadSafeAskFee);
     uiInterface.InitMessage.connect(InitMessage);
     uiInterface.Translate.connect(Translate);
-
-    // Show help message immediately after parsing command-line options (for "-lang") and setting locale,
-    // but before showing splash screen.
-    if (mapArgs.count("-?") || mapArgs.count("--help"))
-    {
-        GUIUtil::HelpMessageBox help;
-        help.showOrPrint();
-        return 1;
-    }
 
     QSplashScreen splash(QPixmap(":/images/splash"), 0);
     if (GetBoolArg("-splash", true) && !GetBoolArg("-min"))
@@ -266,11 +259,12 @@ int main(int argc, char *argv[])
     try
     {
         // Regenerate startup link, to fix links to old versions
+        // OSX: makes no sense on MAC OS and might also scan/mount external (and sleeping) volumes (can take some time).
         if (GUIUtil::GetStartOnSystemStartup())
             GUIUtil::SetStartOnSystemStartup(true);
 
         boost::thread_group threadGroup;
-        BitbeanGUI window;
+        BitbeanGUI window(TestNet(), 0);
         guiref = &window;
         QTimer* pollShutdownTimer = new QTimer(guiref);
         QObject::connect(pollShutdownTimer, SIGNAL(timeout()), guiref, SLOT(detectShutdown()));

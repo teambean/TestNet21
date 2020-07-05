@@ -832,6 +832,11 @@ bool AppInit2(boost::thread_group& threadGroup)
     nStart = GetTimeMillis();
     if (!LoadBlockIndex())
         return InitError(_("Error loading blkindex.dat"));
+    
+    // If the loaded chain has the wrong genesis, bail out immediately
+    // It is likely using a Testnet data directory or visversa.
+    if (!mapBlockIndex.empty() && pindexGenesisBlock == NULL)
+        return InitError(strprintf(_("Incorrect or no genesis block found. Perhaps the wrong datadir is specified for the network?")));
 
 
     // as LoadBlockIndex can take several minutes, it's possible the user

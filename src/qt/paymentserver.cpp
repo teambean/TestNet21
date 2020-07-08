@@ -50,6 +50,18 @@ static QString ipcServerName()
 //
 static QStringList savedPaymentRequests;
 
+bool PaymentServer::ipcParseCommandLine(int argc, char* argv[])
+{
+    const QStringList& args = QCoreApplication::arguments();
+    for (int i = 1; i < args.size(); i++)
+    {
+        if (!args[i].startsWith(BITBEAN_IPC_PREFIX, Qt::CaseInsensitive))
+            continue;
+        savedPaymentRequests.append(args[i]);
+    }
+    return true;
+}
+
 //
 // Sending to the server is done synchronously, at startup.
 // If the server isn't already running, startup continues,
@@ -59,15 +71,6 @@ static QStringList savedPaymentRequests;
 bool PaymentServer::ipcSendCommandLine()
 {
     bool fResult = false;
-
-    const QStringList& args = QCoreApplication::arguments();
-    for (int i = 1; i < args.size(); i++)
-    {
-        if (!args[i].startsWith(BITBEAN_IPC_PREFIX, Qt::CaseInsensitive))
-            continue;
-        savedPaymentRequests.append(args[i]);
-    }
-
     foreach (const QString& arg, savedPaymentRequests)
     {
         QLocalSocket* socket = new QLocalSocket();

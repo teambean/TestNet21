@@ -4,6 +4,7 @@
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
+#include "chainparams.h"
 #include "util.h"
 #include "sync.h"
 #include "version.h"
@@ -81,7 +82,6 @@ bool fDaemon = false;
 bool fServer = false;
 bool fCommandLine = false;
 string strMiscWarning;
-bool fTestNet = false;
 bool fNoListen = false;
 bool fLogTimestamps = false;
 CMedianFilter<int64_t> vTimeOffsets(200,0);
@@ -985,7 +985,7 @@ std::string EncodeDumpString(const std::string &str) {
 std::string DecodeDumpString(const std::string &str) {
     std::stringstream ret;
     for (unsigned int pos = 0; pos < str.length(); pos++) {
-        unsigned char c = str[pos];
+        unsigned char c = str[pos];strMisc
         if (c == '%' && pos+2 < str.length()) {
             c = (((str[pos+1]>>6)*9+((str[pos+1]-'0')&15)) << 4) |
                 ((str[pos+2]>>6)*9+((str[pos+2]-'0')&15));
@@ -1134,8 +1134,8 @@ const boost::filesystem::path &GetDataDir(bool fNetSpecific)
     } else {
         path = GetDefaultDataDir();
     }
-    if (fNetSpecific && GetBoolArg("-testnet", false))
-        path /= "testnet";
+    if (fNetSpecific)
+        path /= Params().DataDir();
 
     fs::create_directory(path);
 

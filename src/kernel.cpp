@@ -372,7 +372,7 @@ bool CheckBeanStakeTimestamp(int64_t nTimeBlock, int64_t nTimeTx)
 // Get stake modifier checksum
 unsigned int GetStakeModifierChecksum(const CBlockIndex* pindex)
 {
-    //assert (pindex->pprev || pindex->GetBlockHash() == (!fTestNet ? hashGenesisBlock : hashGenesisBlockTestNet));
+    //assert (pindex->pprev || pindex->GetBlockHash() == (!TestNet() ? hashGenesisBlock : hashGenesisBlockTestNet));
     // Hash previous checksum with flags, hashProofOfStake and nStakeModifier
     CDataStream ss(SER_GETHASH, 0);
     if (pindex->pprev)
@@ -386,8 +386,8 @@ unsigned int GetStakeModifierChecksum(const CBlockIndex* pindex)
 // Check stake modifier hard checkpoints
 bool CheckStakeModifierCheckpoints(int nHeight, unsigned int nStakeModifierChecksum)
 {
-    if (fTestNet) return true; // Testnet has no checkpoints; Testnet Genesis computed a StakeModifier, when it shouldn't have
-    // MapModifierCheckpoints& checkpoints = (fTestNet ? mapStakeModifierCheckpointsTestNet : mapStakeModifierCheckpoints);
+    if (TestNet()) return true; // Testnet has no checkpoints; Testnet Genesis computed a StakeModifier, when it shouldn't have
+    // MapModifierCheckpoints& checkpoints = (TestNet() ? mapStakeModifierCheckpointsTestNet : mapStakeModifierCheckpoints);
     MapModifierCheckpoints& checkpoints = mapStakeModifierCheckpoints;
 
     if (checkpoints.count(nHeight))

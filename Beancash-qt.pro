@@ -152,7 +152,8 @@ LIBS += $$PWD/src/leveldb/libleveldb.a $$PWD/src/leveldb/libmemenv.a
 SOURCES += src/txdb-leveldb.cpp \
     src/qt/paymentserver.cpp \
     src/qt/trafficgraphwidget.cpp \
-    src/beancashd.cpp
+    src/beancashd.cpp \
+    src/chainparams.cpp
 
 !win32 {
     # we use QMAKE_CXXFLAGS_RELEASE even without RELEASE=1 because we use RELEASE to indicate linking preferences not -O preferences
@@ -285,7 +286,8 @@ HEADERS += src/qt/bitbeangui.h \
     src/qt/paymentserver.h \
     src/qt/trafficgraphwidget.h \
     src/qt/intro.h \
-    src/limitedmap.h
+    src/limitedmap.h \
+    src/chainparams.h
 
 SOURCES += src/qt/beancash.cpp \
     src/qt/bitbeangui.cpp \

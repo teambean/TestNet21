@@ -45,7 +45,7 @@ namespace Checkpoints
 
     bool CheckHardened(int nHeight, const uint256& hash)
     {
-        MapCheckpoints& checkpoints = (fTestNet ? mapCheckpointsTestnet : mapCheckpoints);
+        MapCheckpoints& checkpoints = (TestNet() ? mapCheckpointsTestnet : mapCheckpoints);
 
         MapCheckpoints::const_iterator i = checkpoints.find(nHeight);
         if (i == checkpoints.end()) return true;
@@ -54,14 +54,14 @@ namespace Checkpoints
 
     int GetTotalBlocksEstimate()
     {
-        MapCheckpoints& checkpoints = (fTestNet ? mapCheckpointsTestnet : mapCheckpoints);
+        MapCheckpoints& checkpoints = (TestNet() ? mapCheckpointsTestnet : mapCheckpoints);
 
         return checkpoints.rbegin()->first;
     }
 
     CBlockIndex* GetLastCheckpoint(const std::map<uint256, CBlockIndex*>& mapBlockIndex)
     {
-        MapCheckpoints& checkpoints = (fTestNet ? mapCheckpointsTestnet : mapCheckpoints);
+        MapCheckpoints& checkpoints = (TestNet() ? mapCheckpointsTestnet : mapCheckpoints);
 
         for (const MapCheckpoints::value_type& i : boost::adaptors::reverse(checkpoints))
         {
@@ -73,7 +73,7 @@ namespace Checkpoints
         return NULL;
     }
 
-    // ppbean: synchronized checkpoint (centrally broadcasted)
+    // Synchronized checkpoint (centrally broadcasted)
     uint256 hashSyncCheckpoint = 0;
     uint256 hashPendingCheckpoint = 0;
     CSyncCheckpoint checkpointMessage;
@@ -207,7 +207,7 @@ namespace Checkpoints
     // Check against synchronized checkpoint
     bool CheckSync(const uint256& hashBlock, const CBlockIndex* pindexPrev)
     {
-        if (fTestNet) return true; // Testnet has no checkpoints
+        if (TestNet()) return true; // Testnet has no checkpoints
         int nHeight = pindexPrev->nHeight + 1;
 
         LOCK(cs_hashSyncCheckpoint);
@@ -297,7 +297,7 @@ namespace Checkpoints
     {
         // Test signing a sync-checkpoint with genesis block
         CSyncCheckpoint checkpoint;
-        checkpoint.hashCheckpoint = !fTestNet ? hashGenesisBlock : hashGenesisBlockTestNet;
+        checkpoint.hashCheckpoint = !TestNet() ? hashGenesisBlock : hashGenesisBlockTestNet;
         CDataStream sMsg(SER_NETWORK, PROTOCOL_VERSION);
         sMsg << (CUnsignedSyncCheckpoint)checkpoint;
         checkpoint.vchMsg = std::vector<unsigned char>(sMsg.begin(), sMsg.end());

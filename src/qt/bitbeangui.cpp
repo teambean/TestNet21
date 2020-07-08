@@ -82,7 +82,7 @@ BitbeanGUI::BitbeanGUI(QWidget *parent):
     nWeight(0)
 {
     restoreWindowGeometry();
-    setWindowTitle(tr("Bean Cash") + " - " + tr("Core v1.2.1 Testy2"));
+    setWindowTitle(tr("Bean Cash") + " - " + tr("Core v1.2.2 Testy2"));
     qApp->setStyleSheet("QMainWindow { border-image: url(:images/bkg);border:none; } QProgressBar { background: transparent; border: 1px solid gray; border-radius: 7px; padding: 1px; text-align: center; } QProgressBar::chunk { background: QLinearGradient(x1: 0, y1: 0, x2: 1, y2: 0, stop: 0 #d3eeaf, stop: 1 #9fd555); border-radius: 7px; margin: 0px; } QMenu { background-color: #ff9a9a; color: black; } QMenu::item { color: black; background: transparent; } QMenu::item:selected { background-color: #9fd555; } QMenuBar { background-color: #ff9a9a; color: black; } QPushButton {background-color: #d3eeaf; } QLineEdit { background-color: white; } QToolTip { color: #ffffff; background-color: #ff9a9a; border-radius: 7px; border: 1px solid black; } QTabWidget::pane {background-color: white; color: black } QTabWidget::tab-bar {left: 5px;} QTabBar::tab {background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #d3eeaf, stop: 1 #9fd555); border: 2px solid #ff9a9a; border-bottom-color: #ff9a9a; border-top-left-radius: 7px; border-top-right-radius: 7px; min-width: 8ex; padding: 2px; color: black; } QTabBar::tab:selected {border-color: #9fd555; border-bottom-color: #ff9a9a; background-color: white; color: black; } QTabBar:tab:!selected {margin-top: 3px; } ");
     QFontDatabase::addApplicationFont("::/res/fonts/helvetica");
     QFont font("Helvetica");
@@ -667,7 +667,7 @@ void BitbeanGUI::setNumBlocks(int count, int nTotalBlocks)
 
 void BitbeanGUI::message(const QString &title, const QString &message, unsigned int style)
 {
-    QString strTitle = tr("Bean Cash Core") + " v1.2.1 Testy2";
+    QString strTitle = tr("Bean Cash Core") + " v1.2.2 Testy2";
     // Default to information icon
     int nMBoxIcon = QMessageBox::Information;
     int nNotifyIcon = Notificator::Information;

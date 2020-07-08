@@ -42,11 +42,16 @@ private:
     QLocalServer* uriServer;
 
 public:
+    // Parse URIs on command line
+    // Returns false on error
+    static bool ipcParseCommandLine(int argc, char *argv[]);
+
     // Returns true if there were URIs on the command line
     // which were successfully sent to an already-running
     // process.
     static bool ipcSendCommandLine();
 
+    // parent should be QApplication object
     PaymentServer(QApplication* parent);
 
     bool eventFilter(QObject *object, QEvent *event);

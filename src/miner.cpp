@@ -537,11 +537,15 @@ void ThreadStakeMiner(CWallet *pwallet)
             MilliSleep(1000);
         }
 
-        while (vNodes.empty() || IsInitialBlockDownload())
+        if (Params().NetworkID() != CChainParams::REGTEST)
+        // Wait for the network to come online so we don't waste time on an obsolete chain. With regtest mode this not necessary.
         {
-            nLastBeanStakeSearchInterval = 0;
-            fTryToSync = true;
-            MilliSleep(1000);
+            while (vNodes.empty() || IsInitialBlockDownload())
+            {
+                nLastBeanStakeSearchInterval = 0;
+                fTryToSync = true;
+                MilliSleep(1000);
+            }
         }
 
         if (fTryToSync)
@@ -568,6 +572,10 @@ void ThreadStakeMiner(CWallet *pwallet)
             SetThreadPriority(THREAD_PRIORITY_NORMAL);
             CheckStake(pblock.get(), *pwallet);
             SetThreadPriority(THREAD_PRIORITY_LOWEST);
+            // In regtest mode, stop sprouting after a block is found. This allows developers to generate blocks on demand in a controlled manner.
+            if (Params().NetworkID() == CChainParams::REGTEST)
+                throw boost::thread_interrupted();
+
             MilliSleep(500);
         }
         else

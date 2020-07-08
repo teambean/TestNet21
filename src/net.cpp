@@ -4,6 +4,7 @@
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
+#include "chainparams.h"
 #include "db.h"
 #include "net.h"
 #include "main.h"
@@ -75,7 +76,7 @@ void AddOneShot(string strDest)
 
 unsigned short GetListenPort()
 {
-    return (unsigned short)(GetArg("-port", GetDefaultPort()));
+    return (unsigned short)(GetArg("-port", Params().GetDefaultPort()));
 }
 
 // find 'best' local address for a particular peer
@@ -361,7 +362,7 @@ CNode* ConnectNode(CAddress addrConnect, const char *pszDest)
 
     // Connect
     SOCKET hSocket;
-    if (pszDest ? ConnectSocketByName(addrConnect, hSocket, pszDest, GetDefaultPort()) : ConnectSocket(addrConnect, hSocket))
+    if (pszDest ? ConnectSocketByName(addrConnect, hSocket, pszDest, Params().GetDefaultPort()) : ConnectSocket(addrConnect, hSocket))
     {
         addrman.Attempt(addrConnect);
 
@@ -952,20 +953,6 @@ void ThreadSocketHandler()
     }
 }
 
-
-// DNS seeds
-// Each pair gives a source name and a seed name.
-// The first name is used as information source for addrman.
-// The second name should resolve to a list of seed addresses.
-static const char *strDNSSeed[][2] = {
-    {"bitbean.org", "stalk1.bitbean.org"},
-    {"bitbean.org", "stalk2.bitbean.org"},
-    {"bitbean.org", "stalk3.bitbean.org"},
-    {"beancash.org", "stalk1.beancash.org"},
-    {"beancash.org", "stalk2.beancash.org"},
-    {"beancash.org", "stalk3.beancash.org"},
-};
-
 void ThreadDNSAddressSeed()
 {
     // Only query DNS seeders if needed
@@ -982,7 +969,7 @@ void ThreadDNSAddressSeed()
 
     int found = 0;
 
-    if (!fTestNet)
+    if (!TestNet())
     {
         printf("Loading addresses from DNS seeds (could take a while)\n");
 
@@ -997,7 +984,7 @@ void ThreadDNSAddressSeed()
                     for (CNetAddr& ip : vaddr)
                     {
                         int nOneDay = 24*3600;
-                        CAddress addr = CAddress(CService(ip, GetDefaultPort()));
+                        CAddress addr = CAddress(CService(ip, Params().GetDefaultPort()));
                         addr.nTime = GetTime() - 3*nOneDay - GetRand(4*nOneDay); // use a random age between 3 and 7 days old
                         vAdd.push_back(addr);
                         found++;
@@ -1010,19 +997,6 @@ void ThreadDNSAddressSeed()
 
     printf("%d addresses found from DNS seeds\n", found);
 }
-
-    unsigned int pnSeed[] =
-    {
-        0x4c6c6805, 0x59b7bd05, 0x3092a359, 0xbecd6bd8, 0x32dc6bd8,
-        0x33dc6bd8, 0x35dc6bd8, 0x3adc6bd8, 0x86eee0d9, 0xefa5f5d9,
-        0x05e8f4dc, 0x7c8f52dc, 0xf1daccdf, 0xbac5a818, 0x50b0c618,
-        0x47b2af62, 0x1832e563, 0x4d9d3863, 0xd9e88446, 0x7f901147,
-        0x30ef53b4, 0x394e3742, 0x14cd2349, 0xa2ce4849, 0x54ea4e49,
-        0x4f7b564b, 0xcfa4bb4c, 0x821c6651, 0xaddaeb59, 0x08a1b05b,
-        0x19c37261, 0xdd705563, 0xd3cd5a6c, 0x9398a359, 0x4415f54f,
-        0x476c6805, 0x8298a359, 0x9c98a359, 0x338a2eb5, 0x3399201b,
-        0xdab26826, 0x8feb652e, 0x85e5132e, 0xf773042e, 0xda28152f
-    };
 
 void DumpAddresses()
 {
@@ -1086,23 +1060,13 @@ void ThreadOpenConnections()
         boost::this_thread::interruption_point();
 
         // Add Beanstalk nodes
-        if (addrman.size()==0 && (GetTime() - nStart > 60) && !fTestNet)
+
+        if (addrman.size() == 0 && (GetTime() - nStart > 60))
         {
-            std::vector<CAddress> vAdd;
-            for (unsigned int i = 0; i < ARRAYLEN(pnSeed); i++)
-            {
-                // It'll only connect to one or two seed nodes because once it connects,
-                // it'll get a pile of addresses with newer timestamps.
-                // Seed nodes are given a random 'last seen time' of between one and two
-                // weeks ago.
-                const int64_t nOneWeek = 7*24*60*60;
-                struct in_addr ip;
-                memcpy(&ip, &pnSeed[i], sizeof(ip));
-                CAddress addr(CService(ip, GetDefaultPort()));
-                addr.nTime = GetTime()-GetRand(nOneWeek)-nOneWeek;
-                vAdd.push_back(addr);
-            }
-            addrman.Add(vAdd, CNetAddr("127.0.0.1"));
+            static bool done = false;
+            printf("Adding fixed seed nodes as DNS doesn't seem to be available.\n");
+            addrman.Add(Params().FixedSeeds(), CNetAddr("127.0.0.1"));
+            done = true;
         }
 
         //
@@ -1150,7 +1114,7 @@ void ThreadOpenConnections()
                 continue;
 
             // do not allow non-default ports, unless after 50 invalid addresses selected already
-            if (addr.GetPort() != GetDefaultPort() && nTries < 50)
+            if (addr.GetPort() != Params().GetDefaultPort() && nTries < 50)
                 continue;
 
             addrConnect = addr;
@@ -1201,7 +1165,7 @@ void ThreadOpenAddedConnections()
         for (string& strAddNode : lAddresses)
         {
             vector<CService> vservNode(0);
-            if(Lookup(strAddNode.c_str(), vservNode, GetDefaultPort(), fNameLookup, 0))
+            if(Lookup(strAddNode.c_str(), vservNode, Params().GetDefaultPort(), fNameLookup, 0))
             {
                 lservAddressesToAdd.push_back(vservNode);
                 {

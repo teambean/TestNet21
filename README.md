@@ -1,2 +1,2 @@
-# TestNet21
-TestNet v1.2.1
+# TestNet2
+TestNet v1.2.2

@@ -13,6 +13,7 @@
 #include "util.h"
 #include "ui_interface.h"
 #include "checkpoints.h"
+#include "chainparams.h"
 
 #include <boost/filesystem.hpp>
 #include <boost/filesystem/fstream.hpp>
@@ -181,6 +182,8 @@ std::string HelpMessage()
         "  -logtimestamps         " + _("Prepend debug output with timestamp") + "\n" +
         "  -shrinkdebugfile       " + _("Shrink debug.log file on client startup (default: 1 when no -debug)") + "\n" +
         "  -printtoconsole        " + _("Send trace/debug info to console instead of debug.log file") + "\n" +
+        "  -regtest               " + _("Enter regression test mode, which uses a special chain in which blocks can be "
+                                        "solved instantly. This is intended for regression testing tools and application development.") + "\n";
 #ifdef WIN32
         "  -printtodebugger       " + _("Send trace/debug info to debugger") + "\n" +
 #endif
@@ -400,7 +403,10 @@ bool AppInit2(boost::thread_group& threadGroup)
 
     nDerivationMethodIndex = 0;
 
-    fTestNet = GetBoolArg("-testnet");
+    if (!SelectParamsFromCommandLine())
+    {
+        return InitError("Invalid combination of -testnet and regtest.");
+    }
 
     if (mapArgs.count("-bind")) {
         // when specifying an explicit binding address, you want to listen on it

@@ -11,6 +11,7 @@
 #include "net.h"
 #include "init.h"
 #include "ui_interface.h"
+#include "chainparams.h"
 #include "kernel.h"
 #include <boost/algorithm/string/replace.hpp>
 #include <boost/filesystem.hpp>
@@ -38,9 +39,7 @@ unsigned int nTransactionsUpdated = 0;
 map<uint256, CBlockIndex*> mapBlockIndex;
 set<pair<COutPoint, unsigned int> > setStakeSeen;
 
-CBigNum bnProofOfWorkLimit(~uint256(0) >> 20); // Starting Difficulty: results with 0,000244140625 proof-of-work difficulty
 CBigNum bnProofOfStakeLimit(~uint256(0) >> 20);
-CBigNum bnProofOfWorkLimitTestNet(~uint256(0) >> 16);
 
 static const int64_t nTargetTimespan = 60 * 60;  // Beancash - every 1 hour
 unsigned int nTargetSpacing = 1 * 60; // Beancash - 1 minute
@@ -603,7 +602,7 @@ bool CTxMemPool::accept(CTxDB& txdb, CTransaction &tx, bool fCheckInputs,
         return error("CTxMemPool::accept() : not accepting nLockTime beyond 2038 yet");
 
     // Rather not work on nonstandard transactions (unless -testnet)
-    if (!fTestNet && !tx.IsStandard())
+    if (!TestNet() && !tx.IsStandard())
         return error("CTxMemPool::accept() : nonstandard transaction type");
 
     // Do we already have it?
@@ -660,7 +659,7 @@ bool CTxMemPool::accept(CTxDB& txdb, CTransaction &tx, bool fCheckInputs,
         }
 
         // Check for non-standard pay-to-script-hash in inputs
-        if (!tx.AreInputsStandard(mapInputs) && !fTestNet)
+        if (!tx.AreInputsStandard(mapInputs) && !TestNet())
             return error("CTxMemPool::accept() : nonstandard transaction input");
 
         // Note: if you modify this code to accept non-standard transactions, then
@@ -1088,12 +1087,12 @@ const CBlockIndex* GetLastBlockIndex(const CBlockIndex* pindex, bool fProofOfSta
 
 unsigned int ComputeMinWork(unsigned int nBase, int64_t nTime)
 {
-    return ComputeMaxBits(bnProofOfWorkLimit, nBase, nTime);
+    return ComputeMaxBits(Params().ProofOfWorkLimit(), nBase, nTime);
 }
 unsigned int GetNextTargetRequired(const CBlockIndex* pindexLast, bool fProofOfStake)
 {
 
-	CBigNum bnTargetLimit = fProofOfStake ? bnProofOfStakeLimit : bnProofOfWorkLimit;
+    CBigNum bnTargetLimit = fProofOfStake ? bnProofOfStakeLimit : Params().ProofOfWorkLimit();
 
     if (pindexLast == NULL)
         return bnTargetLimit.GetCompact(); // genesis block
@@ -1109,8 +1108,8 @@ unsigned int GetNextTargetRequired(const CBlockIndex* pindexLast, bool fProofOfS
     if (nActualSpacing < 0)
         nActualSpacing = nTargetSpacing;
 
-    // ppbean: target change every block
-    // ppbean: retarget with exponential moving toward target spacing
+    // Target change every block
+    // Re-target, exponentialy moving toward target spacing
     CBigNum bnNew;
     bnNew.SetCompact(pindexPrev->nBits);
     int64_t nInterval = nTargetTimespan / nTargetSpacing;
@@ -1130,7 +1129,7 @@ bool CheckProofOfWork(uint256 hash, unsigned int nBits)
     bnTarget.SetCompact(nBits);
 
     // Check range
-    if (bnTarget <= 0 || bnTarget > bnProofOfWorkLimit)
+    if (bnTarget <= 0 || bnTarget > Params().ProofOfWorkLimit())
         return error("CheckProofOfWork() : nBits below minimum work");
 
     // Check proof of work matches claimed amount
@@ -1790,7 +1789,7 @@ bool CBlock::SetBestChain(CTxDB& txdb, CBlockIndex* pindexNew)
     if (!txdb.TxnBegin())
         return error("SetBestChain() : TxnBegin failed");
 
-    if (pindexGenesisBlock == NULL && hash == (!fTestNet ? hashGenesisBlock : hashGenesisBlockTestNet))
+    if (pindexGenesisBlock == NULL && hash == Params().HashGenesisBlock())
     {
         txdb.WriteHashBestChain(hash);
         if (!txdb.TxnCommit())
@@ -2503,30 +2502,8 @@ FILE* AppendBlockFile(unsigned int& nFileRet)
 
 bool LoadBlockIndex(bool fAllowNew)
 {
-    // Zerocoin Deprecated in v1.1.0.0
-    // CBigNum bnTrustedModulus;
-
-    if (fTestNet)
-    {
-        pchMessageStart[0] = 0xad;
-        pchMessageStart[1] = 0xf1;
-        pchMessageStart[2] = 0xc2;
-        pchMessageStart[3] = 0xaf;
-
-        // Zerocoin Deprecated in v1.1.0.0
-        // bnTrustedModulus.SetHex("f0d14cf72623dacfe738d0892b599be0f31052239cddd95a3f25101c801dc990453b38c9434efe3f372db39a32c2bb44cbaea72d62c8931fa785b0ec44531308df3e46069be5573e49bb29f4d479bfc3d162f57a5965db03810be7636da265bfced9c01a6b0296c77910ebdc8016f70174f0f18a57b3b971ac43a934c6aedbc5c866764a3622b5b7e3f9832b8b3f133c849dbcc0396588abcd1e41048555746e4823fb8aba5b3d23692c6857fccce733d6bb6ec1d5ea0afafecea14a0f6f798b6b27f77dc989c557795cc39a0940ef6bb29a7fc84135193a55bcfc2f01dd73efad1b69f45a55198bd0e6bef4d338e452f6a420f1ae2b1167b923f76633ab6e55");
-
-
-        bnProofOfWorkLimit = bnProofOfWorkLimitTestNet; // 16 bits PoW target limit for testnet
         nStakeMinAge = 1 * 60 * 60; // test net min age is 1 hour
         nBeanbaseMaturity = 10; // test maturity is 10 blocks
-    }
-
-    // Zerocoin Deprecated in v1.1.0.0
-    // else
-    // {
-        // bnTrustedModulus.SetHex("d01f952e1090a5a72a3eda261083256596ccc192935ae1454c2bafd03b09e6ed11811be9f3a69f5783bbbced8c6a0c56621f42c2d19087416facf2f13cc7ed7159d1c5253119612b8449f0c7f54248e382d30ecab1928dbf075c5425dcaee1a819aa13550e0f3227b8c685b14e0eae094d65d8a610a6f49fff8145259d1187e4c6a472fa5868b2b67f957cb74b787f4311dbc13c97a2ca13acdb876ff506ebecbb904548c267d68868e07a32cd9ed461fbc2f920e9940e7788fed2e4817f274df5839c2196c80abe5c486df39795186d7bc86314ae1e8342f3c884b158b4b05b4302754bf351477d35370bad6639b2195d30006b77bf3dbb28b848fd9ecff5662bf39dde0c974e83af51b0d3d642d43834827b8c3b189065514636b8f2a59c42ba9b4fc4975d4827a5d89617a3873e4b377b4d559ad165748632bd928439cfbc5a8ef49bc2220e0b15fb0aa302367d5e99e379a961c1bc8cf89825da5525e3c8f14d7d8acca2fa9c133a2176ae69874d8b1d38b26b9c694e211018005a97b40848681b9dd38feb2de141626fb82591aad20dc629b2b6421cef1227809551a0e4e943ab99841939877f18f2d9c0addc93cf672e26b02ed94da3e6d329e8ac8f3736eebbf37bb1a21e5aadf04ee8e3b542f876aa88b2adf2608bd86329b7f7a56fd0dc1c40b48188731d11082aea360c62a0840c2db3dad7178fd7e359317ae081");
-    // }
 
     //
     // Load block index
@@ -2542,74 +2519,16 @@ bool LoadBlockIndex(bool fAllowNew)
     {
         if (!fAllowNew)
             return false;
-
-        // Genesis block
-
-        // OldMainNet:
-
-        //CBlock(hash=000001faef25dec4fbcf906e6242621df2c183bf232f263d0ba5b101911e4563, ver=1, hashPrevBlock=0000000000000000000000000000000000000000000000000000000000000000, hashMerkleRoot=12630d16a97f24b287c8c2594dda5fb98c9e6c70fc61d44191931ea2aa08dc90, nTime=1393221600, nBits=1e0fffff, nNonce=164482, vtx=1, vchBlockSig=)
-        //  Beanbase(hash=12630d16a9, nTime=1393221600, ver=1, vin.size=1, vout.size=1, nLockTime=0)
-        //    CTxIn(COutPoint(0000000000, 4294967295), beanbase 00012a24323020466562203230313420426974636f696e2041544d7320636f6d6520746f20555341)
-        //    CTxOut(empty)
-        //  vMerkleTree: 12630d16a9
-
-        // OldTestNet:
-
-        //CBlock(hash=0000724595fb3b9609d441cbfb9577615c292abf07d996d3edabc48de843642d, ver=1, hashPrevBlock=0000000000000000000000000000000000000000000000000000000000000000, hashMerkleRoot=12630d16a97f24b287c8c2594dda5fb98c9e6c70fc61d44191931ea2aa08dc90, nTime=1393221600, nBits=1f00ffff, nNonce=216178, vtx=1, vchBlockSig=)
-        //  Beanbase(hash=12630d16a9, nTime=1393221600, ver=1, vin.size=1, vout.size=1, nLockTime=0)
-        //    CTxIn(COutPoint(0000000000, 4294967295), beanbase 00012a24323020466562203230313420426974636f696e2041544d7320636f6d6520746f20555341)
-        //    CTxOut(empty)
-        //  vMerkleTree: 12630d16a9
-
-        // NewMainNet:
-
-        //block.nTime = 1423862862
-        //block.nNonce = 620091 
-        //block.nVersion = 1 
-        //block.hashMerkleRoot = da3215e78c191c4e5dd00e8ac2b57f71b20cdcad0c37562d39912df09a2f4d34 
-        //block.GetHash = 000009d2f828234d65299216e258242a4ea75d1b8d8a71d076377145068f08de
-
-
-        // NewTestNet:
-
-        //CBlock(hash=0000021cddf3e66033819044559ebf09acdb95dd79b1743d367d03224e10674b, ver=1, hashPrevBlock=0000000000000000000000000000000000000000000000000000000000000000, hashMerkleRoot=da3215e78c191c4e5dd00e8ac2b57f71b20cdcad0c37562d39912df09a2f4d34, nTime=1423862862, nBits=1f00ffff, nNonce=98938, vtx=1, vchBlockSig=)
-        //  Beanbase(hash=da3215e78c, nTime=1423862862, ver=1, vin.size=1, vout.size=1, nLockTime=0)
-        //    CTxIn(COutPoint(0000000000, 4294967295), beanbase 00012a4a3133204665622032303135202d204269744265616e206c61756e6368657320616e64206368616e6765732074686520776f726c642077697468206974277320617765736f6d656e657373)
-        //    CTxOut(empty)
-        //  vMerkleTree: da3215e78c
-
-        const char* pszTimestamp = "13 Feb 2015 - BitBean launches and changes the world with it's awesomeness";
-        CTransaction txNew;
-        txNew.nTime = 1423862862;
-        txNew.vin.resize(1);
-        txNew.vout.resize(1);
-        txNew.vin[0].scriptSig = CScript() << 0 << CBigNum(42) << vector<unsigned char>((const unsigned char*)pszTimestamp, (const unsigned char*)pszTimestamp + strlen(pszTimestamp));
-        txNew.vout[0].SetEmpty();
-        CBlock block;
-        block.vtx.push_back(txNew);
-        block.hashPrevBlock = 0;
-        block.hashMerkleRoot = block.BuildMerkleTree();
-        block.nVersion = 1;
-        block.nTime    = 1423862862;
-        block.nBits    = bnProofOfWorkLimit.GetCompact();
-        block.nNonce   = !fTestNet ? 620091 : 98938;
-
-        assert(block.hashMerkleRoot == uint256("0xda3215e78c191c4e5dd00e8ac2b57f71b20cdcad0c37562d39912df09a2f4d34"));
-
-	    block.print();
-        assert(block.GetHash() == (!fTestNet ? hashGenesisBlock : hashGenesisBlockTestNet));
-        assert(block.CheckBlock());
-
         // Start new block file
         unsigned int nFile;
         unsigned int nBlockPos;
         if (!block.WriteToDisk(nFile, nBlockPos))
             return error("LoadBlockIndex() : writing genesis block to disk failed");
-        if (!block.AddToBlockIndex(nFile, nBlockPos, hashGenesisBlock))
+        if (!block.AddToBlockIndex(nFile, nBlockPos, Params().HashGenesisBlock()))
             return error("LoadBlockIndex() : genesis block not accepted");
 
-        // ppbean: initialize synchronized checkpoint
-        if (!Checkpoints::WriteSyncCheckpoint((!fTestNet ? hashGenesisBlock : hashGenesisBlockTestNet)))
+        // Initialize synchronized checkpoint
+        if (!Checkpoints::WriteSyncCheckpoint(Params().HashGenesisBlock()))
             return error("LoadBlockIndex() : failed to init sync checkpoint");
     }
 
@@ -2624,7 +2543,7 @@ bool LoadBlockIndex(bool fAllowNew)
             return error("LoadBlockIndex() : failed to write new checkpoint master key to db");
         if (!txdb.TxnCommit())
             return error("LoadBlockIndex() : failed to commit new checkpoint master key to db");
-        if ((!fTestNet) && !Checkpoints::ResetSyncCheckpoint())
+        if ((!TestNet()) && !Checkpoints::ResetSyncCheckpoint())
             return error("LoadBlockIndex() : failed to reset sync-checkpoint");
     }
 
@@ -2802,12 +2721,6 @@ static bool NodeRecentlyStarted()
 
     return (timediff < (2 * 60 * 60));
 }
-
-
-// The message start string is designed to be unlikely to occur in normal data.
-// The characters are rarely used upper ASCII, not valid as UTF-8, and produce
-// a large 4-byte int at any alignment.
-unsigned char pchMessageStart[4] = { 0xa4, 0xd2, 0xf8, 0xa6 };
 
 bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv)
 {
@@ -3568,7 +3481,7 @@ bool ProcessMessages(CNode* pfrom)
         it++;
 
         // Scan for message start
-        if (memcmp(msg.hdr.pchMessageStart, pchMessageStart, sizeof(pchMessageStart)) != 0) {
+        if (memcmp(msg.hdr.pchMessageStart, Params().MessageStart(), MESSAGE_START_SIZE) != 0) {
             printf("\n\nPROCESSMESSAGE: INVALID MESSAGESTART\n\n");
             fOk = false;
             break;

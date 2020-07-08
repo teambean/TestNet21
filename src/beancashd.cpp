@@ -8,13 +8,19 @@
 #include "bitbeanrpc.h"
 #include <boost/algorithm/string/predicate.hpp>
 
-void DetectShutdownThread(boost::thread_group* threadGroup)
+void WaitForShutdown(boost::thread_group* threadGroup)
 {
-    while (!fRequestShutdown)
+    bool fShutdown = ShutdownRequested();
+    // Tell the main threads to shutdown
+    while (!fShutdown)
     {
         MilliSleep(200);
-        if (fRequestShutdown)
-            threadGroup->interrupt_all();
+        fShutdown = ShutdownRequested();
+    }
+    if (threadGroup)
+    {
+        threadGroup->interrupt_all();
+        threadGroup->join_all();
     }
 }
 
@@ -25,7 +31,6 @@ void DetectShutdownThread(boost::thread_group* threadGroup)
 bool AppInit(int argc, char* argv[])
 {
     boost::thread_group threadGroup;
-    boost::thread* detectShutdownThread = NULL;
     bool fRet = false;
     try
     {
@@ -64,6 +69,10 @@ bool AppInit(int argc, char* argv[])
 
         if (fCommandLine)
         {
+            if (!SelectParamsFromCommandLine()) {
+                fprintf(stderr, "Error: invalid combination of -regtest and -testnet.\n");
+                return false;
+            }
             int ret = CommandLineRPC(argc, argv);
             exit(ret);
         }
@@ -91,7 +100,6 @@ bool AppInit(int argc, char* argv[])
     }
 #endif
 
-        detectShutdownThread = new boost::thread(boost::bind(&DetectShutdownThread, &threadGroup));
         fRet = AppInit2(threadGroup);
     }
     catch (std::exception& e) {
@@ -99,17 +107,14 @@ bool AppInit(int argc, char* argv[])
     } catch (...) {
         PrintException(NULL, "AppInit()");
     }
-    if (!fRet) {
-        if (detectShutdownThread)
-            detectShutdownThread->interrupt();
-        threadGroup.interrupt_all();
-    }
 
-    if (detectShutdownThread)
+    if (!fRet)
     {
-        detectShutdownThread->join();
-        delete detectShutdownThread;
-        detectShutdownThread = NULL;
+        threadGroup.interrupt_all();
+
+
+    } else {
+        WaitForShutdown(&threadGroup);
     }
     Shutdown();
 

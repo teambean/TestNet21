@@ -71,6 +71,8 @@ set<pair<COutPoint, unsigned int> > setStakeSeenOrphan;
 map<uint256, CTransaction> mapOrphanTransactions;
 map<uint256, set<uint256> > mapOrphanTransactionsByPrev;
 
+bool fHaveGUI = false;
+
 // Constant stuff for beanbase transactions we create:
 CScript beanBASE_FLAGS;
 

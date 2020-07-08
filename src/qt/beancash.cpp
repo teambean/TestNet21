@@ -151,6 +151,7 @@ int main(int argc, char *argv[])
 {
     bool fMissingDatadir = false;
     bool fSelParFromCLFailed = false;
+    fHaveGUI = true;
 
     // Command-line options take precedence:
     ParseParameters(argc, argv);

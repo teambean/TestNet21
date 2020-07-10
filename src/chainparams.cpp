@@ -63,7 +63,7 @@ public:
                 //    CTxOut(empty)
                 //  vMerkleTree: da3215e78c
 
-
+        // Build the genesis block.
         const char* pszTimestamp = "13 Feb 2015 - BitBean launches and changes the world with it's awesomeness";
         CTransaction txNew;
         txNew.nTime = 1423862862;

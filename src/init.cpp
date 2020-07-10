@@ -245,17 +245,17 @@ bool LoadExternalBlockFile(FILE* fileIn)
                                nPos = std::numeric_limits<uint32_t>::max();
                                break;
                            }
-                       void* nFind = memchr(pchData, pchMessageStart[0], nRead+1-sizeof(pchMessageStart));
+                       void* nFind = memchr(pchData, Params().MessageStart()[0], nRead+1-sizeof(Params().MessageStart()));
                        if (nFind)
                        {
-                        if (memcmp(nFind, pchMessageStart, sizeof(pchMessageStart))==0)
+                        if (memcmp(nFind, Params().MessageStart(), sizeof(Params().MessageStart()))==0)
                         {
-                            nPos += ((unsigned char*)nFind - pchData) + sizeof(pchMessageStart);
+                            nPos += ((unsigned char*)nFind - pchData) + sizeof(Params().MessageStart());
                             break;
                         }
                         nPos += ((unsigned char*)nFind - pchData) + 1;
                        }
-                    else nPos += sizeof(pchData) - sizeof(pchMessageStart) + 1;
+                    else nPos += sizeof(pchData) - sizeof(Params().MessageStart()) + 1;
                     boost::this_thread::interruption_point();
                     } while(true);
             if (nPos == std::numeric_limits<uint32_t>::max())
@@ -402,11 +402,6 @@ bool AppInit2(boost::thread_group& threadGroup)
         CheckpointsMode = Checkpoints::PERMISSIVE;
 
     nDerivationMethodIndex = 0;
-
-    if (!SelectParamsFromCommandLine())
-    {
-        return InitError("Invalid combination of -testnet and regtest.");
-    }
 
     if (mapArgs.count("-bind")) {
         // when specifying an explicit binding address, you want to listen on it
@@ -712,7 +707,7 @@ bool AppInit2(boost::thread_group& threadGroup)
     // If the loaded chain has the wrong genesis, bail out immediately
     // It is likely using a Testnet data directory or visversa.
     if (!mapBlockIndex.empty() && pindexGenesisBlock == NULL)
-        return InitError(strprintf(_("Incorrect or no genesis block found. Perhaps the wrong datadir is specified for the network?")));
+        return InitError(_("Incorrect or no genesis block found. Perhaps the wrong datadir is specified for the network?"));
 
 
     // as LoadBlockIndex can take several minutes, it's possible the user
@@ -922,6 +917,9 @@ bool AppInit2(boost::thread_group& threadGroup)
     if (!CheckDiskSpace())
         return false;
 
+    if (!strErrors.str().empty())
+        return InitError(strErrors.str());
+
     RandAddSeedPerfmon();
 
     //// debug print
@@ -946,9 +944,6 @@ bool AppInit2(boost::thread_group& threadGroup)
 
     uiInterface.InitMessage(_("Done loading"));
     printf("Done loading\n");
-
-    if (!strErrors.str().empty())
-        return InitError(strErrors.str());
 
      // Add wallet transactions that aren't already in a block to mapTransactions
     pwalletMain->ReacceptWalletTransactions();

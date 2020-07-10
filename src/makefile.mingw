@@ -51,7 +51,7 @@ OBJS= \
     obj/key.o \
     obj/db.o \
     obj/init.o \
-    obj/beancashd.o \
+#    obj/beancashd.o \
     obj/chainparams.o \
     obj/keystore.o \
     obj/main.o \

@@ -159,7 +159,7 @@ void Intro::pickDataDirectory(bool fIsTestnet)
         if (!fIsTestnet)
             intro.setWindowIcon(QIcon(":icons/beancash"));
         else
-            intro.setWindowIcon((QIcon(":icons/beancash_testnet2"));
+            intro.setWindowIcon(QIcon(":icons/beancash_testnet2"));
         while(true)
         {
             if(!intro.exec())

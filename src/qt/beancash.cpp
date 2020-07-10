@@ -16,7 +16,9 @@
 
 #include <QApplication>
 #include <QMessageBox>
+#if QT_VERSION < 0x050000
 #include <QTextCodec>
+#endif
 #include <QLocale>
 #include <QTranslator>
 #include <QSplashScreen>
@@ -145,16 +147,24 @@ static void initTranslations(QTranslator &qtTranslatorBase, QTranslator &qtTrans
         QApplication::installTranslator(&translator);
 }
 
-
 #ifndef BEANCASH_QT_TEST
 int main(int argc, char *argv[])
 {
-
+    bool fMissingDatadir = false;
+    bool fSelParFromCLFailed = false;
     fHaveGUI = true;
 
     /// 1. Parse command-line options.
     // Command-line options take precedence:
     ParseParameters(argc, argv);
+
+    // ... then Beancash.conf
+    if (!boost::filesystem::is_directory(GetDataDir(false)))
+    {
+        fMissingDatadir = true;
+    } else {
+        ReadConfigFile(mapArgs, mapMultiArgs);
+    }
 
     // Check for -testnet or -regtest parameter
     // TestNet() calls are only valid after this clause.
@@ -166,10 +176,8 @@ int main(int argc, char *argv[])
     }
 
     // Parse URIs on command line -- this can affect TestNet() & RegTest() mode
-    if (!Paymentserver::ipcParseCommandLine(argc, argv))
+    if (!PaymentServer::ipcParseCommandLine(argc, argv))
         exit(0);
-
-    bool isaTestNet = TestNet() || RegTest();
 
     // Do not refer to data directory yet, this can be overridden by Intro::pickDataDirectory
 
@@ -200,7 +208,7 @@ int main(int argc, char *argv[])
     app.setWindowIcon(QIcon("./icons/icon.png"));
     app.setOrganizationName("Bean Core");
     app.setOrganizationDomain("beancash.org");
-    if (isaTestNet) // Separate UI settings for testnet
+    if (TestNet()) // Separate UI settings for testnet
         app.setApplicationName("Beancash-qt-testnet");
     else
         app.setApplicationName("Beancash-qt");
@@ -220,24 +228,22 @@ int main(int argc, char *argv[])
     }
 
     // Now that translations are initialized, check for errors and allow a translatable error message
-    if (fSelParFromCLFailed)
+    if (fMissingDatadir)
     {
         QMessageBox::critical(0, QObject::tr("Bean Cash"),
-                              QObject::tr("Error: Invalid combination of commandline parameters used."));
+                            QObject::tr("Error: Specified data directory \"%1\" does not exist.").arg(QString::fromStdString(mapArgs["-datadir"])));
         return 1;
+    }
+    else if (fSelParFromCLFailed)
+    {
+        QMessageBox::critical(0, QObject::tr("Bean Cash"),
+                              QObject::tr("Error: Invalid combination of -regtest and -testnet used."));
+        return 1;
+    }
 
     /// 5. Now that settings and translations are available, ask the user for a data directory
     // User language is set up: pick a data directory
-    Intro::pickDataDirectory(isaTestNet);
-
-    /// 6. Determine availability of data diretory and parse Beancash.conf
-    if (!boost::filesystem::is_directory(GetDataDir(false)))
-    {
-        QMessageBox::critical(0, QObject::tr("Bean Cash"),
-                              QObject::tr("Error: Specified data directory \"%1\" does not exist.").arg(QString::fromStdString(mapArgs["-datadir"])));
-        return 1;
-    }
-    ReadConfigFile(mapArgs, mapMultiArgs);
+    Intro::pickDataDirectory(TestNet());
 
     /// 7. URI IPC sending
     // Do this early as we don't want to bother initializing if we are just calling IPC
@@ -251,13 +257,6 @@ int main(int argc, char *argv[])
     /// 8. Main GUI initialization
     // Install global event filter that makes sure that long tooltips can be word-wrapped
     app.installEventFilter(new GUIUtil::ToolTipToRichTextFilter(TOOLTIP_WRAP_THRESHOLD, &app));
-
-    // Install qDebug() message handler to route messages to debug.log
-#if QT_VERSION < 0x050000
-    qInstallMsgHandler(DebugMessageHandler);
-#else
-    qInstallMessageHandler(DebugMessageHandler);
-#endif
 
     // Load GUI settings from QSettings
     OptionsModel optionsModel;
@@ -310,7 +309,7 @@ int main(int argc, char *argv[])
                 window.setWalletModel(&walletModel);
 
                 // If -min option passed, start window minimized.
-                if(GetBoolArg("-min"))
+                if(GetBoolArg("-min", false))
                 {
                     window.showMinimized();
                 }
@@ -338,6 +337,10 @@ int main(int argc, char *argv[])
         }
         else
         {
+            // Exit cleanly if AppInit2 returns false
+            threadGroup.interrupt_all();
+            threadGroup.join_all();
+            Shutdown();
             return 1;
         }
     } catch (std::exception& e) {

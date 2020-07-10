@@ -967,21 +967,22 @@ void ThreadDNSAddressSeed()
         }
     }
 
+    const vector<CDNSSeedData> &vSeeds = Params().DNSSeeds();
     int found = 0;
 
     if (!TestNet())
     {
         printf("Loading addresses from DNS seeds (could take a while)\n");
 
-        for (unsigned int seed_idx = 0; seed_idx < ARRAYLEN(strDNSSeed); seed_idx++) {
+        for (const CDNSSeedData &seed : vSeeds) {
             if (HaveNameProxy()) {
-                AddOneShot(strDNSSeed[seed_idx][1]);
+                AddOneShot(seed.host);
             } else {
-                vector<CNetAddr> vaddr;
+                vector<CNetAddr> vIPs;
                 vector<CAddress> vAdd;
-                if (LookupHost(strDNSSeed[seed_idx][1], vaddr))
+                if (LookupHost(seed.host.c_str(), vIPs))
                 {
-                    for (CNetAddr& ip : vaddr)
+                    for (CNetAddr& ip : vIPs)
                     {
                         int nOneDay = 24*3600;
                         CAddress addr = CAddress(CService(ip, Params().GetDefaultPort()));
@@ -990,7 +991,7 @@ void ThreadDNSAddressSeed()
                         found++;
                     }
                 }
-                addrman.Add(vAdd, CNetAddr(strDNSSeed[seed_idx][0], true));
+                addrman.Add(vAdd, CNetAddr(seed.name, true));
             }
         }
     }

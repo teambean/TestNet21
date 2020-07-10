@@ -32,6 +32,7 @@ bool AppInit(int argc, char* argv[])
 {
     boost::thread_group threadGroup;
     bool fRet = false;
+    fHaveGUI = false;
     try
     {
         //
@@ -41,10 +42,15 @@ bool AppInit(int argc, char* argv[])
         ParseParameters(argc, argv);
         if (!boost::filesystem::is_directory(GetDataDir(false)))
         {
-            fprintf(stderr, "Error: Specified directory does not exist\n");
-            Shutdown();
+            fprintf(stderr, "Error: Specified data directory \"%s\" does not exist.\n", mapArgs["-datadir"].c_str());
+            return false;
         }
         ReadConfigFile(mapArgs, mapMultiArgs);
+        // Check for -testnet or -regtest parameter (TestNet() calls are only valid after this clause)
+        if (!SelectParamsFromCommandLine()) {
+            fprintf(stderr, "Error: Invalid combination of -regtest and -testnet used.\n");
+            return false;
+        }
 
         if (mapArgs.count("-?") || mapArgs.count("--help"))
         {
@@ -63,20 +69,17 @@ bool AppInit(int argc, char* argv[])
         }
 
         // Command-line RPC
+        bool fCommandLine = false;
         for (int i = 1; i < argc; i++)
             if (!IsSwitchChar(argv[i][0]) && !boost::algorithm::istarts_with(argv[i], "Beancash:"))
                 fCommandLine = true;
 
         if (fCommandLine)
         {
-            if (!SelectParamsFromCommandLine()) {
-                fprintf(stderr, "Error: invalid combination of -regtest and -testnet.\n");
-                return false;
-            }
             int ret = CommandLineRPC(argc, argv);
             exit(ret);
         }
-#if !defined(WIN32)
+#ifndef WIN32
     fDaemon = GetBoolArg("-daemon");
     if (fDaemon)
     {
@@ -122,7 +125,7 @@ bool AppInit(int argc, char* argv[])
 }
 
 extern void noui_connect();
-int main(int argc, char* argv[])
+int main(int argc, char *argv[])
 {
     bool fRet = false;
     fHaveGUI = false;

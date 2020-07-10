@@ -67,7 +67,7 @@ extern CWallet* pwalletMain;
 extern int64_t nLastBeanStakeSearchInterval;
 double GetPoSKernelPS();
 
-BitbeanGUI::BitbeanGUI(QWidget *parent):
+BitbeanGUI::BitbeanGUI(bool fIsTestnet, QWidget *parent):
     QMainWindow(parent),
     clientModel(0),
     walletModel(0),
@@ -82,7 +82,6 @@ BitbeanGUI::BitbeanGUI(QWidget *parent):
     nWeight(0)
 {
     restoreWindowGeometry();
-    setWindowTitle(tr("Bean Cash") + " - " + tr("Core v1.2.2 Testy2"));
     qApp->setStyleSheet("QMainWindow { border-image: url(:images/bkg);border:none; } QProgressBar { background: transparent; border: 1px solid gray; border-radius: 7px; padding: 1px; text-align: center; } QProgressBar::chunk { background: QLinearGradient(x1: 0, y1: 0, x2: 1, y2: 0, stop: 0 #d3eeaf, stop: 1 #9fd555); border-radius: 7px; margin: 0px; } QMenu { background-color: #ff9a9a; color: black; } QMenu::item { color: black; background: transparent; } QMenu::item:selected { background-color: #9fd555; } QMenuBar { background-color: #ff9a9a; color: black; } QPushButton {background-color: #d3eeaf; } QLineEdit { background-color: white; } QToolTip { color: #ffffff; background-color: #ff9a9a; border-radius: 7px; border: 1px solid black; } QTabWidget::pane {background-color: white; color: black } QTabWidget::tab-bar {left: 5px;} QTabBar::tab {background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #d3eeaf, stop: 1 #9fd555); border: 2px solid #ff9a9a; border-bottom-color: #ff9a9a; border-top-left-radius: 7px; border-top-right-radius: 7px; min-width: 8ex; padding: 2px; color: black; } QTabBar::tab:selected {border-color: #9fd555; border-bottom-color: #ff9a9a; background-color: white; color: black; } QTabBar:tab:!selected {margin-top: 3px; } ");
     QFontDatabase::addApplicationFont("::/res/fonts/helvetica");
     QFont font("Helvetica");
@@ -90,17 +89,34 @@ BitbeanGUI::BitbeanGUI(QWidget *parent):
     QApplication::setFont(font);
 
 #ifndef Q_OS_MAC
-    qApp->setWindowIcon(QIcon(":icons/beancash"));
-    setWindowIcon(QIcon(":icons/beancash"));
+    if (!fIsTestnet)
+    {
+        setWindowTitle(tr("Bean Cash") + " - " + tr("Core v1.2.2 Testy2"));
+        qApp->setWindowIcon(QIcon(":icons/beancash"));
+        setWindowIcon(QIcon(":icons/beancash"));
+    }
+    else
+    {
+        setWindowTitle(tr("Bean Cash") + " - " + tr("Core v1.2.2 Testy2") + " " + tr("[TestNet2]"));
+        qApp->setWindowIcon(QIcon(":icons/beancash_testnet"));
+        setWindowIcon(QIcon(":icons/beancash_testnet"));
+    }
 #else
     setUnifiedTitleAndToolBarOnMac(true);
     QApplication::setAttribute(Qt::AA_DontShowIconsInMenus);
+
+
+    if (!fIsTestnet)
+        MacDockIconHandler::instance()->setIcon(QIcon(":icons/beancash"));
+    else
+        MacDockIconHandler::instance()->setIcon(QIcon(":icons/beancash_testnet"));
 #endif
+
     // Accept D&D of URIs
     setAcceptDrops(true);
 
     // Create actions for the toolbar, menu bar and tray/dock icon
-    createActions();
+    createActions(fIsTestnet);
 
     // Create application menu bar
     createMenuBar();
@@ -109,7 +125,7 @@ BitbeanGUI::BitbeanGUI(QWidget *parent):
     createToolBars();
 
     // Create system tray icon and notification
-    createTrayIcon();
+    createTrayIcon(fIsTestnet);
 
     // Create tabs
     overviewPage = new OverviewPage();
@@ -218,7 +234,7 @@ BitbeanGUI::~BitbeanGUI()
 #endif
 }
 
-void BitbeanGUI::createActions()
+void BitbeanGUI::createActions(bool fIsTestnet)
 {
     QActionGroup *tabGroup = new QActionGroup(this);
 
@@ -276,7 +292,10 @@ void BitbeanGUI::createActions()
     optionsAction = new QAction(QIcon(":/icons/options"), tr("&Options..."), this);
     optionsAction->setToolTip(tr("Modify configuration options for Bean Cash"));
     optionsAction->setMenuRole(QAction::PreferencesRole);
-    toggleHideAction = new QAction(QIcon(":/icons/beancash"), tr("&Show / Hide"), this);
+    if (!fIsTestnet)
+        toggleHideAction = new QAction(QIcon(":/icons/beancash"), tr("&Show / Hide"), this);
+    else
+        toggleHideAction = new QAction(QIcon(":/icons/beancash_testnet"), tr("&Show / Hide"), this);
     encryptWalletAction = new QAction(QIcon(":/icons/lock_closed"), tr("&Encrypt Keys..."), this);
     encryptWalletAction->setToolTip(tr("Encrypt or decrypt vault"));
     encryptWalletAction->setCheckable(true);
@@ -446,12 +465,21 @@ void BitbeanGUI::setWalletModel(WalletModel *walletModel)
     }
 }
 
-void BitbeanGUI::createTrayIcon()
+void BitbeanGUI::createTrayIcon(bool fIsTestnet)
 {
 #ifndef Q_OS_MAC
     trayIcon = new QSystemTrayIcon(this);
-    trayIcon->setToolTip(tr("Bean Cash Core"));
-    trayIcon->setIcon(QIcon(":/icons/toolbar"));
+    if (!fIsTestnet)
+    {
+        trayIcon->setToolTip(tr("Bean Cash Core"));
+        trayIcon->setIcon(QIcon(":/icons/toolbar"));
+    }
+    else
+    {
+        trayIcon->setToolTip(tr("Bean Cash Core") + " " + tr("[testnet]"));
+        trayIcon->setIcon(QIcon(":/icons/toolbar_testnet"));
+    }
+
     trayIcon->show();
 
 #endif

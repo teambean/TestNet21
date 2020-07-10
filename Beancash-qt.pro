@@ -153,7 +153,7 @@ LIBS += $$PWD/src/leveldb/libleveldb.a $$PWD/src/leveldb/libmemenv.a
 SOURCES += src/txdb-leveldb.cpp \
     src/qt/paymentserver.cpp \
     src/qt/trafficgraphwidget.cpp \
-    src/beancashd.cpp \
+#   src/beancashd.cpp \
     src/chainparams.cpp
 
 !win32 {

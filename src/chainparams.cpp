@@ -69,15 +69,17 @@ public:
 
                 // NewTestNet:
 
-                //CBlock(hash=0000021cddf3e66033819044559ebf09acdb95dd79b1743d367d03224e10674b, ver=1, hashPrevBlock=0000000000000000000000000000000000000000000000000000000000000000, hashMerkleRoot=da3215e78c191c4e5dd00e8ac2b57f71b20cdcad0c37562d39912df09a2f4d34, nTime=1423862862, nBits=1f00ffff, nNonce=98938, vtx=1, vchBlockSig=)
-                //  Beanbase(hash=da3215e78c, nTime=1423862862, ver=1, vin.size=1, vout.size=1, nLockTime=0)
-                //    CTxIn(COutPoint(0000000000, 4294967295), beanbase 00012a4a3133204665622032303135202d204269744265616e206c61756e6368657320616e64206368616e6765732074686520776f726c642077697468206974277320617765736f6d656e657373)
-                //    CTxOut(empty)
-                //  vMerkleTree: da3215e78c
+
 
         /**
          * Build the genesis block. Note that the output of its generation transaction cannot be spent since it did not originally exist in the database.
          *
+         * CBlock(hash=000009d2f828234d65299216e258242a4ea75d1b8d8a71d076377145068f08de, ver=1, hashPrevBlock=0000000000000000000000000000000000000000000000000000000000000000,
+         * hashMerkleRoot=da3215e78c191c4e5dd00e8ac2b57f71b20cdcad0c37562d39912df09a2f4d34, nTime=1423862862, nBits=1f00ffff, nNonce=620091, vtx=1, vchBlockSig=)
+         *   Beanbase(hash=da3215e78c, nTime=1423862862, ver=1, vin.size=1, vout.size=1, nLockTime=0)
+         *     CTxIn(COutPoint(0000000000, 4294967295), beanbase 00012a4a3133204665622032303135202d204269744265616e206c61756e6368657320616e64206368616e6765732074686520776f726c642077697468206974277320617765736f6d656e657373)
+         *     CTxOut(empty)
+         *   vMerkleTree: da3215e78c
         */
 
         const char* pszTimestamp = "13 Feb 2015 - BitBean launches and changes the world with it's awesomeness";
@@ -99,6 +101,7 @@ public:
         assert(hashGenesisBlock == uint256("0x000009d2f828234d65299216e258242a4ea75d1b8d8a71d076377145068f08de"));
         assert(genesis.hashMerkleRoot == uint256("0xda3215e78c191c4e5dd00e8ac2b57f71b20cdcad0c37562d39912df09a2f4d34"));
 
+
         vSeeds.push_back(CDNSSeedData("bitbean.org", "stalk1.bitbean.org"));
         vSeeds.push_back(CDNSSeedData("bitbean.org", "stalk2.bitbean.org"));
         vSeeds.push_back(CDNSSeedData("bitbean.org", "stalk3.bitbean.org"));
@@ -110,20 +113,7 @@ public:
         base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1,85);
         base58Prefixes[SECRET_KEY] = std::vector<unsigned char>(1,131);
 
-        // Convert the pnSeeds array into usable address objects.
-        for (unsigned int i = 0; i < ARRAYLEN(pnSeed); i++)
-        {
-            // It'll only connect to one or two seed nodes because once it connects,
-            // it'll get a pile of addresses with newer timestamps.
-            // Seed nodes are given a random 'last seen time' of between one and two
-            // weeks ago.
-            const int64_t nOneWeek = 7*24*60*60;
-            struct in_addr ip;
-            memcpy(&ip, &pnSeed[i], sizeof(ip));
-            CAddress addr(CService(ip, GetDefaultPort()));
-            addr.nTime = GetTime() - GetRand(nOneWeek) - nOneWeek;
-            vFixedSeeds.push_back(addr);
-        }
+        convertSeed6(vFixedSeeds, pnSeed6_main, ARRAYLEN(pnSeed6_main));
     }
 
     virtual const CBlock& GenesisBlock() const { return genesis; }

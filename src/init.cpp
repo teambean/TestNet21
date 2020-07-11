@@ -245,17 +245,18 @@ bool LoadExternalBlockFile(FILE* fileIn)
                                nPos = std::numeric_limits<uint32_t>::max();
                                break;
                            }
-                       void* nFind = memchr(pchData, Params().MessageStart()[0], nRead+1-sizeof(Params().MessageStart()));
+                       void* nFind = memchr(pchData, Params().MessageStart()[0], nRead+1-MESSAGE_START_SIZE);
                        if (nFind)
                        {
-                        if (memcmp(nFind, Params().MessageStart(), sizeof(Params().MessageStart()))==0)
+                        if (memcmp(nFind, Params().MessageStart(), MESSAGE_START_SIZE)==0)
                         {
-                            nPos += ((unsigned char*)nFind - pchData) + sizeof(Params().MessageStart());
+                            nPos += ((unsigned char*)nFind - pchData) + MESSAGE_START_SIZE;
                             break;
                         }
                         nPos += ((unsigned char*)nFind - pchData) + 1;
                        }
-                    else nPos += sizeof(pchData) - sizeof(Params().MessageStart()) + 1;
+                    else
+                        nPos += sizeof(pchData) - MESSAGE_START_SIZE + 1;
                     boost::this_thread::interruption_point();
                     } while(true);
             if (nPos == std::numeric_limits<uint32_t>::max())
@@ -402,6 +403,10 @@ bool AppInit2(boost::thread_group& threadGroup)
         CheckpointsMode = Checkpoints::PERMISSIVE;
 
     nDerivationMethodIndex = 0;
+
+    if (!SelectParamsFromCommandLine()) {
+        return InitError("Invalid combination of -testnet and regtest.");
+    }
 
     if (mapArgs.count("-bind")) {
         // when specifying an explicit binding address, you want to listen on it

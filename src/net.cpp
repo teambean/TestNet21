@@ -1067,7 +1067,6 @@ void ThreadOpenConnections()
             static bool done = false;
             if (!done) {
                 printf("Adding fixed seed nodes as DNS doesn't seem to be available.\n");
-                convertSeed6(vAdd, pnSeed6_main, ARRAYLEN(pnSeed6_main));
                 addrman.Add(Params().FixedSeeds(), CNetAddr("127.0.0.1"));
                 done = true;
             }

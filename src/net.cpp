@@ -62,11 +62,11 @@ CCriticalSection cs_setservAddNodeAddresses;
 vector<std::string> vAddedNodes;
 CCriticalSection cs_vAddedNodes;
 
+static CSemaphore *semOutbound = NULL;
+
 // Signals for message handling
 static CNodeSignals g_signals;
 CNodeSignals& GetNodeSignals() { return g_signals;}
-
-static CSemaphore *semOutbound = NULL;
 
 void AddOneShot(string strDest)
 {
@@ -1065,9 +1065,12 @@ void ThreadOpenConnections()
         if (addrman.size() == 0 && (GetTime() - nStart > 60))
         {
             static bool done = false;
-            printf("Adding fixed seed nodes as DNS doesn't seem to be available.\n");
-            addrman.Add(Params().FixedSeeds(), CNetAddr("127.0.0.1"));
-            done = true;
+            if (!done) {
+                printf("Adding fixed seed nodes as DNS doesn't seem to be available.\n");
+                convertSeed6(vAdd, pnSeed6_main, ARRAYLEN(pnSeed6_main));
+                addrman.Add(Params().FixedSeeds(), CNetAddr("127.0.0.1"));
+                done = true;
+            }
         }
 
         //

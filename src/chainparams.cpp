@@ -14,22 +14,34 @@
 
 using namespace boost::assign;
 
+struct SeedSpec6 {
+    uint8_t addr[16];
+    uint16_t port;
+};
+
+#include "chainparamsseeds.h"
+
 //
 // Main network
 //
 
-unsigned int pnSeed[] =
+// Convert the pnSeeds6 array into usable address objects.
+static void convertSeed6(std::vector<CAddress> &vSeedsOut, const SeedSpec6 *data, unsigned int count)
 {
-    0x4c6c6805, 0x59b7bd05, 0x3092a359, 0xbecd6bd8, 0x32dc6bd8,
-    0x33dc6bd8, 0x35dc6bd8, 0x3adc6bd8, 0x86eee0d9, 0xefa5f5d9,
-    0x05e8f4dc, 0x7c8f52dc, 0xf1daccdf, 0xbac5a818, 0x50b0c618,
-    0x47b2af62, 0x1832e563, 0x4d9d3863, 0xd9e88446, 0x7f901147,
-    0x30ef53b4, 0x394e3742, 0x14cd2349, 0xa2ce4849, 0x54ea4e49,
-    0x4f7b564b, 0xcfa4bb4c, 0x821c6651, 0xaddaeb59, 0x08a1b05b,
-    0x19c37261, 0xdd705563, 0xd3cd5a6c, 0x9398a359, 0x4415f54f,
-    0x476c6805, 0x8298a359, 0x9c98a359, 0x338a2eb5, 0x3399201b,
-    0xdab26826, 0x8feb652e, 0x85e5132e, 0xf773042e, 0xda28152f
-};
+        // It'll only connect to one or two seed nodes because once it connects,
+        // it'll get a pile of addresses with newer timestamps.
+        // Seed nodes are given a random 'last seen time' of between one and two
+        // weeks ago.
+        const int64_t nOneWeek = 7*24*60*60;
+        for (unsigned int i = 0; i < count; i++)
+        {
+            struct in6_addr ip;
+            memcpy(&ip, data[i].addr, sizeof(ip));
+            CAddress addr(CService(ip, data[i].port));
+            addr.nTime = GetTime() - GetRand(nOneWeek) - nOneWeek;
+            vSeedsOut.push_back(addr);
+        }
+}
 
 class CMainParams : public CChainParams {
 public:
@@ -44,7 +56,7 @@ public:
         vAlertPubKey = ParseHex("020dd8d110163315b5ed74293dcb6a69fc4a2ed0e549af37f69d4ecf99e1a21f40");
         nDefaultPort = 22460;
         nRPCPort = 22461;
-        CBigNum bnProofOfWorkLimit(~uint256(0) >> 20); // Starting Difficulty: results with 0,000244140625 proof-of-work difficulty
+        bnProofOfWorkLimit = CBigNum(~uint256(0) >> 20); // Starting Difficulty: results with 0,000244140625 proof-of-work difficulty
 
                 // NewMainNet:
 
@@ -63,7 +75,11 @@ public:
                 //    CTxOut(empty)
                 //  vMerkleTree: da3215e78c
 
-        // Build the genesis block.
+        /**
+         * Build the genesis block. Note that the output of its generation transaction cannot be spent since it did not originally exist in the database.
+         *
+        */
+
         const char* pszTimestamp = "13 Feb 2015 - BitBean launches and changes the world with it's awesomeness";
         CTransaction txNew;
         txNew.nTime = 1423862862;
@@ -80,8 +96,8 @@ public:
         genesis.nNonce   = 620091;
 
         hashGenesisBlock = genesis.GetHash();
-        assert(hashGenesisBlock == uint256("0xda3215e78c191c4e5dd00e8ac2b57f71b20cdcad0c37562d39912df09a2f4d34"));
-        assert(genesis.hashMerkleRoot == uint256("0x000009d2f828234d65299216e258242a4ea75d1b8d8a71d076377145068f08de"));
+        assert(hashGenesisBlock == uint256("0x000009d2f828234d65299216e258242a4ea75d1b8d8a71d076377145068f08de"));
+        assert(genesis.hashMerkleRoot == uint256("0xda3215e78c191c4e5dd00e8ac2b57f71b20cdcad0c37562d39912df09a2f4d34"));
 
         vSeeds.push_back(CDNSSeedData("bitbean.org", "stalk1.bitbean.org"));
         vSeeds.push_back(CDNSSeedData("bitbean.org", "stalk2.bitbean.org"));
@@ -174,13 +190,13 @@ public:
         pchMessageStart[2] = 0xb5;
         pchMessageStart[3] = 0xda;
         bnProofOfWorkLimit = CBigNum(~uint256(0) >> 1);
-        genesis.nTime = 1411111111;
+        genesis.nTime = 1423862862;
         genesis.nBits = bnProofOfWorkLimit.GetCompact();
         genesis.nNonce = 2;
         hashGenesisBlock = genesis.GetHash();
         nDefaultPort = 18444;
         strDataDir = "regtest";
-        assert(hashGenesisBlock == uint256("0x523dda6d336047722cbaf1c5dce622298af791bac21b33bf6e2d5048b2a13e3d"));
+        assert(hashGenesisBlock == uint256("0x0000021cddf3e66033819044559ebf09acdb95dd79b1743d367d03224e10674b"));
 
         vSeeds.clear();  // Regtest mode doesn't have any DNS seeds.
     }

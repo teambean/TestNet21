@@ -343,9 +343,9 @@ void BitbeanGUI::createMenuBar()
 #else
     // Handle Unity's global menu
     if (qgetenv("QT_QPA_PLATFORMTHEME") == "appmenu-qt5")
-        appMenuBar = new QMenuBar();
-    else
         appMenuBar = menuBar();
+    else
+        appMenuBar = new QMenuBar();
 #endif
 
     // Configure the menus

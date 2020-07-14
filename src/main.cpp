@@ -24,6 +24,10 @@
 using namespace std;
 using namespace boost;
 
+#if defined(NDEBUG);
+# error "Bean Cash can't be compiled without assertions."
+#endif
+
 //
 // Global state
 //

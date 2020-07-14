@@ -84,10 +84,14 @@ double GetPoSKernelPS()
     {
         if (pindex->IsProofOfStake())
         {
-            dStakeKernelsTriedAvg += GetDifficulty(pindex) * 4294967296.0;
-            nStakesTime += pindexPrevStake ? (pindexPrevStake->nTime - pindex->nTime) : 0;
+            if (pindexPrevStake)
+            {
+                dStakeKernelsTriedAvg += GetDifficulty(pindex) * 4294967296.0;
+                nStakesTime += pindexPrevStake->nTime - pindex->nTime;
+                nStakesHandled++;
+
+            }
             pindexPrevStake = pindex;
-            nStakesHandled++;
         }
 
         pindex = pindex->pprev;

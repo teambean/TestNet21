@@ -6,15 +6,16 @@
 #ifndef BITBEAN_DB_H
 #define BITBEAN_DB_H
 
-#include "main.h"
+#include "sync.h"
+#include "serialize.h"
 
 #include <map>
 #include <string>
 #include <vector>
 
+#include <boost/filesystem.hpp>
 #include <db_cxx.h>
 
-class CAddress;
 class CAddrMan;
 class CBlockLocator;
 class CDiskBlockIndex;
@@ -23,7 +24,6 @@ class CMasterKey;
 class COutPoint;
 class CTxIndex;
 class CWallet;
-class CWalletTx;
 
 extern unsigned int nWalletDBUpdated;
 
@@ -321,6 +321,7 @@ class CAddrDB
 {
 private:
     boost::filesystem::path pathAddr;
+
 public:
     CAddrDB();
     bool Write(const CAddrMan& addr);

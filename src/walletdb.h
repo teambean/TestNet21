@@ -13,6 +13,8 @@
 class CKeyPool;
 class CAccount;
 class CAccountingEntry;
+class CWallet;
+class CWalletTx;
 
 /** Error statuses for the wallet database */
 enum DBErrors
@@ -185,5 +187,7 @@ public:
     static bool Recover(CDBEnv& dbenv, std::string filename, bool fOnlyKeys);
     static bool Recover(CDBEnv& dbenv, std::string filename);
 };
+
+bool BackupWallet(const CWallet& wallet, const std::string& strDest);
 
 #endif // BITBEAN_WALLETDB_H

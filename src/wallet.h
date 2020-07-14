@@ -6,6 +6,8 @@
 #ifndef BITBEAN_WALLET_H
 #define BITBEAN_WALLET_H
 
+#include "walletdb.h"
+
 #include <string>
 #include <vector>
 
@@ -17,15 +19,17 @@
 #include "script.h"
 #include "ui_interface.h"
 #include "util.h"
-#include "walletdb.h"
+
 
 extern bool fWalletUnlockStakingOnly;
 extern bool fConfChange;
 class CAccountingEntry;
+class CBeanControl;
 class CWalletTx;
 class CReserveKey;
 class COutput;
-class CBeanControl;
+class CWalletDB;
+
 
 /** (client) version numbers for particular wallet features */
 enum WalletFeature

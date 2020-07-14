@@ -1,19 +1,16 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
-// Copyright (c) 2009-2013 The Bitcoin developers
+// Copyright (c) 2009-2012 The Bitcoin developers
+// Copyright (c) 2020 Bean Core www.beancash.org
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
+#ifndef BITBEAN_HASH_H
+#define BITBEAN_HASH_H
 
-#ifndef BITCOIN_HASH_H
-#define BITCOIN_HASH_H
-
-#include "serialize.h"
 #include "uint256.h"
-#include "version.h"
+#include "serialize.h"
 
-#include <vector>
-
-#include <openssl/ripemd.h>
 #include <openssl/sha.h>
+#include <openssl/ripemd.h>
 
 template<typename T1>
 inline uint256 Hash(const T1 pbegin, const T1 pend)
@@ -124,8 +121,6 @@ inline uint160 Hash160(const std::vector<unsigned char>& vch)
     return Hash160(vch.begin(), vch.end());
 }
 
-unsigned int MurmurHash3(unsigned int nHashSeed, const std::vector<unsigned char>& vDataToHash);
-
 typedef struct
 {
     SHA512_CTX ctxInner;
@@ -137,3 +132,4 @@ int HMAC_SHA512_Update(HMAC_SHA512_CTX *pctx, const void *pdata, size_t len);
 int HMAC_SHA512_Final(unsigned char *pmd, HMAC_SHA512_CTX *pctx);
 
 #endif
+

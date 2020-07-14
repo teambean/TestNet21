@@ -309,7 +309,8 @@ HEADERS += src/qt/bitbeangui.h \
     src/qt/trafficgraphwidget.h \
     src/qt/intro.h \
     src/limitedmap.h \
-    src/chainparams.h
+    src/chainparams.h \
+    src/hash.h
 
 SOURCES += src/qt/beancash.cpp \
     src/qt/bitbeangui.cpp \

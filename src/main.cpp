@@ -24,7 +24,7 @@
 using namespace std;
 using namespace boost;
 
-#if defined(NDEBUG);
+#if defined(NDEBUG)
 # error "Bean Cash can't be compiled without assertions."
 #endif
 

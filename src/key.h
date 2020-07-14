@@ -1,7 +1,7 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2012 The Bitcoin developers
 // Copyright (c) 2015-2017 Bean Core www.bitbean.org
-// Copyright (c) 2018-2019 Bean Core www.beancash.org
+// Copyright (c) 2018-2020 Bean Core www.beancash.org
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 #ifndef BITBEAN_KEY_H
@@ -12,7 +12,7 @@
 #include "allocators.h"
 #include "serialize.h"
 #include "uint256.h"
-#include "util.h"
+#include "hash.h"
 
 // secp256k1:
 // const unsigned int PRIVATE_KEY_SIZE = 279;

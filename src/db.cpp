@@ -8,6 +8,7 @@
 #include "db.h"
 #include "net.h"
 #include "util.h"
+#include "main.h"
 #include "hash.h"
 #include "addrman.h"
 #include <boost/version.hpp>

@@ -55,7 +55,8 @@ namespace Checkpoints
     int GetTotalBlocksEstimate()
     {
         MapCheckpoints& checkpoints = (TestNet() ? mapCheckpointsTestnet : mapCheckpoints);
-
+        if (checkpoints.empty())
+            return 0;
         return checkpoints.rbegin()->first;
     }
 

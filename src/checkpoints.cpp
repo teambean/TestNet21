@@ -26,7 +26,6 @@ namespace Checkpoints
     //
     static MapCheckpoints mapCheckpoints =
         boost::assign::map_list_of
-        ( 0,      Params().HashGenesisBlock() )
         (11111, uint256("0xdfa8f0f85cbffeb3edd67a1d1ab94c6407e33d1b4b7900bf7ced592d9cc3898a"))
        (322748, uint256("0x191e1f49ceead4324ed96982c3bb3dd11acfb18c81cd0d7a4ea3ab4ffb733858"))
        (1666369, uint256("0xf8c5f5a3107b0c2224d613f5de09949e1d6afec3a63b05a34ef663a2701800d6"))
@@ -35,13 +34,13 @@ namespace Checkpoints
     ;
 
     // TestNet checkpoints
-    static MapCheckpoints mapCheckpointsTestnet =
-        boost::assign::map_list_of
-        ( 0, Params().HashGenesisBlock() )
-        (10000, uint256("0x000000005e728e868fcbc7dfacb5d4058f6d698c63febd742ff4d19eb4cc757f"))
-        (20000, uint256("0xdd7cd3bda3d34192e4ec307f6abd5d8c49033fdaacbbda74e89cb6c1fe058f25"))
-        (30000, uint256("0x810030c01513735ca9a3e4be48588767367d0563ed1c43e41a55332eb116aeae"))
-        ;
+    static MapCheckpoints mapCheckpointsTestnet;
+        // boost::assign::map_list_of
+        // ( 0, Params().HashGenesisBlock() )
+        // (10000, uint256("0x000000005e728e868fcbc7dfacb5d4058f6d698c63febd742ff4d19eb4cc757f"))
+        // (20000, uint256("0xdd7cd3bda3d34192e4ec307f6abd5d8c49033fdaacbbda74e89cb6c1fe058f25"))
+        // (30000, uint256("0x810030c01513735ca9a3e4be48588767367d0563ed1c43e41a55332eb116aeae"))
+        // ;
 
     bool CheckHardened(int nHeight, const uint256& hash)
     {
@@ -284,7 +283,10 @@ namespace Checkpoints
             }
         }
 
-        return false;
+        if (!WriteSyncCheckpoint(Params().HashGenesisBlock()))
+            return error("ResetSyncCheckpoing: failed to write sync checkpoing genesis block");
+        printf("ResetSyncCheckpoint: sync-checkpoint reset to genesis block\n");
+        return true;
     }
 
     void AskForPendingSyncCheckpoint(CNode* pfrom)

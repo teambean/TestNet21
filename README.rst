@@ -1,11 +1,14 @@
   .. image:: BeanCashLogo.png
-
-Bean Cash is a digital currency re-branded from BitBean.
+  
+*****************************************
+Bean Cash Core v1.2.3b (Beta) [TestNet21]
+*****************************************
 
 *"Bean Cash is Bitcoin's Big Little Brother - Fast..Simple..Secure..More
 Than a Digital Currency!"*
 
-www.beancash.org
+ 
+https://www.beancash.org
 
 What Is Bean Cash?
 ------------------
@@ -64,10 +67,18 @@ cards).
 To learn more about Bean Cash, visit our website: www.beancash.org or
 chat live with our community members at: https://live.beancash.org.
 
-Alternatively, if you are a merchant with questions or interested in
-adopting Bean Cash in your business, you may contact Bean Core via
-telephone: 1 (406) 213-4656 or via email.
+.. raw:: html
 
+   </li>
+   <li>
+   
+.. raw:: html
+
+    <embed>
+    Alternatively, if you are a merchant with questions or interested in
+    adopting Bean Cash in your business, you may contact Bean Core via telephone: <a href="tel:14062134656">01 (406)213-4656</a>  
+    </embed>
+    
 Bean Cash Specifications
 ------------------------
 
@@ -77,7 +88,7 @@ ended at block 10,000)
 **Proof of Work Algorithm**: SHA-256
 
 **PoW Block Reward**: 100,000 BITB
-
+<<
 **PoW Blocks**: 10,000
 
 **PoB Block Reward**: 1000 BITB (1 SPROUT)
@@ -125,14 +136,18 @@ Live Community Support: https://live.beancash.org
    </li>
    <li>
 
-Twitter: @BeanCash\_BEAN
+Twitter: https://twitter.com/BeanCash_BEAN
 
 .. raw:: html
 
    </li>
    <li>
 
-email
+.. raw:: html
 
-Copyright (c) 2015-2017 Bean Core, Team Bean, bitbean.org Copyright (c)
-2017-2019 Bean Core, Team Bean, beancash.org
+    <embed> 
+        email: <a href="mailto:support@beancash.org">support@beancash.org</a>
+   </embed>
+   
+| *Copyright (c) 2015-2017 Bean Core, Team Bean, bitbean.org*
+| *Copyright (c) 2017-2020 Bean Core, Team Bean, beancash.org*

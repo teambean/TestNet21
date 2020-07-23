@@ -8,7 +8,7 @@
 
 #include "wallet.h"
 #include "walletdb.h"
-#include "bitbeanrpc.h"
+#include "rpcserver.h"
 #include "init.h"
 #include "base58.h"
 

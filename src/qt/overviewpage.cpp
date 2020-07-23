@@ -8,12 +8,12 @@
 #include "transactionfilterproxy.h"
 #include "guiutil.h"
 #include "guiconstants.h"
-#include "bitbeanrpc.h"
+#include "rpcserver.h"
 #include "init.h"
 #include "base58.h"
 #include "main.h"
 #include "wallet.h"
-#include "bitbeanrpc.h"
+
 
 #include <QAbstractItemDelegate>
 #include <QPainter>

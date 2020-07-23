@@ -287,7 +287,9 @@ HEADERS += src/qt/bitbeangui.h \
     src/qt/transactionfilterproxy.h \
     src/qt/transactionview.h \
     src/qt/walletmodel.h \
-    src/bitbeanrpc.h \
+    src/rpcclient.h \
+    src/rpcprotocol.h \
+    src/rpcserver.h \
     src/qt/overviewpage.h \
     src/qt/csvmodelwriter.h \
     src/crypter.h \
@@ -310,7 +312,8 @@ HEADERS += src/qt/bitbeangui.h \
     src/qt/intro.h \
     src/limitedmap.h \
     src/chainparams.h \
-    src/hash.h
+    src/hash.h \
+    src/rpcprotocol.h
 
 SOURCES += src/qt/beancash.cpp \
     src/qt/bitbeangui.cpp \
@@ -354,7 +357,9 @@ SOURCES += src/qt/beancash.cpp \
     src/qt/transactionfilterproxy.cpp \
     src/qt/transactionview.cpp \
     src/qt/walletmodel.cpp \
-    src/bitbeanrpc.cpp \
+    src/rpcclient.cpp \
+    src/rpcprotocol.cpp \
+    src/rpcserver.cpp \
     src/rpcdump.cpp \
     src/rpcnet.cpp \
     src/rpcmining.cpp \

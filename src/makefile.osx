@@ -79,7 +79,9 @@ OBJS= \
     obj/miner.o \
     obj/net.o \
     obj/protocol.o \
-    obj/bitbeanrpc.o \
+    obj/rpcclient.o \
+    obj/rpcprotocol.o \
+    obj/rpcserver.o \
     obj/rpcdump.o \
     obj/rpcnet.o \
     obj/rpcmining.o \
@@ -90,6 +92,7 @@ OBJS= \
     obj/sync.o \
     obj/util.o \
     obj/wallet.o \
+    obj/noui.o \
     obj/walletdb.o \
     obj/noui.o \
     obj/pbkdf2.o \

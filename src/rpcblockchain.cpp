@@ -1,11 +1,12 @@
 // Copyright (c) 2010 Satoshi Nakamoto
 // Copyright (c) 2009-2012 The Bitcoin developers
-// Copyright (c) 2018 Bean Core www.beancash.org
+// Copyright (c) 2018-2020 Bean Core www.beancash.org
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
+#include "rpcserver.h"
 #include "main.h"
-#include "bitbeanrpc.h"
+#include "checkpoints.h"
 
 using namespace json_spirit;
 using namespace std;

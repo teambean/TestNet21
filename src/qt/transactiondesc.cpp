@@ -1,4 +1,4 @@
-// Copyright (c) 2019 www.beancash.org
+// Copyright (c) 2019-2020 Bean Core www.beancash.org
 
 #include "transactiondesc.h"
 

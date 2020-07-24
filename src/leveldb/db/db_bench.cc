@@ -83,6 +83,10 @@ static bool FLAGS_histogram = false;
 // (initialized to default value by "main")
 static int FLAGS_write_buffer_size = 0;
 
+// Number of bytes written to each file.
+// (initialized to default value by "main")
+
+
 // Number of bytes to use as a cache of uncompressed data.
 // Negative means use default settings.
 static int FLAGS_cache_size = -1;

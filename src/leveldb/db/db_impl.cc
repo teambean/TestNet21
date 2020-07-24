@@ -641,7 +641,19 @@ void DBImpl::BackgroundCall() {
   } else if (!bg_error_.ok()) {
     // No more background work after a background error.
   } else {
-    BackgroundCompaction();
+    Status s = BackgroundCompaction();
+    if (!s.ok()) {
+        // Wait a little bit before retrying background compaction in
+        // case this is an environmental problem and we do not want to
+        // chew up resources for failed compactions for the duration of
+        // the problem. 
+        bg_cv_.SignalAll();  // In case a waiter can proceed despite the error
+        Log(options_.info_log, "Waiting after background compaction error: %s",
+          s.ToString().c_str());
+        mutex_.Unlock();
+        env_->SleepForMicroseconds(1000000);
+        mutex_.Lock();
+    }
   }
 
   bg_compaction_scheduled_ = false;
@@ -652,12 +664,11 @@ void DBImpl::BackgroundCall() {
   bg_cv_.SignalAll();
 }
 
-void DBImpl::BackgroundCompaction() {
+status DBImpl::BackgroundCompaction() {
   mutex_.AssertHeld();
 
   if (imm_ != NULL) {
-    CompactMemTable();
-    return;
+    return CompactMemTable();
   }
 
   Compaction* c;
@@ -735,6 +746,7 @@ void DBImpl::BackgroundCompaction() {
     }
     manual_compaction_ = NULL;
   }
+  return status;
 }
 
 void DBImpl::CleanupCompaction(CompactionState* compact) {

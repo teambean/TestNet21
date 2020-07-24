@@ -72,7 +72,7 @@ SHARED = $(SHARED1)
 else
 # Update db.h if you change these.
 SHARED_MAJOR = 1
-SHARED_MINOR = 16
+SHARED_MINOR = 17
 SHARED1 = libleveldb.$(PLATFORM_SHARED_EXT)
 SHARED2 = $(SHARED1).$(SHARED_MAJOR)
 SHARED3 = $(SHARED1).$(SHARED_MAJOR).$(SHARED_MINOR)
@@ -186,22 +186,24 @@ memenv_test : helpers/memenv/memenv_test.o $(MEMENVLIBRARY) $(LIBRARY) $(TESTHAR
 ifeq ($(PLATFORM), IOS)
 # For iOS, create universal object files to be used on both the simulator and
 # a device.
-SIMULATORSDSK=$(shell xcrun -sdk iphonesimulator --show-sdk-path)
-DEVICESDK=$(shell xcrun -sdk iphoneos --show-sdk-path)
+PLATFORMSROOT=/Applications/Xcode.app/Contents/Developer/Platforms
+SIMULATORROOT=$(PLATFORMSROOT)/iPhoneSimulator.platform/Developer
+DEVICEROOT=$(PLATFORMSROOT)/iPhoneOS.platform/Developer
+IOSVERSION=$(shell defaults read $(PLATFORMSROOT)/iPhoneOS.platform/version CFBundleShortVersionString)
 IOSARCH=-arch armv6 -arch arm7 -arch -armv7s -arch arm64
 
 .cc.o:
 	mkdir -p ios-x86/$(dir $@)
-	$(CXX) $(CXXFLAGS) -isysroot "$(SIMULATORSDK)" -arch i686 -c $< -o ios-x86/$@
+	$(CXX) $(CXXFLAGS) -isysroot "$(SIMULATORSDK)" -arch x86_64 -c $< -o ios-x86/$@
 	mkdir -p ios-arm/$(dir $@)
-	xcrun -sdk iphoneos $(CXX) $(CXXFLAGS) -isysroot "$(DEVICESDK)" $(IOSARCH) -c $< -o ios-arm/$@
+	xcrun -sdk iphoneos $(CXX) $(CXXFLAGS) -isysroot $(DEVICEROOT)/SDKs/iPhoneOS$(IOSVERSION).sdk $(IOSARCH) -c $< -o ios-arm/$@
 	lipo ios-x86/$@ ios-arm/$@ -create -output $@
 
 .c.o:
 	mkdir -p ios-x86/$(dir $@)
-	$(CC) $(CFLAGS) -isysroot "$(SIMULATORSDK)" -arch i686 -ARCH x86_64 -c $< -o ios-x86/$@
+	$(CC) $(CFLAGS) -isysroot "$(SIMULATORSDK)" -arch x86_64 -c $< -o ios-x86/$@
 	mkdir -p ios-arm/$(dir $@)
-	xcrun -sdk iphoneos $(CC) $(CFLAGS) -isysroot "$(DEVICESDK)" $(IOSARCH) -c $< -o ios-arm/$@
+	xcrun -sdk iphoneos $(CC) $(CFLAGS) -isysroot $(DEVICEROOT)/SDKs/iPhoneOS$(IOSVERSION).sdk $(IOSARCH) -c $< -o ios-arm/$@
 	lipo ios-x86/$@ ios-arm/$@ -create -output $@
 
 else

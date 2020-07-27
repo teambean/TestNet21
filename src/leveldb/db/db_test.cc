@@ -78,7 +78,6 @@ class SpecialEnv : public EnvWrapper {
   bool count_random_reads_;
   AtomicCounter random_read_counter_;
   
-  AtomicCounter sleep_counter_;
 
   explicit SpecialEnv(Env* base) : EnvWrapper(base) {
     delay_data_sync_.Release_Store(NULL);
@@ -185,11 +184,6 @@ class SpecialEnv : public EnvWrapper {
       *r = new CountingFile(*r, &random_read_counter_);
     }
     return s;
-  }
-  
-  virtual void SleepForMicroseconds(int micros) {
-    sleep_counter_.Increment();
-    target()->SleepForMicroseconds(micros);
   }
 };
 
@@ -1540,16 +1534,13 @@ TEST(DBTest, NoSpace) {
   Compact("a", "z");
   const int num_files = CountFiles();
   env_->no_space_.Release_Store(env_);   // Force out-of-space errors
-  env_->sleep_counter_.Reset();
-  for (int i = 0; i < 5; i++) {
+  for (int i = 0; i < 10; i++) {
     for (int level = 0; level < config::kNumLevels-1; level++) {
       dbfull()->TEST_CompactRange(level, NULL, NULL);
     }
   }
   env_->no_space_.Release_Store(NULL);
   ASSERT_LT(CountFiles(), num_files + 3);
-  // Check that compaction attempts slept after errors
-  ASSERT_GE(env_->sleep_counter_.Read(), 5);
 }
 
 TEST(DBTest, NonWritableFileSystem) {

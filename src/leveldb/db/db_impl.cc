@@ -641,7 +641,7 @@ void DBImpl::BackgroundCall() {
   } else if (!bg_error_.ok()) {
     // No more background work after a background error.
   } else {
-    Status s = BackgroundCompaction();
+    BackgroundCompaction();
     if (!s.ok()) {
         // Wait a little bit before retrying background compaction in
         // case this is an environmental problem and we do not want to
@@ -664,11 +664,12 @@ void DBImpl::BackgroundCall() {
   bg_cv_.SignalAll();
 }
 
-status DBImpl::BackgroundCompaction() {
+void DBImpl::BackgroundCompaction() {
   mutex_.AssertHeld();
 
   if (imm_ != NULL) {
-    return CompactMemTable();
+    CompactMemTable();
+    return;
   }
 
   Compaction* c;
@@ -746,7 +747,6 @@ status DBImpl::BackgroundCompaction() {
     }
     manual_compaction_ = NULL;
   }
-  return status;
 }
 
 void DBImpl::CleanupCompaction(CompactionState* compact) {

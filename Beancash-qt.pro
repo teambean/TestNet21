@@ -448,7 +448,7 @@ QMAKE_EXTRA_COMPILERS += TSQM
 
 # "Other files" to show in Qt Creator
 OTHER_FILES += \
-    contrib/debian/* contrib/gitian-descriptors/* contrib/initscripts/* contrib/macdeploy/* contrib/pythontools/* doc/*.rst doc/*.txt doc/Doxyfile doc/README README.md res/Beancash-qt.rc contrib/* qa/* share/*.sh share/setup* share/seeds/*
+    contrib/debian/* contrib/gitian-descriptors/* contrib/initscripts/* contrib/macdeploy/* contrib/pythontools/* doc/*.rst doc/*.txt doc/Doxyfile doc/README README.md res/Beancash-qt.rc contrib/* qa/* share/*.sh share/setup* share/seeds/* src/leveldb/*
 
 # platform specific defaults, if not overridden on command line
 !exists(BOOST_LIB_SUFFIX) {

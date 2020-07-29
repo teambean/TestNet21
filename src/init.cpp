@@ -344,10 +344,10 @@ strUsage += "  -maxsendbuffer=<n>     " + _("Maximum per-connection send buffer,
 strUsage += "  -detachdb              " + _("Detach block and address databases. Increases shutdown time (default: 1)") + "\n";
 strUsage += "  -paytxfee=<amt>        " + _("Fee per KB to add to transactions you send") + "\n";
 strUsage += "  -mininput=<amt>        " + _("When creating transactions, ignore inputs with value less than this (default: 0.01)") + "\n";
-#ifdef QT_GUI
+if (fHaveGUI)
     strUsage += "  -server                " + _("Accept command line and JSON-RPC commands") + "\n";
-#endif
-#if !defined(WIN32) && !defined(QT_GUI)
+#if !defined(WIN32)
+   if (fHaveGUI)
     strUsage += "  -daemon                " + _("Run in the background as a daemon and accept commands") + "\n";
 #endif
 strUsage += "  -testnet               " + _("Use the test network") + "\n";
@@ -365,7 +365,8 @@ strUsage += "  -rpcuser=<user>        " + _("Username for JSON-RPC connections")
 strUsage += "  -rpcpassword=<pw>      " + _("Password for JSON-RPC connections") + "\n";
 strUsage += "  -rpcport=<port>        " + _("Listen for JSON-RPC connections on <port> (default: 22461 or testnet: 22463)") + "\n";
 strUsage += "  -rpcallowip=<ip>       " + _("Allow JSON-RPC connections from specified IP address") + "\n";
-strUsage += "  -rpcconnect=<ip>       " + _("Send commands to node running on <ip> (default: 127.0.0.1)") + "\n";
+if (!fHaveGUI)
+    strUsage += "  -rpcconnect=<ip>       " + _("Send commands to node running on <ip> (default: 127.0.0.1)") + "\n";
 strUsage += "  -rpcwait               " + _("Wait for RPC server to start") + "\n";
 strUsage += "  -rpcthreads=<n>        " + _("Use this to set the number of threads to service RPC calls (defult: 4)") + "\n";
 strUsage += "  -blocknotify=<cmd>     " + _("Execute command when the best block changes (%s in cmd is replaced by block hash)") + "\n";
@@ -645,9 +646,8 @@ bool AppInit2(boost::thread_group& threadGroup)
         fServer = GetBoolArg("-server");
 
     /* force fServer when running without GUI */
-#if !defined(QT_GUI)
+if (!fHaveGUI)
     fServer = true;
-#endif
     fPrintToConsole = GetBoolArg("-printtoconsole");
     fPrintToDebugger = GetBoolArg("-printtodebugger");
     fLogTimestamps = GetBoolArg("-logtimestamps");

@@ -1,6 +1,6 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2012 The Bitcoin developers
-// Copyright (c) 2015-2018 Bean Core www.beancash.org
+// Copyright (c) 2015-2020 Bean Core www.beancash.org
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 #ifndef BITBEAN_MAIN_H
@@ -216,7 +216,7 @@ public:
 
     void print() const
     {
-        printf("%s", ToString().c_str());
+        LogPrintf("%s", ToString().c_str());
     }
 };
 
@@ -272,7 +272,7 @@ public:
 
     void print() const
     {
-        printf("%s\n", ToString().c_str());
+        LogPrintf("%s\n", ToString().c_str());
     }
 };
 
@@ -355,7 +355,7 @@ public:
 
     void print() const
     {
-        printf("%s\n", ToString().c_str());
+        LogPrintf("%s\n", ToString().c_str());
     }
 };
 
@@ -434,7 +434,7 @@ public:
 
     void print() const
     {
-        printf("%s\n", ToString().c_str());
+        LogPrintf("%s\n", ToString().c_str());
     }
 };
 
@@ -686,7 +686,7 @@ public:
 
     void print() const
     {
-        printf("%s", ToString().c_str());
+        LogPrintf("%s", ToString().c_str());
     }
 
 
@@ -957,8 +957,8 @@ public:
     {
         // Take last bit of block hash as entropy bit
         unsigned int nEntropyBit = ((GetHash().Get64()) & 1llu);
-        if (fDebug && GetBoolArg("-printstakemodifier"))
-            printf("GetStakeEntropyBit: hashBlock=%s nEntropyBit=%u\n", GetHash().ToString().c_str(), nEntropyBit);
+        if (fDebug && GetBoolArg("-printsproutmodifier"))
+            LogPrint("sproutmodifier", "GetStakeEntropyBit: hashBlock=%s nEntropyBit=%u\n", GetHash().ToString().c_str(), nEntropyBit);
         return nEntropyBit;
     }
 
@@ -978,7 +978,7 @@ public:
         return IsProofOfStake()? std::make_pair(vtx[1].vin[0].prevout, vtx[1].nTime) : std::make_pair(COutPoint(), (unsigned int)0);
     }
 
-    // ppbean: get max transaction timestamp
+    // Get max transaction timestamp
     int64_t GetMaxTransactionTime() const
     {
         int64_t maxTransactionTime = 0;
@@ -1094,7 +1094,7 @@ public:
 
     void print() const
     {
-        printf("CBlock(hash=%s, ver=%d, hashPrevBlock=%s, hashMerkleRoot=%s, nTime=%u, nBits=%08x, nNonce=%u, vtx=%" PRIszu ", vchBlockSig=%s)\n",
+        LogPrintf("CBlock(hash=%s, ver=%d, hashPrevBlock=%s, hashMerkleRoot=%s, nTime=%u, nBits=%08x, nNonce=%u, vtx=%" PRIszu ", vchBlockSig=%s)\n",
             GetHash().ToString().c_str(),
             nVersion,
             hashPrevBlock.ToString().c_str(),
@@ -1104,13 +1104,13 @@ public:
             HexStr(vchBlockSig.begin(), vchBlockSig.end()).c_str());
         for (unsigned int i = 0; i < vtx.size(); i++)
         {
-            printf("  ");
+            LogPrintf("  ");
             vtx[i].print();
         }
-        printf("  vMerkleTree: ");
+        LogPrintf("  vMerkleTree: ");
         for (unsigned int i = 0; i < vMerkleTree.size(); i++)
-            printf("%s ", vMerkleTree[i].ToString().substr(0,10).c_str());
-        printf("\n");
+            LogPrintf("%s ", vMerkleTree[i].ToString().substr(0,10).c_str());
+        LogPrintf("\n");
     }
 
 
@@ -1149,24 +1149,24 @@ public:
     CBlockIndex* pnext;
     unsigned int nFile;
     unsigned int nBlockPos;
-    uint256 nChainTrust; // ppbean: trust score of block chain
+    uint256 nChainTrust; // Trust score of block chain
     int nHeight;
 
     int64_t nMint;
     int64_t nMoneySupply;
 
-    unsigned int nFlags;  // ppbean: block index flags
+    unsigned int nFlags;  // Block index flags
     enum
     {
-        BLOCK_PROOF_OF_STAKE = (1 << 0), // is proof-of-stake block
-        BLOCK_STAKE_ENTROPY  = (1 << 1), // entropy bit for stake modifier
-        BLOCK_STAKE_MODIFIER = (1 << 2), // regenerated stake modifier
+        BLOCK_PROOF_OF_STAKE = (1 << 0), // is proof-of-bean block
+        BLOCK_STAKE_ENTROPY  = (1 << 1), // entropy bit for sprout modifier
+        BLOCK_STAKE_MODIFIER = (1 << 2), // regenerated sprout modifier
     };
 
-    uint64_t nStakeModifier; // hash modifier for proof-of-stake
+    uint64_t nStakeModifier; // hash modifier for proof-of-bean
     unsigned int nStakeModifierChecksum; // checksum of index; in-memeory only
 
-    // proof-of-stake specific fields
+    // proof-of-bean specific fields
     COutPoint prevoutStake;
     unsigned int nStakeTime;
 
@@ -1357,7 +1357,7 @@ public:
 
     void print() const
     {
-        printf("%s\n", ToString().c_str());
+        LogPrintf("%s\n", ToString().c_str());
     }
 };
 
@@ -1452,7 +1452,7 @@ public:
 
     void print() const
     {
-        printf("%s\n", ToString().c_str());
+        LogPrintf("%s\n", ToString().c_str());
     }
 };
 

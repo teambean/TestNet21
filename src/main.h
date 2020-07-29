@@ -98,6 +98,9 @@ void RegisterWallet(CWallet* pwalletIn);
 /** Unregister a wallet from core */
 void UnregisterWallet(CWallet* pwalletIn);
 
+/** Unregister all wallets from core */
+void UnregisterAllWallets();
+
 /** Push an updated transaction to all registered wallets */
 void SyncWithWallets(const CTransaction& tx, const CBlock* pblock = NULL, bool fUpdate = false, bool fConnect = true);
 

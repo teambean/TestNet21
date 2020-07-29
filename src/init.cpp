@@ -113,7 +113,7 @@ void Shutdown()
     if (pwalletMain)
         bitdb.Flush(true);
     boost::filesystem::remove(GetPidFile());
-    UnregisterWallet(pwalletMain);
+    UnregisterAllWallets();
     delete pwalletMain;
     LogPrintf("Bean Cash exited\n\n");
 

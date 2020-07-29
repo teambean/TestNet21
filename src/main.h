@@ -962,7 +962,7 @@ public:
         return nEntropyBit;
     }
 
-    // ppbean: two types of block: proof-of-work or proof-of-stake
+    // Two types of block: proof-of-work or proof-of-bean
     bool IsProofOfStake() const
     {
         return (vtx.size() > 1 && vtx[1].IsBeanStake());

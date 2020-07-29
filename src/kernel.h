@@ -13,7 +13,7 @@ extern unsigned int nModifierInterval;
 // ratio of group interval length between the last group and the first group
 static const int MODIFIER_INTERVAL_RATIO = 3;
 
-// Compute the hash modifier for proof-of-stake
+// Compute the hash modifier for proof-of-bean
 bool ComputeNextStakeModifier(const CBlockIndex* pindexPrev, uint64_t& nStakeModifier, bool& fGeneratedStakeModifier);
 
 // Check whether stake kernel meets hash target

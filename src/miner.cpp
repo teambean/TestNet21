@@ -108,7 +108,7 @@ public:
     }
 };
 
-// CreateNewBlock: create new block (without proof-of-work/proof-of-stake)
+// CreateNewBlock: create new block (without proof-of-work/proof-of-bean)
 CBlock* CreateNewBlock(CWallet* pwallet, bool fProofOfStake, int64_t* pFees)
 {
     // Create new block
@@ -489,14 +489,14 @@ bool CheckStake(CBlock* pblock, CWallet& wallet)
     uint256 hashBlock = pblock->GetHash();
 
     if(!pblock->IsProofOfStake())
-        return error("CheckStake() : %s is not a proof-of-stake block", hashBlock.GetHex().c_str());
+        return error("CheckStake() : %s is not a proof-of-bean block", hashBlock.GetHex().c_str());
 
     // verify hash target and signature of beansprout tx
     if (!CheckProofOfStake(pblock->vtx[1], pblock->nBits, proofHash, hashTarget))
-        return error("CheckStake() : proof-of-stake checking failed");
+        return error("CheckStake() : proof-of-bean checking failed");
 
     //// debug print
-    LogPrintf("CheckStake() : new proof-of-stake block found  \n  hash: %s \nproofhash: %s  \ntarget: %s\n", hashBlock.GetHex().c_str(), proofHash.GetHex().c_str(), hashTarget.GetHex().c_str());
+    LogPrintf("CheckStake() : new proof-of-bean block found  \n  hash: %s \nproofhash: %s  \ntarget: %s\n", hashBlock.GetHex().c_str(), proofHash.GetHex().c_str(), hashTarget.GetHex().c_str());
     pblock->print();
     LogPrintf("out %s\n", FormatMoney(pblock->vtx[1].GetValueOut()).c_str());
 

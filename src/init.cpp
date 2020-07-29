@@ -1108,7 +1108,7 @@ if (!fHaveGUI)
 
     // Mine Proof-of-Bean blocks in the background
     if (!GetBoolArg("-sprouting", true))
-        LogPrintf("Sprouting disabled\n");
+        LogPrintf("Sprouting is disabled\n");
     else
         threadGroup.create_thread(boost::bind(&ThreadStakeMiner, pwalletMain));
 

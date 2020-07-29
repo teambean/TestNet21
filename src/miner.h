@@ -22,7 +22,7 @@ void FormatHashBuffers(CBlock* pblock, char* pmidstate, char* pdata, char* phash
 /** Check mined proof-of-work block */
 bool CheckWork(CBlock* pblock, CWallet& wallet, CReserveKey& reservekey);
 
-/** Check mined proof-of-stake block */
+/** Check mined proof-of-bean block */
 bool CheckStake(CBlock* pblock, CWallet& wallet);
 
 /** Base sha256 mining transform */

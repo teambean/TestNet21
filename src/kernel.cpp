@@ -91,11 +91,11 @@ static bool SelectBlockFromCandidates(vector<pair<int64_t, uint256> >& vSortedBy
         if (mapSelectedBlocks.count(pindex->GetBlockHash()) > 0)
             continue;
         // compute the selection hash by hashing its proof-hash and the
-        // previous proof-of-stake modifier
+        // previous proof-of-bean modifier
         CDataStream ss(SER_GETHASH, 0);
         ss << pindex->hashProof << nStakeModifierPrev;
         uint256 hashSelection = Hash(ss.begin(), ss.end());
-        // the selection hash is divided by 2**32 so that proof-of-stake block
+        // the selection hash is divided by 2**32 so that proof-of-bean block
         // is always favored over proof-of-work block. this is to preserve
         // the energy efficiency property
         if (pindex->IsProofOfStake())
@@ -194,14 +194,14 @@ bool ComputeNextStakeModifier(const CBlockIndex* pindexPrev, uint64_t& nStakeMod
         pindex = pindexPrev;
         while (pindex && pindex->nHeight >= nHeightFirstCandidate)
         {
-            // '=' indicates proof-of-stake blocks not selected
+            // '=' indicates proof-of-bean blocks not selected
             if (pindex->IsProofOfStake())
                 strSelectionMap.replace(pindex->nHeight - nHeightFirstCandidate, 1, "=");
             pindex = pindex->pprev;
         }
         for (const std::pair<uint256, const CBlockIndex*>& item : mapSelectedBlocks)
         {
-            // 'S' indicates selected proof-of-stake blocks
+            // 'S' indicates selected proof-of-bean blocks
             // 'W' indicates selected proof-of-work blocks
             strSelectionMap.replace(item.second->nHeight - nHeightFirstCandidate, 1, item.second->IsProofOfStake()? "S" : "W");
         }

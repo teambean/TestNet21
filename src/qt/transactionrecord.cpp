@@ -65,7 +65,7 @@ QList<TransactionRecord> TransactionRecord::decomposeTransaction(const CWallet *
                 }
                 if (wtx.IsBeanStake())
                 {
-                    // Generated (proof-of-stake)
+                    // Generated (proof-of-bean)
 
                     if (hashPrev == hash)
                         continue; // last beansprout output

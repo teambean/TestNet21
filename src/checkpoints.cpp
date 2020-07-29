@@ -396,7 +396,7 @@ bool CSyncCheckpoint::ProcessSyncCheckpoint(CNode* pfrom)
         {
             PushGetBlocks(pfrom, pindexBest, hashCheckpoint);
             // ask directly as well in case rejected earlier by duplicate
-            // proof-of-stake because getblocks may not get it this time
+            // proof-of-bean because getblocks may not get it this time
             pfrom->AskFor(CInv(MSG_BLOCK, mapOrphanBlocks.count(hashCheckpoint)? WantedByOrphan(mapOrphanBlocks[hashCheckpoint]) : hashCheckpoint));
         }
         return false;

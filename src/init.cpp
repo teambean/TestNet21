@@ -1095,11 +1095,11 @@ if (!fHaveGUI)
     RandAddSeedPerfmon();
 
     //// debug print
-    LogPrintf("mapBlockIndex.size() = %" PRIszu "\n",   mapBlockIndex.size());
+    LogPrintf("mapBlockIndex.size() = %u\n",   mapBlockIndex.size());
     LogPrintf("nBestHeight = %d\n",            nBestHeight);
-    LogPrintf("setKeyPool.size() = %" PRIszu "\n",      pwalletMain->setKeyPool.size());
-    LogPrintf("mapWallet.size() = %" PRIszu "\n",       pwalletMain->mapWallet.size());
-    LogPrintf("mapAddressBook.size() = %" PRIszu "\n",  pwalletMain->mapAddressBook.size());
+    LogPrintf("setKeyPool.size() = %u\n",      pwalletMain->setKeyPool.size());
+    LogPrintf("mapWallet.size() = %u\n",       pwalletMain->mapWallet.size());
+    LogPrintf("mapAddressBook.size() = %u\n",  pwalletMain->mapAddressBook.size());
 
     StartNode(threadGroup);
 

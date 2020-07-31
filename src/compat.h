@@ -7,12 +7,18 @@
 #define _BITBEAN_COMPAT_H 1
 
 #ifdef WIN32
+#ifdef _WIN32_WINNT
+#undef _WIN32_WINNT // prevent redefinition compiler warning
+#endif
 #define _WIN32_WINNT 0x0501
 #ifndef WIN32_LEAN_AND_MEAN
 #define WIN32_LEAN_AND_MEAN 1
 #endif
 #ifndef NOMINMAX
 #define NOMINMAX
+#endif
+#ifdef FD_SETSIZE
+#undef FD_SETSIZE  // prevent redefinition compiler warning
 #endif
 #include <winsock2.h>
 #include <mswsock.h>

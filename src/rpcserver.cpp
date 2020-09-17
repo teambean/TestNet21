@@ -687,75 +687,85 @@ static string JSONRPCExecBatch(const Array& vReq)
     return write_string(Value(ret), false) + "\n";
 }
 
-void ServiceConnection(AcceptedConnection *conn);
-
-// Forward declaration required for RPCListen
-template <typename Protocol, typename SocketAcceptorService>
-static void RPCAcceptHandler(boost::shared_ptr< basic_socket_acceptor<Protocol, SocketAcceptorService> > acceptor,
-                             ssl::context& context,
-                             bool fUseSSL,
-                             AcceptedConnection* conn,
-                             const boost::system::error_code& error);
-
-/**
- * Sets up I/O resources to accept and handle a new connection.
- */
-template <typename Protocol, typename SocketAcceptorService>
-static void RPCListen(boost::shared_ptr< basic_socket_acceptor<Protocol, SocketAcceptorService> > acceptor,
-                   ssl::context& context,
-                   const bool fUseSSL)
+void ServiceConnection(AcceptedConnection *conn)
 {
-    // Accept connection
-    AcceptedConnectionImpl<Protocol>* conn = new AcceptedConnectionImpl<Protocol>(acceptor->get_io_service(), context, fUseSSL);
-
-    acceptor->async_accept(
-            conn->sslStream.lowest_layer(),
-            conn->peer,
-            boost::bind(&RPCAcceptHandler<Protocol, SocketAcceptorService>,
-                acceptor,
-                boost::ref(context),
-                fUseSSL,
-                conn,
-                boost::asio::placeholders::error));
-}
-
-
-/**
- * Accept and handle incoming connection.
- */
-template <typename Protocol, typename SocketAcceptorService>
-static void RPCAcceptHandler(boost::shared_ptr< basic_socket_acceptor<Protocol, SocketAcceptorService> > acceptor,
-                             ssl::context& context,
-                             const bool fUseSSL,
-                             AcceptedConnection* conn,
-                             const boost::system::error_code& error)
-{
-    // Immediately start accepting new connections, except when we're cancelled or our socket is closed.
-    if (error != asio::error::operation_aborted && acceptor->is_open())
-        RPCListen(acceptor, context, fUseSSL);
-
-    AcceptedConnectionImpl<ip::tcp>* tcp_conn = dynamic_cast< AcceptedConnectionImpl<ip::tcp>* >(conn);
-
-    // TODO: Actually handle errors
-    if (error)
+    bool fRun = true;
+    while (fRun)
     {
-        delete conn;
-    }
+        int nProto = 0;
+        map<string, string> mapHeaders;
+        string strRequest, strMethod, strURI;
 
-    // Restrict callers by IP.  It is important to
-    // do this before starting client thread, to filter out
-    // certain DoS and misbehaving clients.
-    else if (tcp_conn && !ClientAllowed(tcp_conn->peer.address()))
-    {
-        // Only send a 403 if we're not using SSL to prevent a DoS during the SSL handshake.
-        if (!fUseSSL)
-            conn->stream() << HTTPReply(HTTP_FORBIDDEN, "", false) << std::flush;
-        delete conn;
-    }
-    else {
-        ServiceConnection(conn);
-        conn->close();
-        delete conn;
+        // Read HTTP request line
+        if (!ReadHTTPRequestLine(conn->stream(), nProto, strMethod, strURI))
+            break;
+
+        // Read HTTP message headers and body
+        ReadHTTPMessage(conn->stream(), mapHeaders, strRequest, nProto);
+
+        if (strURI != "/") {
+            conn->stream() << HTTPReply(HTTP_NOT_FOUND, "", false) << std::flush;
+            break;
+        }
+
+        // Check authorization
+        if (mapHeaders.count("authorization") == 0)
+        {
+            conn->stream() << HTTPReply(HTTP_UNAUTHORIZED, "", false) << std::flush;
+            break;
+        }
+        if (!HTTPAuthorized(mapHeaders))
+        {
+            LogPrintf("ThreadRPCServer incorrect password attempt from %s\n", conn->peer_address_to_string().c_str());
+            /* Deter brute-forcing short passwords.
+               If this results in a DoS the user really
+               shouldn't have their RPC port exposed. */
+            if (mapArgs["-rpcpassword"].size() < 20)
+                MilliSleep(250);
+
+            conn->stream() << HTTPReply(HTTP_UNAUTHORIZED, "", false) << std::flush;
+            break;
+        }
+        if (mapHeaders["connection"] == "close")
+            fRun = false;
+
+        JSONRequest jreq;
+        try
+        {
+            // Parse request
+            Value valRequest;
+            if (!read_string(strRequest, valRequest))
+                throw JSONRPCError(RPC_PARSE_ERROR, "Parse error");
+
+            string strReply;
+
+            // singleton request
+            if (valRequest.type() == obj_type) {
+                jreq.parse(valRequest);
+
+                Value result = tableRPC.execute(jreq.strMethod, jreq.params);
+
+                // Send reply
+                strReply = JSONRPCReply(result, Value::null, jreq.id);
+
+            // array of requests
+            } else if (valRequest.type() == array_type)
+                strReply = JSONRPCExecBatch(valRequest.get_array());
+            else
+                throw JSONRPCError(RPC_PARSE_ERROR, "Top-level object parse error");
+
+            conn->stream() << HTTPReply(HTTP_OK, strReply, fRun) << std::flush;
+        }
+        catch (Object& objError)
+        {
+            ErrorReply(conn->stream(), objError, jreq.id);
+            break;
+        }
+        catch (std::exception& e)
+        {
+            ErrorReply(conn->stream(), JSONRPCError(RPC_PARSE_ERROR, e.what()), jreq.id);
+            break;
+        }
     }
 }
 

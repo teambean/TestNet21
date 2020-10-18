@@ -16,7 +16,6 @@
 #include <boost/algorithm/string.hpp>
 #include <boost/asio.hpp>
 #include <boost/asio/ip/v6_only.hpp>
-#include <boost/bind.hpp>
 #include <boost/filesystem.hpp>
 #include <boost/iostreams/concepts.hpp>
 #include <boost/iostreams/stream.hpp>
@@ -437,9 +436,9 @@ static void RPCListen(std::shared_ptr< basic_socket_acceptor<Protocol, SocketAcc
     acceptor->async_accept(
             conn->sslStream.lowest_layer(),
             conn->peer,
-            boost::bind(&RPCAcceptHandler<Protocol, SocketAcceptorService>,
+            std::bind(&RPCAcceptHandler<Protocol, SocketAcceptorService>,
                 acceptor,
-                boost::ref(context),
+                std::ref(context),
                 fUseSSL,
                 conn,
                 _1));
@@ -599,7 +598,7 @@ void StartRPCThreads()
 
     rpc_worker_group = new boost::thread_group();
     for (int i = 0; i < GetArg("-rpcthreads", 4); i++)
-        rpc_worker_group->create_thread(boost::bind(&asio::io_service::run, rpc_io_service));
+        rpc_worker_group->create_thread(std::bind(&asio::io_service::run, rpc_io_service));
 }
 
 void StopRPCThreads()

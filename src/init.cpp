@@ -233,7 +233,7 @@ bool AppInit(int argc, char* argv[])
     }
 #endif
 
-        detectShutdownThread = new boost::thread(boost::bind(&DetectShutdownThread, &threadGroup));
+        detectShutdownThread = new boost::thread(std::bind(&DetectShutdownThread, &threadGroup));
         fRet = AppInit2(threadGroup);
     }
     catch (std::exception& e) {
@@ -1068,7 +1068,7 @@ if (!fHaveGUI)
             vPath.push_back(strFile);
     }
 
-    threadGroup.create_thread(boost::bind(&ThreadImport, vPath));
+    threadGroup.create_thread(std::bind(&ThreadImport, vPath));
 
     // ********************************************************* Step 10: load peers
 
@@ -1110,7 +1110,7 @@ if (!fHaveGUI)
     if (!GetBoolArg("-sprouting", true))
         LogPrintf("Sprouting is disabled\n");
     else
-        threadGroup.create_thread(boost::bind(&ThreadStakeMiner, pwalletMain));
+        threadGroup.create_thread(std::bind(&ThreadStakeMiner, pwalletMain));
 
     // ********************************************************* Step 12: finished
 
@@ -1120,7 +1120,7 @@ if (!fHaveGUI)
     pwalletMain->ReacceptWalletTransactions();
 
     // Run a thread to flush wallet periodically
-    threadGroup.create_thread(boost::bind(&ThreadFlushWalletDB, boost::ref(pwalletMain->strWalletFile)));
+    threadGroup.create_thread(std::bind(&ThreadFlushWalletDB, std::ref(pwalletMain->strWalletFile)));
 
     return !fRequestShutdown;
 }

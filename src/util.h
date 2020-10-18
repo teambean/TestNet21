@@ -530,10 +530,10 @@ inline uint32_t ByteReverse(uint32_t value)
 // Standard wrapper for do-something-forever thread functions.
 // "Forever" really means until the thread is interrupted.
 // Use it like:
-//   new boost::thread(boost::bind(&LoopForever<void (*)()>, "dumpaddr", &DumpAddresses, 10000));
+//   new boost::thread(std::bind(&LoopForever<void (*)()>, "dumpaddr", &DumpAddresses, 10000));
 // or maybe:
-//    boost::function<void()> f = boost::bind(&FunctionWithArg, argument);
-//    threadGroup.create_thread(boost::bind(&LoopForever<boost::function<void()> >, "nothing", f, milliseconds));
+//    boost::function<void()> f = std::bind(&FunctionWithArg, argument);
+//    threadGroup.create_thread(std::bind(&LoopForever<boost::function<void()> >, "nothing", f, milliseconds));
 template <typename Callable> void LoopForever(const char* name,  Callable func, int64_t msecs)
 {
     std::string s = strprintf("beancash-%s", name);

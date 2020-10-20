@@ -5,7 +5,7 @@ SetCompressor /SOLID lzma
 
 # General Symbol Definitions
 !define REGKEY "SOFTWARE\$(^Name)"
-!define VERSION 1.1.2.2RC
+!define VERSION 1.3.0.0Beta
 !define COMPANY "Bean Core"
 !define URL http://www.beancash.org
 

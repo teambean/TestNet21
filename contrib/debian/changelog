@@ -17,5 +17,11 @@ Beancash (1.1.2.2RC) stable; urgency=high
    [Bean Core]
    *Rebrand release.
 
+Beancash (1.3.0.0Beta) stable; urgency=high
+
+   [Bean Core]
+   *Major update release sine launch
+   *Extensive fixes & updates (When released as GA, extensive list will be published here.)
+
 -- Bean Core <support@beancash.org>  Tuesday, 28 Nov 2017 00:00:00 +0000
 

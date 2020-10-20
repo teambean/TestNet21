@@ -91,13 +91,13 @@ BitbeanGUI::BitbeanGUI(bool fIsTestnet, QWidget *parent):
 #ifndef Q_OS_MAC
     if (!fIsTestnet)
     {
-        setWindowTitle(tr("Bean Cash") + " - " + tr("Core v1.2.2 Testy2"));
+        setWindowTitle(tr("Bean Cash") + " - " + tr("Core v1.3.0.0B Testy2"));
         qApp->setWindowIcon(QIcon(":icons/beancash"));
         setWindowIcon(QIcon(":icons/beancash"));
     }
     else
     {
-        setWindowTitle(tr("Bean Cash") + " - " + tr("Core v1.2.2 Testy2") + " " + tr("[TestNet2]"));
+        setWindowTitle(tr("Bean Cash") + " - " + tr("Core v1.3.0.0B") + " " + tr("[TestNet2]"));
         qApp->setWindowIcon(QIcon(":icons/beancash_testnet"));
         setWindowIcon(QIcon(":icons/beancash_testnet"));
     }
@@ -695,7 +695,7 @@ void BitbeanGUI::setNumBlocks(int count, int nTotalBlocks)
 
 void BitbeanGUI::message(const QString &title, const QString &message, unsigned int style)
 {
-    QString strTitle = tr("Bean Cash Core") + " v1.2.2 Testy2";
+    QString strTitle = tr("Bean Cash Core") + " v1.3 Core";
     // Default to information icon
     int nMBoxIcon = QMessageBox::Information;
     int nNotifyIcon = Notificator::Information;

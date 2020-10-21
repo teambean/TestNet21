@@ -5,6 +5,7 @@
 
 #include "clientmodel.h"
 #include "guiutil.h"
+#include "utilitydialog.h"
 
 #include "rpcserver.h"
 #include "rpcclient.h"
@@ -458,8 +459,8 @@ void RPCConsole::scrollToEnd()
 
 void RPCConsole::on_showCLOptionsButton_clicked()
 {
-    GUIUtil::HelpMessageBox help;
-    help.exec();
+    HelpMessageDialog *help = new HelpMessageDialog(this);
+    help->show();
 }
 
 void RPCConsole::on_closeButton_clicked()

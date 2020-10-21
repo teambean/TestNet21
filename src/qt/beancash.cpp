@@ -11,6 +11,8 @@
 #include "init.h"
 #include "util.h"
 #include "ui_interface.h"
+#include "utilitydialog.h"
+#ifdef ENABLE_WALLET
 #include "paymentserver.h"
 #include "intro.h"
 
@@ -21,6 +23,8 @@
 #endif
 #include <QLocale>
 #include <QTranslator>
+#include <QVBoxLayout>
+#include <QLabel>
 #include <QSplashScreen>
 #include <QLibraryInfo>
 #include <QTimer>
@@ -352,6 +356,10 @@ int main(int argc, char *argv[])
                 guiref = 0;
             }
             // Shutdown the core and its threads, but don't exit Beancash-qt here
+
+            // Show a simple window indicating shutdown status
+            ShutdownWindow::showShutdownWindow(window);
+
             threadGroup.interrupt_all();
             threadGroup.join_all();
             Shutdown();

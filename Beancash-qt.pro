@@ -55,7 +55,6 @@ BDB_LIB_SUFFIX=-5.3
 
 # BOOST_INCLUDE_PATH=/path/to/lib/boost_1_59_0
 # BOOST_LIB_PATH=/path/to/lib/boost_1_59_0/stage/lib
-
 # OPENSSL_INCLUDE_PATH=/path/to/libs/openssl-1.0.1j/include
 # OPENSSL_LIB_PATH=/path/to/lib/openssl-1.0.1j
 
@@ -154,7 +153,8 @@ SOURCES += src/txdb-leveldb.cpp \
     src/qt/paymentserver.cpp \
     src/qt/trafficgraphwidget.cpp \
 #   src/beancashd.cpp \
-    src/chainparams.cpp
+    src/chainparams.cpp \
+    src/qt/utilitydialog.cpp
 
 !win32 {
     # we use QMAKE_CXXFLAGS_RELEASE even without RELEASE=1 because we use RELEASE to indicate linking preferences not -O preferences
@@ -237,7 +237,6 @@ HEADERS += src/qt/bitbeangui.h \
     src/qt/sendbeansdialog.h \
     src/qt/addressbookpage.h \
     src/qt/signverifymessagedialog.h \
-    src/qt/aboutdialog.h \
     src/qt/editaddressdialog.h \
     src/qt/bitbeanaddressvalidator.h \
     src/alert.h \
@@ -315,7 +314,8 @@ HEADERS += src/qt/bitbeangui.h \
     src/hash.h \
     src/rpcprotocol.h \
     src/tinyformat.h \
-    src/core.h
+    src/core.h \
+    src/qt/utilitydialog.h
 
 SOURCES += src/qt/beancash.cpp \
     src/qt/bitbeangui.cpp \
@@ -327,7 +327,6 @@ SOURCES += src/qt/beancash.cpp \
     src/qt/beancontroltreewidget.cpp \
     src/qt/addressbookpage.cpp \
     src/qt/signverifymessagedialog.cpp \
-    src/qt/aboutdialog.cpp \
     src/qt/editaddressdialog.cpp \
     src/qt/bitbeanaddressvalidator.cpp \
     src/alert.cpp \
@@ -401,7 +400,8 @@ FORMS += \
     src/qt/forms/askpassphrasedialog.ui \
     src/qt/forms/rpcconsole.ui \
     src/qt/forms/optionsdialog.ui \
-    src/qt/forms/intro.ui
+    src/qt/forms/intro.ui \
+    src/qt/forms/helpmessagedialog.ui
 
 PROTOS = src/qt/paymentrequest.proto
 # (remove) include(share/qt/protobuf.pri)

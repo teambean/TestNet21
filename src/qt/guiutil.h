@@ -98,25 +98,6 @@ namespace GUIUtil
     bool GetStartOnSystemStartup();
     bool SetStartOnSystemStartup(bool fAutoStart);
 
-    /** Help message for Beancash-qt, shown with --help. */
-    class HelpMessageBox : public QMessageBox
-    {
-        Q_OBJECT
-
-    public:
-        HelpMessageBox(QWidget *parent = 0);
-
-        /** Show message box or print help message to standard output, based on operating system. */
-        void showOrPrint();
-
-        /** Print help message to console */
-        void printToConsole();
-
-    private:
-        QString header;
-        QString coreOptions;
-        QString uiOptions;
-    };
 
 } // namespace GUIUtil
 

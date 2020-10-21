@@ -39,8 +39,17 @@ WalletModel::~WalletModel()
     unsubscribeFromCoreSignals();
 }
 
-qint64 WalletModel::getBalance() const
+qint64 WalletModel::getBalance(const CBeanControl *beanControl) const
 {
+    if (beanControl)
+    {
+        qint64 nBalance = 0;
+        std::vector<COutput> vBeans;
+        wallet->AvailableBeans(vBeans, true, beanControl);
+        for (const COutput& out : vBeans)
+            nBalance += out.tx->vout[out.i].nValue;
+        return nBalance;
+    }
     return wallet->GetBalance();
 }
 

@@ -60,7 +60,6 @@
 #include <QUrl>
 #include <QStyle>
 #include <QFontDatabase>
-#include <QSettings>
 #include <iostream>
 
 extern CWallet* pwalletMain;
@@ -81,7 +80,7 @@ BitbeanGUI::BitbeanGUI(bool fIsTestnet, QWidget *parent):
     rpcConsole(0),
     nWeight(0)
 {
-    restoreWindowGeometry();
+    GUIUtil::restoreWindowGeometry("nWindow", QSize(850, 550), this);
     qApp->setStyleSheet("QMainWindow { border-image: url(:images/bkg);border:none; } QProgressBar { background: transparent; border: 1px solid gray; border-radius: 7px; padding: 1px; text-align: center; } QProgressBar::chunk { background: QLinearGradient(x1: 0, y1: 0, x2: 1, y2: 0, stop: 0 #d3eeaf, stop: 1 #9fd555); border-radius: 7px; margin: 0px; } QMenu { background-color: #ff9a9a; color: black; } QMenu::item { color: black; background: transparent; } QMenu::item:selected { background-color: #9fd555; } QMenuBar { background-color: #ff9a9a; color: black; } QPushButton {background-color: #d3eeaf; } QLineEdit { background-color: white; } QToolTip { color: #ffffff; background-color: #ff9a9a; border-radius: 7px; border: 1px solid black; } QTabWidget::pane {background-color: white; color: black } QTabWidget::tab-bar {left: 5px;} QTabBar::tab {background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #d3eeaf, stop: 1 #9fd555); border: 2px solid #ff9a9a; border-bottom-color: #ff9a9a; border-top-left-radius: 7px; border-top-right-radius: 7px; min-width: 8ex; padding: 2px; color: black; } QTabBar::tab:selected {border-color: #9fd555; border-bottom-color: #ff9a9a; background-color: white; color: black; } QTabBar:tab:!selected {margin-top: 3px; } ");
     QFontDatabase::addApplicationFont("::/res/fonts/helvetica");
     QFont font("Helvetica");
@@ -226,7 +225,7 @@ BitbeanGUI::BitbeanGUI(bool fIsTestnet, QWidget *parent):
 
 BitbeanGUI::~BitbeanGUI()
 {
-    saveWindowGeometry();
+    GUIUtil::saveWindowGeometry("nWindow", this);
     if(trayIcon) // Hide tray icon, as deleting will let it linger until quit (on Ubuntu)
         trayIcon->hide();
 #ifdef Q_OS_MAC
@@ -541,22 +540,6 @@ void BitbeanGUI::trayIconActivated(QSystemTrayIcon::ActivationReason reason)
     }
 }
 #endif
-
-void BitbeanGUI::saveWindowGeometry()
-{
-    QSettings settings;
-    settings.setValue("nWindowPos", pos());
-    settings.setValue("nWindowSize", size());
-}
-
-void BitbeanGUI::restoreWindowGeometry()
-{
-    QSettings settings;
-    QPoint pos = settings.value("nWindowPos").toPoint();
-    QSize size = settings.value("nWindowSize", QSize(850, 550)).toSize();
-    resize(size);
-    move(pos);
-}
 
 void BitbeanGUI::optionsClicked()
 {

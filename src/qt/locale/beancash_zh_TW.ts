@@ -163,7 +163,7 @@ This product includes software developed by the OpenSSL Project for use in the O
         <translation>編輯</translation>
     </message>
     <message>
-        <location line="+248"/>
+        <location line="+250"/>
         <source>Export Address Book Data</source>
         <translation>導出地址簿數據</translation>
     </message>
@@ -877,7 +877,7 @@ This label turns red, if the priority is smaller than &quot;medium&quot;.
         <translation type="unfinished"></translation>
     </message>
     <message numerus="yes">
-        <location line="+254"/>
+        <location line="+256"/>
         <source>%n active connection(s) to the Bean Cash network</source>
         <translation type="unfinished">
             <numerusform></numerusform>
@@ -1005,7 +1005,7 @@ Address: %4
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-892"/>
+        <location line="-894"/>
         <source>Core v1.3.0.0B Testy2</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1047,7 +1047,7 @@ Address: %4
     <message>
         <location line="+167"/>
         <location line="+5"/>
-        <location line="+203"/>
+        <location line="+205"/>
         <source>Bean Cash Core</source>
         <translation type="unfinished"></translation>
     </message>

@@ -426,7 +426,7 @@ void BitbeanGUI::setClientModel(ClientModel *clientModel)
         setNumBlocks(clientModel->getNumBlocks(), clientModel->getNumBlocksOfPeers());
         connect(clientModel, SIGNAL(numBlocksChanged(int,int)), this, SLOT(setNumBlocks(int,int)));
 
-        // Receive and report messages from network/worker thread
+        // Receive and report messages from client model
         connect(clientModel, SIGNAL(message(QString,QString,unsigned int)), this, SLOT(message(QString,QString,unsigned int)));
 
         rpcConsole->setClientModel(clientModel);
@@ -545,14 +545,16 @@ void BitbeanGUI::optionsClicked()
 {
     if(!clientModel || !clientModel->getOptionsModel())
         return;
-    OptionsDialog dlg;
+    OptionsDialog dlg(this);
     dlg.setModel(clientModel->getOptionsModel());
     dlg.exec();
 }
 
 void BitbeanGUI::aboutClicked()
 {
-    AboutDialog dlg;
+    if(!clientModel)
+        return;
+    AboutDialog dlg(this);
     dlg.setModel(clientModel);
     dlg.exec();
 }

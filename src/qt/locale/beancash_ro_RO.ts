@@ -169,7 +169,7 @@ Acest produs include programe dezvoltate de către OpenSSL Project pentru a fi f
         <translation>&amp;Editează</translation>
     </message>
     <message>
-        <location line="+248"/>
+        <location line="+250"/>
         <source>Export Address Book Data</source>
         <translation>Exportă datele din Agendă</translation>
     </message>
@@ -927,7 +927,7 @@ Acest lucru înseamnă că o taxă de cel puțin %2 este necesară</translation>
         <translation type="unfinished"></translation>
     </message>
     <message numerus="yes">
-        <location line="+254"/>
+        <location line="+256"/>
         <source>%n active connection(s) to the Bean Cash network</source>
         <translation type="unfinished">
             <numerusform></numerusform>
@@ -1079,7 +1079,7 @@ Adresa: %4
         <translation type="obsolete">Eroare la încercarea de a salva datele portofelului în noua locaţie.</translation>
     </message>
     <message>
-        <location line="-892"/>
+        <location line="-894"/>
         <source>Core v1.3.0.0B Testy2</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1121,7 +1121,7 @@ Adresa: %4
     <message>
         <location line="+167"/>
         <location line="+5"/>
-        <location line="+203"/>
+        <location line="+205"/>
         <source>Bean Cash Core</source>
         <translation type="unfinished"></translation>
     </message>

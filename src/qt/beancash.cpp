@@ -12,7 +12,7 @@
 #include "util.h"
 #include "ui_interface.h"
 #include "utilitydialog.h"
-#ifdef ENABLE_WALLET
+// #ifdef ENABLE_WALLET
 #include "paymentserver.h"
 #include "intro.h"
 
@@ -240,7 +240,7 @@ int main(int argc, char *argv[])
     // but before showing splash screen.
     if (mapArgs.count("-?") || mapArgs.count("--help"))
     {
-        GUIUtil::HelpMessageBox help;
+        HelpMessageDialog help(NULL);
         help.showOrPrint();
         return 1;
     }
@@ -358,7 +358,7 @@ int main(int argc, char *argv[])
             // Shutdown the core and its threads, but don't exit Beancash-qt here
 
             // Show a simple window indicating shutdown status
-            ShutdownWindow::showShutdownWindow(window);
+            ShutdownWindow::showShutdownWindow(&window);
 
             threadGroup.interrupt_all();
             threadGroup.join_all();

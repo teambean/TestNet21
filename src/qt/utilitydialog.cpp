@@ -46,7 +46,7 @@ AboutDialog::~AboutDialog()
     delete ui;
 }
 
-void AboutDialog::on_closeButton_clicked()
+void AboutDialog::on_buttonBox_accepted()
 {
     close();
 }
@@ -110,7 +110,7 @@ void HelpMessageDialog::on_okButton_accepted()
 
 
 /** "Shutdown" window */
-void ShutdownWindow::showShutdownWindow(BitcoinGUI *window)
+void ShutdownWindow::showShutdownWindow(BitbeanGUI *window)
 {
     if (!window)
         return;

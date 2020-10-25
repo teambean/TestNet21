@@ -167,6 +167,8 @@ void AddressBookPage::onCopyLabelAction()
 
 void AddressBookPage::onEditAction()
 {
+    if(!model)
+        return;
     if(!ui->tableView->selectionModel())
         return;
     QModelIndexList indexes = ui->tableView->selectionModel()->selectedRows();
@@ -174,9 +176,9 @@ void AddressBookPage::onEditAction()
         return;
 
     EditAddressDialog dlg(
-            tab == SendingTab ?
-            EditAddressDialog::EditSendingAddress :
-            EditAddressDialog::EditReceivingAddress);
+        tab == SendingTab ?
+        EditAddressDialog::EditSendingAddress :
+        EditAddressDialog::EditReceivingAddress, this);
     dlg.setModel(model);
     QModelIndex origIndex = proxyModel->mapToSource(indexes.at(0));
     dlg.loadRow(origIndex.row());
@@ -214,9 +216,9 @@ void AddressBookPage::on_newAddressButton_clicked()
     if(!model)
         return;
     EditAddressDialog dlg(
-            tab == SendingTab ?
-            EditAddressDialog::NewSendingAddress :
-            EditAddressDialog::NewReceivingAddress, this);
+        tab == SendingTab ?
+        EditAddressDialog::NewSendingAddress :
+        EditAddressDialog::NewReceivingAddress, this);
     dlg.setModel(model);
     if(dlg.exec())
     {

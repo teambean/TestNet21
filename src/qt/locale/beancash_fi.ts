@@ -162,7 +162,7 @@ Tämä tuote sisältää OpenSSL-projektin kehittämää ohjelmistoa OpenSSL-ty�
         <translation>&amp;Muokkaa</translation>
     </message>
     <message>
-        <location line="+248"/>
+        <location line="+250"/>
         <source>Export Address Book Data</source>
         <translation>Vie osoitekirjasta tietoja</translation>
     </message>
@@ -919,7 +919,7 @@ Tämä tarkoittaa, että ainakin %2 rahansiirtopalkkio tarvitaan.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message numerus="yes">
-        <location line="+254"/>
+        <location line="+256"/>
         <source>%n active connection(s) to the Bean Cash network</source>
         <translation type="unfinished">
             <numerusform></numerusform>
@@ -1064,7 +1064,7 @@ Osoite: %4</translation>
         <translation type="obsolete">Virhe tallentaessa lompakkotiedostoa uuteen sijaintiinsa.</translation>
     </message>
     <message>
-        <location line="-892"/>
+        <location line="-894"/>
         <source>Core v1.3.0.0B Testy2</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1106,7 +1106,7 @@ Osoite: %4</translation>
     <message>
         <location line="+167"/>
         <location line="+5"/>
-        <location line="+203"/>
+        <location line="+205"/>
         <source>Bean Cash Core</source>
         <translation type="unfinished"></translation>
     </message>

@@ -172,7 +172,7 @@ Eric Young (eay@cryptsoft.com) y el software UPnP escrito por Thomas Bernard.</t
         <translation>&amp;Editar</translation>
     </message>
     <message>
-        <location line="+248"/>
+        <location line="+250"/>
         <source>Export Address Book Data</source>
         <translation>Exportar Data de Libro de Direcciones</translation>
     </message>
@@ -929,7 +929,7 @@ Esto significa que se requiere una cuota de al menos %2.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message numerus="yes">
-        <location line="+254"/>
+        <location line="+256"/>
         <source>%n active connection(s) to the Bean Cash network</source>
         <translation type="unfinished">
             <numerusform></numerusform>
@@ -1075,7 +1075,7 @@ Dirección: %4
         <translation type="obsolete">Hubo un error al tratar de salvar los datos de su monedero a la nueva ubicación.</translation>
     </message>
     <message>
-        <location line="-892"/>
+        <location line="-894"/>
         <source>Core v1.3.0.0B Testy2</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1117,7 +1117,7 @@ Dirección: %4
     <message>
         <location line="+167"/>
         <location line="+5"/>
-        <location line="+203"/>
+        <location line="+205"/>
         <source>Bean Cash Core</source>
         <translation type="unfinished"></translation>
     </message>

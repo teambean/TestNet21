@@ -70,7 +70,7 @@ const std::string CLIENT_NAME("Bean Core");
 const std::string CLIENT_BUILD(BUILD_DESC CLIENT_VERSION_SUFFIX);
 const std::string CLIENT_DATE(BUILD_DATE);
 
-string FormatVersion(int nVersion)
+std::string FormatVersion(int nVersion)
 {
     if (nVersion%100 == 0)
         return strprintf("%d.%d.%d", nVersion/1000000, (nVersion/10000)%100, (nVersion/100)%100);
@@ -78,7 +78,7 @@ string FormatVersion(int nVersion)
         return strprintf("%d.%d.%d.%d", nVersion/1000000, (nVersion/10000)%100, (nVersion/100)%100, nVersion%100);
 }
 
-string FormatFullVersion()
+std::string FormatFullVersion()
 {
     return CLIENT_BUILD;
 }

@@ -141,7 +141,7 @@ This product includes software developed by the OpenSSL Project for use in the O
         <translation>עריכה</translation>
     </message>
     <message>
-        <location line="+248"/>
+        <location line="+250"/>
         <source>Export Address Book Data</source>
         <translation type="unfinished"></translation>
     </message>
@@ -690,7 +690,7 @@ This label turns red, if the priority is smaller than &quot;medium&quot;.
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+296"/>
+        <location line="+298"/>
         <source>%1% done</source>
         <translation type="unfinished"></translation>
     </message>
@@ -816,7 +816,7 @@ Some or all keys from:
         <translation type="obsolete">גיבוי הארנק למקום אחר</translation>
     </message>
     <message>
-        <location line="-748"/>
+        <location line="-750"/>
         <source>&amp;Change Passphrase...</source>
         <translation type="unfinished">שנה סיסמא</translation>
     </message>
@@ -989,7 +989,7 @@ Some or all keys from:
     <message>
         <location line="+155"/>
         <location line="+5"/>
-        <location line="+203"/>
+        <location line="+205"/>
         <source>Bean Cash Core</source>
         <translation type="unfinished"></translation>
     </message>

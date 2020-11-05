@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="it">
+<TS version="2.0" language="it">
+<defaultcodec>UTF-8</defaultcodec>
 <context>
     <name>AboutDialog</name>
     <message>
@@ -1900,7 +1901,7 @@ Indirizzo: %4
     </message>
     <message>
         <source>&amp;Display addresses in transaction list</source>
-        <translation type="vanished">&amp;Mostra gli indirizzi nella lista delle transazioni</translation>
+        <translation type="obsolete">&amp;Mostra gli indirizzi nella lista delle transazioni</translation>
     </message>
     <message>
         <source>Whether to show coin control features or not.</source>

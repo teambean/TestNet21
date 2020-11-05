@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="zh_TW">
+<TS version="2.0" language="zh_TW">
+<defaultcodec>UTF-8</defaultcodec>
 <context>
     <name>AboutDialog</name>
     <message>
@@ -2009,7 +2010,7 @@ Address: %4
     </message>
     <message>
         <source>&amp;Display addresses in transaction list</source>
-        <translation type="vanished">在交易列表顯示位址</translation>
+        <translation type="obsolete">在交易列表顯示位址</translation>
     </message>
     <message>
         <source>Whether to show coin control features or not.</source>

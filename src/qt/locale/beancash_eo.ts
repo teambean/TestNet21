@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="eo">
+<TS version="2.0" language="eo">
+<defaultcodec>UTF-8</defaultcodec>
 <context>
     <name>AboutDialog</name>
     <message>
@@ -998,7 +999,6 @@ Some or all keys from:
         <source>%n active connection(s) to the Bean Cash network</source>
         <translation type="unfinished">
             <numerusform></numerusform>
-            <numerusform></numerusform>
         </translation>
     </message>
     <message>
@@ -1015,14 +1015,12 @@ Some or all keys from:
         <source>%n second(s) ago</source>
         <translation type="unfinished">
             <numerusform></numerusform>
-            <numerusform></numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <location line="+4"/>
         <source>%n minute(s) ago</source>
         <translation type="unfinished">
-            <numerusform></numerusform>
             <numerusform></numerusform>
         </translation>
     </message>
@@ -1031,14 +1029,12 @@ Some or all keys from:
         <source>%n hour(s) ago</source>
         <translation type="unfinished">
             <numerusform></numerusform>
-            <numerusform></numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <location line="+4"/>
         <source>%n day(s) ago</source>
         <translation type="unfinished">
-            <numerusform></numerusform>
             <numerusform></numerusform>
         </translation>
     </message>
@@ -1121,14 +1117,12 @@ Adreso: %4
         <source>%n second(s)</source>
         <translation type="unfinished">
             <numerusform></numerusform>
-            <numerusform></numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <location line="+4"/>
         <source>%n minute(s)</source>
         <translation type="unfinished">
-            <numerusform></numerusform>
             <numerusform></numerusform>
         </translation>
     </message>
@@ -1137,7 +1131,6 @@ Adreso: %4
         <source>%n hour(s)</source>
         <translation type="unfinished">
             <numerusform>%n horo</numerusform>
-            <numerusform></numerusform>
         </translation>
     </message>
     <message numerus="yes">
@@ -1145,7 +1138,6 @@ Adreso: %4
         <source>%n day(s)</source>
         <translation type="unfinished">
             <numerusform>%n tago</numerusform>
-            <numerusform></numerusform>
         </translation>
     </message>
     <message>
@@ -1330,14 +1322,12 @@ Adreso: %4
         <source>%n hour(s)</source>
         <translation type="obsolete">
             <numerusform>%n horo</numerusform>
-            <numerusform></numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <source>%n day(s)</source>
         <translation type="obsolete">
             <numerusform>%n tago</numerusform>
-            <numerusform></numerusform>
         </translation>
     </message>
 </context>
@@ -1898,7 +1888,7 @@ Adreso: %4
     </message>
     <message>
         <source>&amp;Display addresses in transaction list</source>
-        <translation type="vanished">&amp;Montri adresojn en la listo de transakcioj</translation>
+        <translation type="obsolete">&amp;Montri adresojn en la listo de transakcioj</translation>
     </message>
     <message>
         <source>Whether to show coin control features or not.</source>
@@ -3166,7 +3156,6 @@ Adreso: %4
         <source>Open for %n block(s)</source>
         <translation type="unfinished">
             <numerusform></numerusform>
-            <numerusform></numerusform>
         </translation>
     </message>
     <message>
@@ -3199,7 +3188,6 @@ Adreso: %4
         <source>, broadcast through %n node(s)</source>
         <translation>
             <numerusform>, elsendita(j) tra %n nodo</numerusform>
-            <numerusform></numerusform>
         </translation>
     </message>
     <message>
@@ -3255,7 +3243,6 @@ Adreso: %4
         <source>matures in %n more block(s)</source>
         <translation>
             <numerusform>maturiĝos post %n bloko</numerusform>
-            <numerusform></numerusform>
         </translation>
     </message>
     <message>
@@ -3397,7 +3384,6 @@ Adreso: %4
         <source>Open for %n more block(s)</source>
         <translation>
             <numerusform>Malferma dum ankoraŭ %n bloko</numerusform>
-            <numerusform></numerusform>
         </translation>
     </message>
     <message>

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="en">
+<TS version="2.0" language="en">
+<defaultcodec>UTF-8</defaultcodec>
 <context>
     <name>AboutDialog</name>
     <message>
@@ -1733,35 +1734,35 @@ Address: %4
     <name>GUIUtil::HelpMessageBox</name>
     <message>
         <source>Beancash-qt</source>
-        <translation type="vanished">Beancash-qt</translation>
+        <translation type="obsolete">Beancash-qt</translation>
     </message>
     <message>
         <source>version</source>
-        <translation type="vanished">version</translation>
+        <translation type="obsolete">version</translation>
     </message>
     <message>
         <source>Usage:</source>
-        <translation type="vanished">Usage:</translation>
+        <translation type="obsolete">Usage:</translation>
     </message>
     <message>
         <source>command-line options</source>
-        <translation type="vanished">command-line options</translation>
+        <translation type="obsolete">command-line options</translation>
     </message>
     <message>
         <source>UI options</source>
-        <translation type="vanished">UI options</translation>
+        <translation type="obsolete">UI options</translation>
     </message>
     <message>
         <source>Set language, for example &quot;de_DE&quot; (default: system locale)</source>
-        <translation type="vanished">Set language, for example &quot;de_DE&quot; (default: system locale)</translation>
+        <translation type="obsolete">Set language, for example &quot;de_DE&quot; (default: system locale)</translation>
     </message>
     <message>
         <source>Start minimized</source>
-        <translation type="vanished">Start minimized</translation>
+        <translation type="obsolete">Start minimized</translation>
     </message>
     <message>
         <source>Show splash screen on startup (default: 1)</source>
-        <translation type="vanished">Show splash screen on startup (default: 1)</translation>
+        <translation type="obsolete">Show splash screen on startup (default: 1)</translation>
     </message>
 </context>
 <context>
@@ -2080,7 +2081,7 @@ Address: %4
     </message>
     <message>
         <source>&amp;Display addresses in transaction list</source>
-        <translation type="vanished">&amp;Display addresses in transaction list</translation>
+        <translation type="obsolete">&amp;Display addresses in transaction list</translation>
     </message>
     <message>
         <location line="+147"/>
@@ -3870,7 +3871,7 @@ Address: %4
     <name>WalletModel</name>
     <message>
         <source>Sending...</source>
-        <translation type="vanished">Sending...</translation>
+        <translation type="obsolete">Sending...</translation>
     </message>
     <message>
         <location filename="../walletmodel.cpp" line="+217"/>

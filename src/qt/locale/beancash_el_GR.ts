@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="el_GR">
+<TS version="2.0" language="el_GR">
+<defaultcodec>UTF-8</defaultcodec>
 <context>
     <name>AboutDialog</name>
     <message>
@@ -1778,7 +1779,7 @@ Address: %4
     </message>
     <message>
         <source>&amp;Display addresses in transaction list</source>
-        <translation type="vanished">Εμφάνιση διευθύνσεων στη λίστα συναλλαγών</translation>
+        <translation type="obsolete">Εμφάνιση διευθύνσεων στη λίστα συναλλαγών</translation>
     </message>
     <message>
         <location line="+147"/>

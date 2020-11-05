@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="nl">
+<TS version="2.0" language="nl">
+<defaultcodec>UTF-8</defaultcodec>
 <context>
     <name>AboutDialog</name>
     <message>
@@ -2003,35 +2004,35 @@ Dit betekend dat een fee van %2 is vereist.</translation>
     <name>GUIUtil::HelpMessageBox</name>
     <message>
         <source>Beancash-qt</source>
-        <translation type="vanished">Beancash-qt</translation>
+        <translation type="obsolete">Beancash-qt</translation>
     </message>
     <message>
         <source>version</source>
-        <translation type="vanished">versie</translation>
+        <translation type="obsolete">versie</translation>
     </message>
     <message>
         <source>Usage:</source>
-        <translation type="vanished">Gebruik:</translation>
+        <translation type="obsolete">Gebruik:</translation>
     </message>
     <message>
         <source>command-line options</source>
-        <translation type="vanished">Commandoregel-opties</translation>
+        <translation type="obsolete">Commandoregel-opties</translation>
     </message>
     <message>
         <source>UI options</source>
-        <translation type="vanished">Gebruikerinterface-opties</translation>
+        <translation type="obsolete">Gebruikerinterface-opties</translation>
     </message>
     <message>
         <source>Set language, for example &quot;de_DE&quot; (default: system locale)</source>
-        <translation type="vanished">Stel taal in, bijvoorbeeld &quot;de_DE&quot; (standaard: systeeminstellingen)</translation>
+        <translation type="obsolete">Stel taal in, bijvoorbeeld &quot;de_DE&quot; (standaard: systeeminstellingen)</translation>
     </message>
     <message>
         <source>Start minimized</source>
-        <translation type="vanished">Geminimaliseerd starten</translation>
+        <translation type="obsolete">Geminimaliseerd starten</translation>
     </message>
     <message>
         <source>Show splash screen on startup (default: 1)</source>
-        <translation type="vanished">Laat laadscherm zien bij het opstarten. (standaard: 1)</translation>
+        <translation type="obsolete">Laat laadscherm zien bij het opstarten. (standaard: 1)</translation>
     </message>
 </context>
 <context>
@@ -2354,7 +2355,7 @@ Dit betekend dat een fee van %2 is vereist.</translation>
     </message>
     <message>
         <source>&amp;Display addresses in transaction list</source>
-        <translation type="vanished">Toon a&amp;dressen in de transactielijst</translation>
+        <translation type="obsolete">Toon a&amp;dressen in de transactielijst</translation>
     </message>
     <message>
         <source>Whether to show coin control features or not.</source>
@@ -4272,7 +4273,7 @@ Dit betekend dat een fee van %2 is vereist.</translation>
     <name>WalletModel</name>
     <message>
         <source>Sending...</source>
-        <translation type="vanished">Versturen...</translation>
+        <translation type="obsolete">Versturen...</translation>
     </message>
     <message>
         <location filename="../walletmodel.cpp" line="+217"/>

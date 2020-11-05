@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="ru">
+<TS version="2.0" language="ru">
+<defaultcodec>UTF-8</defaultcodec>
 <context>
     <name>AboutDialog</name>
     <message>
@@ -1954,35 +1955,35 @@ Address: %4
     <name>GUIUtil::HelpMessageBox</name>
     <message>
         <source>Beancash-qt</source>
-        <translation type="vanished">Beancash-qt</translation>
+        <translation type="obsolete">Beancash-qt</translation>
     </message>
     <message>
         <source>version</source>
-        <translation type="vanished">версия</translation>
+        <translation type="obsolete">версия</translation>
     </message>
     <message>
         <source>Usage:</source>
-        <translation type="vanished">Использование:</translation>
+        <translation type="obsolete">Использование:</translation>
     </message>
     <message>
         <source>command-line options</source>
-        <translation type="vanished">параметры командной строки</translation>
+        <translation type="obsolete">параметры командной строки</translation>
     </message>
     <message>
         <source>UI options</source>
-        <translation type="vanished">Опции интерфейса</translation>
+        <translation type="obsolete">Опции интерфейса</translation>
     </message>
     <message>
         <source>Set language, for example &quot;de_DE&quot; (default: system locale)</source>
-        <translation type="vanished">Выберите язык, например &quot;de_DE&quot; (по умолчанию: как в системе)</translation>
+        <translation type="obsolete">Выберите язык, например &quot;de_DE&quot; (по умолчанию: как в системе)</translation>
     </message>
     <message>
         <source>Start minimized</source>
-        <translation type="vanished">Запускать свёрнутым</translation>
+        <translation type="obsolete">Запускать свёрнутым</translation>
     </message>
     <message>
         <source>Show splash screen on startup (default: 1)</source>
-        <translation type="vanished">Показывать сплэш при запуске (по умолчанию: 1)</translation>
+        <translation type="obsolete">Показывать сплэш при запуске (по умолчанию: 1)</translation>
     </message>
 </context>
 <context>
@@ -2305,7 +2306,7 @@ Address: %4
     </message>
     <message>
         <source>&amp;Display addresses in transaction list</source>
-        <translation type="vanished">&amp;Показывать адреса в списке транзакций</translation>
+        <translation type="obsolete">&amp;Показывать адреса в списке транзакций</translation>
     </message>
     <message>
         <source>Whether to show coin control features or not.</source>
@@ -4191,7 +4192,7 @@ Address: %4
     <name>WalletModel</name>
     <message>
         <source>Sending...</source>
-        <translation type="vanished">Отправка....</translation>
+        <translation type="obsolete">Отправка....</translation>
     </message>
     <message>
         <location filename="../walletmodel.cpp" line="+217"/>

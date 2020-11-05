@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="pt_BR">
+<TS version="2.0" language="pt_BR">
+<defaultcodec>UTF-8</defaultcodec>
 <context>
     <name>AboutDialog</name>
     <message>
@@ -2038,7 +2039,7 @@ Endereço: %4</translation>
     </message>
     <message>
         <source>&amp;Display addresses in transaction list</source>
-        <translation type="vanished">Mostrar en&amp;dereços na lista de transações</translation>
+        <translation type="obsolete">Mostrar en&amp;dereços na lista de transações</translation>
     </message>
     <message>
         <source>Whether to show coin control features or not.</source>

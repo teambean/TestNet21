@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="sl_SI">
+<TS version="2.0" language="sl_SI">
+<defaultcodec>UTF-8</defaultcodec>
 <context>
     <name>AboutDialog</name>
     <message>
@@ -2037,35 +2038,35 @@ Ta oznaka se obarva rdeče, če je prioriteta manjša kot &quot;srednja&quot;.
     <name>GUIUtil::HelpMessageBox</name>
     <message>
         <source>Beancash-qt</source>
-        <translation type="vanished">Beancash-qt</translation>
+        <translation type="obsolete">Beancash-qt</translation>
     </message>
     <message>
         <source>version</source>
-        <translation type="vanished">različica</translation>
+        <translation type="obsolete">različica</translation>
     </message>
     <message>
         <source>Usage:</source>
-        <translation type="vanished">Uporaba:</translation>
+        <translation type="obsolete">Uporaba:</translation>
     </message>
     <message>
         <source>command-line options</source>
-        <translation type="vanished">možnosti ukazne vrstice</translation>
+        <translation type="obsolete">možnosti ukazne vrstice</translation>
     </message>
     <message>
         <source>UI options</source>
-        <translation type="vanished">možnosti uporabniškega vmesnika</translation>
+        <translation type="obsolete">možnosti uporabniškega vmesnika</translation>
     </message>
     <message>
         <source>Set language, for example &quot;de_DE&quot; (default: system locale)</source>
-        <translation type="vanished">Nastavi jezik, npr. &quot;sl_SI&quot; (privzeto: jezikovna oznaka sistema)</translation>
+        <translation type="obsolete">Nastavi jezik, npr. &quot;sl_SI&quot; (privzeto: jezikovna oznaka sistema)</translation>
     </message>
     <message>
         <source>Start minimized</source>
-        <translation type="vanished">Zaženi pomanjšano</translation>
+        <translation type="obsolete">Zaženi pomanjšano</translation>
     </message>
     <message>
         <source>Show splash screen on startup (default: 1)</source>
-        <translation type="vanished">Prikaži splash screen ob zagonu (default: 1)</translation>
+        <translation type="obsolete">Prikaži splash screen ob zagonu (default: 1)</translation>
     </message>
 </context>
 <context>
@@ -2388,7 +2389,7 @@ Ta oznaka se obarva rdeče, če je prioriteta manjša kot &quot;srednja&quot;.
     </message>
     <message>
         <source>&amp;Display addresses in transaction list</source>
-        <translation type="vanished">&amp;Prikaz naslovov v seznamu transakcij</translation>
+        <translation type="obsolete">&amp;Prikaz naslovov v seznamu transakcij</translation>
     </message>
     <message>
         <source>Whether to show coin control features or not.</source>
@@ -4314,7 +4315,7 @@ Ta oznaka se obarva rdeče, če je prioriteta manjša kot &quot;srednja&quot;.
     <name>WalletModel</name>
     <message>
         <source>Sending...</source>
-        <translation type="vanished">Pošiljanje...</translation>
+        <translation type="obsolete">Pošiljanje...</translation>
     </message>
     <message>
         <location filename="../walletmodel.cpp" line="+217"/>

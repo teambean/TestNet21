@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="fa_IR">
+<TS version="2.0" language="fa_IR">
+<defaultcodec>UTF-8</defaultcodec>
 <context>
     <name>AboutDialog</name>
     <message>
@@ -1708,7 +1709,7 @@ Address: %4
     </message>
     <message>
         <source>&amp;Display addresses in transaction list</source>
-        <translation type="vanished">و نمایش آدرسها در فهرست تراکنش</translation>
+        <translation type="obsolete">و نمایش آدرسها در فهرست تراکنش</translation>
     </message>
     <message>
         <location line="+147"/>

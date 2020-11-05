@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="sv">
+<TS version="2.0" language="sv">
+<defaultcodec>UTF-8</defaultcodec>
 <context>
     <name>AboutDialog</name>
     <message>
@@ -2004,35 +2005,35 @@ Detta betyder att en avgift på minst %2 krävs.</translation>
     <name>GUIUtil::HelpMessageBox</name>
     <message>
         <source>Beancash-qt</source>
-        <translation type="vanished">Beancash-qt</translation>
+        <translation type="obsolete">Beancash-qt</translation>
     </message>
     <message>
         <source>version</source>
-        <translation type="vanished">version</translation>
+        <translation type="obsolete">version</translation>
     </message>
     <message>
         <source>Usage:</source>
-        <translation type="vanished">Användning:</translation>
+        <translation type="obsolete">Användning:</translation>
     </message>
     <message>
         <source>command-line options</source>
-        <translation type="vanished">Command-line alternativ</translation>
+        <translation type="obsolete">Command-line alternativ</translation>
     </message>
     <message>
         <source>UI options</source>
-        <translation type="vanished">UI alternativ</translation>
+        <translation type="obsolete">UI alternativ</translation>
     </message>
     <message>
         <source>Set language, for example &quot;de_DE&quot; (default: system locale)</source>
-        <translation type="vanished">Ställ in språk, t.ex. &quot;de_DE&quot; (förval: systemets språk)</translation>
+        <translation type="obsolete">Ställ in språk, t.ex. &quot;de_DE&quot; (förval: systemets språk)</translation>
     </message>
     <message>
         <source>Start minimized</source>
-        <translation type="vanished">Starta som minimerad</translation>
+        <translation type="obsolete">Starta som minimerad</translation>
     </message>
     <message>
         <source>Show splash screen on startup (default: 1)</source>
-        <translation type="vanished">Visa startscreen vid start (förval: 1)</translation>
+        <translation type="obsolete">Visa startscreen vid start (förval: 1)</translation>
     </message>
 </context>
 <context>
@@ -2355,7 +2356,7 @@ Detta betyder att en avgift på minst %2 krävs.</translation>
     </message>
     <message>
         <source>&amp;Display addresses in transaction list</source>
-        <translation type="vanished">&amp;Visa adresser i transaktionslistan</translation>
+        <translation type="obsolete">&amp;Visa adresser i transaktionslistan</translation>
     </message>
     <message>
         <source>Whether to show coin control features or not.</source>
@@ -4273,7 +4274,7 @@ Detta betyder att en avgift på minst %2 krävs.</translation>
     <name>WalletModel</name>
     <message>
         <source>Sending...</source>
-        <translation type="vanished">Skickar...</translation>
+        <translation type="obsolete">Skickar...</translation>
     </message>
     <message>
         <location filename="../walletmodel.cpp" line="+217"/>

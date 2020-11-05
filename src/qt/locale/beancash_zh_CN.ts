@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="zh_CN">
+<TS version="2.0" language="zh_CN">
+<defaultcodec>UTF-8</defaultcodec>
 <context>
     <name>AboutDialog</name>
     <message>
@@ -1968,35 +1969,35 @@ This label turns red, if the priority is smaller than &quot;medium&quot;.
     <name>GUIUtil::HelpMessageBox</name>
     <message>
         <source>Beancash-qt</source>
-        <translation type="vanished">黑币客户端Beancash-qt</translation>
+        <translation type="obsolete">黑币客户端Beancash-qt</translation>
     </message>
     <message>
         <source>version</source>
-        <translation type="vanished">版本</translation>
+        <translation type="obsolete">版本</translation>
     </message>
     <message>
         <source>Usage:</source>
-        <translation type="vanished">使用</translation>
+        <translation type="obsolete">使用</translation>
     </message>
     <message>
         <source>command-line options</source>
-        <translation type="vanished">命令行选项</translation>
+        <translation type="obsolete">命令行选项</translation>
     </message>
     <message>
         <source>UI options</source>
-        <translation type="vanished">用户界面选项</translation>
+        <translation type="obsolete">用户界面选项</translation>
     </message>
     <message>
         <source>Set language, for example &quot;de_DE&quot; (default: system locale)</source>
-        <translation type="vanished">设定语言，例如 “de_DE&quot; (默认语言为本地操作系统语言)</translation>
+        <translation type="obsolete">设定语言，例如 “de_DE&quot; (默认语言为本地操作系统语言)</translation>
     </message>
     <message>
         <source>Start minimized</source>
-        <translation type="vanished">启动时最小化</translation>
+        <translation type="obsolete">启动时最小化</translation>
     </message>
     <message>
         <source>Show splash screen on startup (default: 1)</source>
-        <translation type="vanished">登录时显示Logo界面 (默认开启)</translation>
+        <translation type="obsolete">登录时显示Logo界面 (默认开启)</translation>
     </message>
 </context>
 <context>
@@ -2319,7 +2320,7 @@ This label turns red, if the priority is smaller than &quot;medium&quot;.
     </message>
     <message>
         <source>&amp;Display addresses in transaction list</source>
-        <translation type="vanished">在交易清单中显示黑币地址(&amp;D)</translation>
+        <translation type="obsolete">在交易清单中显示黑币地址(&amp;D)</translation>
     </message>
     <message>
         <source>Whether to show coin control features or not.</source>
@@ -4233,7 +4234,7 @@ This label turns red, if the priority is smaller than &quot;medium&quot;.
     <name>WalletModel</name>
     <message>
         <source>Sending...</source>
-        <translation type="vanished">正在发送</translation>
+        <translation type="obsolete">正在发送</translation>
     </message>
     <message>
         <location filename="../walletmodel.cpp" line="+217"/>

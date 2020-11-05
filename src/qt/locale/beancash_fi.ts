@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="fi">
+<TS version="2.0" language="fi">
+<defaultcodec>UTF-8</defaultcodec>
 <context>
     <name>AboutDialog</name>
     <message>
@@ -1994,35 +1995,35 @@ Tämä tarkoittaa, että ainakin %2 rahansiirtopalkkio tarvitaan.</translation>
     <name>GUIUtil::HelpMessageBox</name>
     <message>
         <source>Beancash-qt</source>
-        <translation type="vanished">Beancash-qt</translation>
+        <translation type="obsolete">Beancash-qt</translation>
     </message>
     <message>
         <source>version</source>
-        <translation type="vanished">versio</translation>
+        <translation type="obsolete">versio</translation>
     </message>
     <message>
         <source>Usage:</source>
-        <translation type="vanished">Kulutus:</translation>
+        <translation type="obsolete">Kulutus:</translation>
     </message>
     <message>
         <source>command-line options</source>
-        <translation type="vanished">komentokehotteen asetukset</translation>
+        <translation type="obsolete">komentokehotteen asetukset</translation>
     </message>
     <message>
         <source>UI options</source>
-        <translation type="vanished">Käyttäjärajapinnan asetukset</translation>
+        <translation type="obsolete">Käyttäjärajapinnan asetukset</translation>
     </message>
     <message>
         <source>Set language, for example &quot;de_DE&quot; (default: system locale)</source>
-        <translation type="vanished">Aseta kieli, esimerkiksi &quot;fi_FI&quot; (oletus: järjestelmän oma)</translation>
+        <translation type="obsolete">Aseta kieli, esimerkiksi &quot;fi_FI&quot; (oletus: järjestelmän oma)</translation>
     </message>
     <message>
         <source>Start minimized</source>
-        <translation type="vanished">Käynnistä pienennettynä</translation>
+        <translation type="obsolete">Käynnistä pienennettynä</translation>
     </message>
     <message>
         <source>Show splash screen on startup (default: 1)</source>
-        <translation type="vanished">Näytä logo käynnistettäessä (oletus: 1)</translation>
+        <translation type="obsolete">Näytä logo käynnistettäessä (oletus: 1)</translation>
     </message>
 </context>
 <context>
@@ -2345,7 +2346,7 @@ Tämä tarkoittaa, että ainakin %2 rahansiirtopalkkio tarvitaan.</translation>
     </message>
     <message>
         <source>&amp;Display addresses in transaction list</source>
-        <translation type="vanished">&amp;Näytä osoitteet rahansiirrot listassa</translation>
+        <translation type="obsolete">&amp;Näytä osoitteet rahansiirrot listassa</translation>
     </message>
     <message>
         <source>Whether to show coin control features or not.</source>
@@ -4263,7 +4264,7 @@ Tämä tarkoittaa, että ainakin %2 rahansiirtopalkkio tarvitaan.</translation>
     <name>WalletModel</name>
     <message>
         <source>Sending...</source>
-        <translation type="vanished">Lähetetään...</translation>
+        <translation type="obsolete">Lähetetään...</translation>
     </message>
     <message>
         <location filename="../walletmodel.cpp" line="+217"/>

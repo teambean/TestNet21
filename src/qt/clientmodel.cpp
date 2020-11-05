@@ -169,12 +169,6 @@ QString ClientModel::formatClientStartupTime() const
 }
 
 // Handlers for core signals
-static void NotifyBlocksChanged(ClientModel *clientmodel)
-{
-    // This notification is too frequent. Don't trigger a signal.
-    // Don't remove it, though, as it might be useful later.
-}
-
 static void NotifyNumConnectionsChanged(ClientModel *clientmodel, int newNumConnections)
 {
     // Too noisy: qDebug() << "NotifyNumConnectionsChanged : " + QString::number(newNumConnections);
@@ -193,7 +187,6 @@ static void NotifyAlertChanged(ClientModel *clientmodel, const uint256 &hash, Ch
 void ClientModel::subscribeToCoreSignals()
 {
     // Connect signals to client
-    uiInterface.NotifyBlocksChanged.connect(std::bind(NotifyBlocksChanged, this));
     uiInterface.NotifyNumConnectionsChanged.connect(std::bind(NotifyNumConnectionsChanged, this, std::placeholders::_1));
     uiInterface.NotifyAlertChanged.connect(std::bind(NotifyAlertChanged, this, std::placeholders::_1, std::placeholders::_2));
 }
@@ -201,7 +194,6 @@ void ClientModel::subscribeToCoreSignals()
 void ClientModel::unsubscribeFromCoreSignals()
 {
     // Disconnect signals from client
-    uiInterface.NotifyBlocksChanged.disconnect(std::bind(NotifyBlocksChanged, this));
     uiInterface.NotifyNumConnectionsChanged.disconnect(std::bind(NotifyNumConnectionsChanged, this, std::placeholders::_1));
     uiInterface.NotifyAlertChanged.disconnect(std::bind(NotifyAlertChanged, this, std::placeholders::_1, std::placeholders::_2));
 }

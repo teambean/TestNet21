@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="fr">
+<TS version="2.0" language="fr">
+<defaultcodec>UTF-8</defaultcodec>
 <context>
     <name>AboutDialog</name>
     <message>
@@ -2003,35 +2004,35 @@ Cela implique que des frais à hauteur d&apos;au moins %2 seront nécessaires.</
     <name>GUIUtil::HelpMessageBox</name>
     <message>
         <source>Beancash-qt</source>
-        <translation type="vanished">Beancash-qt</translation>
+        <translation type="obsolete">Beancash-qt</translation>
     </message>
     <message>
         <source>version</source>
-        <translation type="vanished">version</translation>
+        <translation type="obsolete">version</translation>
     </message>
     <message>
         <source>Usage:</source>
-        <translation type="vanished">Utilisation:</translation>
+        <translation type="obsolete">Utilisation:</translation>
     </message>
     <message>
         <source>command-line options</source>
-        <translation type="vanished">Options de ligne de commande</translation>
+        <translation type="obsolete">Options de ligne de commande</translation>
     </message>
     <message>
         <source>UI options</source>
-        <translation type="vanished">Options graphiques</translation>
+        <translation type="obsolete">Options graphiques</translation>
     </message>
     <message>
         <source>Set language, for example &quot;de_DE&quot; (default: system locale)</source>
-        <translation type="vanished">Définir la langue, par exemple « fr_FR » (par défaut: la langue du système)</translation>
+        <translation type="obsolete">Définir la langue, par exemple « fr_FR » (par défaut: la langue du système)</translation>
     </message>
     <message>
         <source>Start minimized</source>
-        <translation type="vanished">Démarrer en mode réduit</translation>
+        <translation type="obsolete">Démarrer en mode réduit</translation>
     </message>
     <message>
         <source>Show splash screen on startup (default: 1)</source>
-        <translation type="vanished">Affichage de l&apos;écran de démarrage (par défaut: 1)</translation>
+        <translation type="obsolete">Affichage de l&apos;écran de démarrage (par défaut: 1)</translation>
     </message>
 </context>
 <context>
@@ -2354,7 +2355,7 @@ Cela implique que des frais à hauteur d&apos;au moins %2 seront nécessaires.</
     </message>
     <message>
         <source>&amp;Display addresses in transaction list</source>
-        <translation type="vanished">&amp;Afficher les adresses sur la liste des transactions</translation>
+        <translation type="obsolete">&amp;Afficher les adresses sur la liste des transactions</translation>
     </message>
     <message>
         <source>Whether to show coin control features or not.</source>
@@ -4272,7 +4273,7 @@ Cela implique que des frais à hauteur d&apos;au moins %2 seront nécessaires.</
     <name>WalletModel</name>
     <message>
         <source>Sending...</source>
-        <translation type="vanished">Envoi...</translation>
+        <translation type="obsolete">Envoi...</translation>
     </message>
     <message>
         <location filename="../walletmodel.cpp" line="+217"/>

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="da">
+<TS version="2.0" language="da">
+<defaultcodec>UTF-8</defaultcodec>
 <context>
     <name>AboutDialog</name>
     <message>
@@ -2003,35 +2004,35 @@ Det betyder, at et gebyr på mindst %2 er påkrævet.</translation>
     <name>GUIUtil::HelpMessageBox</name>
     <message>
         <source>Beancash-qt</source>
-        <translation type="vanished">Beancash-qt</translation>
+        <translation type="obsolete">Beancash-qt</translation>
     </message>
     <message>
         <source>version</source>
-        <translation type="vanished">version</translation>
+        <translation type="obsolete">version</translation>
     </message>
     <message>
         <source>Usage:</source>
-        <translation type="vanished">Anvendelse:</translation>
+        <translation type="obsolete">Anvendelse:</translation>
     </message>
     <message>
         <source>command-line options</source>
-        <translation type="vanished">Kommandolinjeparametrene</translation>
+        <translation type="obsolete">Kommandolinjeparametrene</translation>
     </message>
     <message>
         <source>UI options</source>
-        <translation type="vanished">UI opsætning</translation>
+        <translation type="obsolete">UI opsætning</translation>
     </message>
     <message>
         <source>Set language, for example &quot;de_DE&quot; (default: system locale)</source>
-        <translation type="vanished">Indstil sprog, for eksempel &quot;de_DE&quot; (standard: system locale)</translation>
+        <translation type="obsolete">Indstil sprog, for eksempel &quot;de_DE&quot; (standard: system locale)</translation>
     </message>
     <message>
         <source>Start minimized</source>
-        <translation type="vanished">Start minimeret</translation>
+        <translation type="obsolete">Start minimeret</translation>
     </message>
     <message>
         <source>Show splash screen on startup (default: 1)</source>
-        <translation type="vanished">Vis splash skærm ved opstart (default: 1)</translation>
+        <translation type="obsolete">Vis splash skærm ved opstart (default: 1)</translation>
     </message>
 </context>
 <context>
@@ -2354,7 +2355,7 @@ Det betyder, at et gebyr på mindst %2 er påkrævet.</translation>
     </message>
     <message>
         <source>&amp;Display addresses in transaction list</source>
-        <translation type="vanished">Vis adresser i transaktionsliste</translation>
+        <translation type="obsolete">Vis adresser i transaktionsliste</translation>
     </message>
     <message>
         <source>Whether to show coin control features or not.</source>
@@ -4272,7 +4273,7 @@ Det betyder, at et gebyr på mindst %2 er påkrævet.</translation>
     <name>WalletModel</name>
     <message>
         <source>Sending...</source>
-        <translation type="vanished">Sender...</translation>
+        <translation type="obsolete">Sender...</translation>
     </message>
     <message>
         <location filename="../walletmodel.cpp" line="+217"/>

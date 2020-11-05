@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="id_ID">
+<TS version="2.0" language="id_ID">
+<defaultcodec>UTF-8</defaultcodec>
 <context>
     <name>AboutDialog</name>
     <message>
@@ -1764,15 +1765,15 @@ Alamat: %4
     <name>GUIUtil::HelpMessageBox</name>
     <message>
         <source>Beancash-qt</source>
-        <translation type="vanished">Beancash-qt</translation>
+        <translation type="obsolete">Beancash-qt</translation>
     </message>
     <message>
         <source>version</source>
-        <translation type="vanished">versi</translation>
+        <translation type="obsolete">versi</translation>
     </message>
     <message>
         <source>Usage:</source>
-        <translation type="vanished">Penggunaan:</translation>
+        <translation type="obsolete">Penggunaan:</translation>
     </message>
 </context>
 <context>
@@ -2059,7 +2060,7 @@ Alamat: %4
     </message>
     <message>
         <source>&amp;Display addresses in transaction list</source>
-        <translation type="vanished">&amp;Tampilkan alamat dalam daftar transaksi</translation>
+        <translation type="obsolete">&amp;Tampilkan alamat dalam daftar transaksi</translation>
     </message>
     <message>
         <location line="+147"/>

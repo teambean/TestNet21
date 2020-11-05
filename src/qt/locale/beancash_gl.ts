@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="gl">
+<TS version="2.0" language="gl">
+<defaultcodec>UTF-8</defaultcodec>
 <context>
     <name>AboutDialog</name>
     <message>
@@ -1839,7 +1840,7 @@ Dirección: %4
     <name>GUIUtil::HelpMessageBox</name>
     <message>
         <source>Beancash-qt</source>
-        <translation type="vanished">Beancash-qt</translation>
+        <translation type="obsolete">Beancash-qt</translation>
     </message>
     <message>
         <source>Usage:</source>
@@ -1847,11 +1848,11 @@ Dirección: %4
     </message>
     <message>
         <source>UI options</source>
-        <translation type="vanished">Opcións UI</translation>
+        <translation type="obsolete">Opcións UI</translation>
     </message>
     <message>
         <source>Start minimized</source>
-        <translation type="vanished">Comezar minimizado</translation>
+        <translation type="obsolete">Comezar minimizado</translation>
     </message>
 </context>
 <context>
@@ -2142,7 +2143,7 @@ Dirección: %4
     </message>
     <message>
         <source>&amp;Display addresses in transaction list</source>
-        <translation type="vanished">&amp;Visualizar direccións na listaxe de transaccións</translation>
+        <translation type="obsolete">&amp;Visualizar direccións na listaxe de transaccións</translation>
     </message>
     <message>
         <location line="+147"/>

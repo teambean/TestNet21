@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="hu">
+<TS version="2.0" language="hu">
+<defaultcodec>UTF-8</defaultcodec>
 <context>
     <name>AboutDialog</name>
     <message>
@@ -1782,7 +1783,7 @@ Cím: %4
     </message>
     <message>
         <source>&amp;Display addresses in transaction list</source>
-        <translation type="vanished">&amp;Címek megjelenítése a tranzakciólistában</translation>
+        <translation type="obsolete">&amp;Címek megjelenítése a tranzakciólistában</translation>
     </message>
     <message>
         <location line="+147"/>

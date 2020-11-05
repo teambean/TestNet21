@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="de">
+<TS version="2.0" language="de">
+<defaultcodec>UTF-8</defaultcodec>
 <context>
     <name>AboutDialog</name>
     <message>
@@ -1633,19 +1634,19 @@ Adresse: %4</translation>
     <name>GUIUtil::HelpMessageBox</name>
     <message>
         <source>version</source>
-        <translation type="vanished">version</translation>
+        <translation type="obsolete">version</translation>
     </message>
     <message>
         <source>Usage:</source>
-        <translation type="vanished">Benutzung:</translation>
+        <translation type="obsolete">Benutzung:</translation>
     </message>
     <message>
         <source>command-line options</source>
-        <translation type="vanished">Kommandozeilen optionen</translation>
+        <translation type="obsolete">Kommandozeilen optionen</translation>
     </message>
     <message>
         <source>Start minimized</source>
-        <translation type="vanished">Minimiert starten</translation>
+        <translation type="obsolete">Minimiert starten</translation>
     </message>
 </context>
 <context>
@@ -1956,7 +1957,7 @@ Adresse: %4</translation>
     </message>
     <message>
         <source>&amp;Display addresses in transaction list</source>
-        <translation type="vanished">Adressen in der Transaktionsliste &amp;anzeigen</translation>
+        <translation type="obsolete">Adressen in der Transaktionsliste &amp;anzeigen</translation>
     </message>
     <message>
         <source>Whether to show coin control features or not.</source>
@@ -3774,7 +3775,7 @@ Adresse: %4</translation>
     <name>WalletModel</name>
     <message>
         <source>Sending...</source>
-        <translation type="vanished">Wird gesendet...</translation>
+        <translation type="obsolete">Wird gesendet...</translation>
     </message>
     <message>
         <location filename="../walletmodel.cpp" line="+217"/>

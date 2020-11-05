@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="ja">
+<TS version="2.0" language="ja">
+<defaultcodec>UTF-8</defaultcodec>
 <context>
     <name>AboutDialog</name>
     <message>
@@ -1980,35 +1981,35 @@ This label turns red, if the priority is smaller than &quot;medium&quot;.
     <name>GUIUtil::HelpMessageBox</name>
     <message>
         <source>Beancash-qt</source>
-        <translation type="vanished">ブラックコインQT</translation>
+        <translation type="obsolete">ブラックコインQT</translation>
     </message>
     <message>
         <source>version</source>
-        <translation type="vanished">バージョン</translation>
+        <translation type="obsolete">バージョン</translation>
     </message>
     <message>
         <source>Usage:</source>
-        <translation type="vanished">使用法</translation>
+        <translation type="obsolete">使用法</translation>
     </message>
     <message>
         <source>command-line options</source>
-        <translation type="vanished">コマンドラインのオプション</translation>
+        <translation type="obsolete">コマンドラインのオプション</translation>
     </message>
     <message>
         <source>UI options</source>
-        <translation type="vanished">UIのオプション</translation>
+        <translation type="obsolete">UIのオプション</translation>
     </message>
     <message>
         <source>Set language, for example &quot;de_DE&quot; (default: system locale)</source>
-        <translation type="vanished">言語の設定、例: &quot;de_DE&quot; (デフォルト:システムのロケール)</translation>
+        <translation type="obsolete">言語の設定、例: &quot;de_DE&quot; (デフォルト:システムのロケール)</translation>
     </message>
     <message>
         <source>Start minimized</source>
-        <translation type="vanished">最小化でスタート</translation>
+        <translation type="obsolete">最小化でスタート</translation>
     </message>
     <message>
         <source>Show splash screen on startup (default: 1)</source>
-        <translation type="vanished">スタートでスプラッシュスクリーンを表示(デフォルト:１)</translation>
+        <translation type="obsolete">スタートでスプラッシュスクリーンを表示(デフォルト:１)</translation>
     </message>
 </context>
 <context>
@@ -2331,7 +2332,7 @@ This label turns red, if the priority is smaller than &quot;medium&quot;.
     </message>
     <message>
         <source>&amp;Display addresses in transaction list</source>
-        <translation type="vanished">処理の履歴にアドレスを表示 (&amp;D)</translation>
+        <translation type="obsolete">処理の履歴にアドレスを表示 (&amp;D)</translation>
     </message>
     <message>
         <source>Whether to show coin control features or not.</source>
@@ -4245,7 +4246,7 @@ This label turns red, if the priority is smaller than &quot;medium&quot;.
     <name>WalletModel</name>
     <message>
         <source>Sending...</source>
-        <translation type="vanished">通信中...</translation>
+        <translation type="obsolete">通信中...</translation>
     </message>
     <message>
         <location filename="../walletmodel.cpp" line="+217"/>

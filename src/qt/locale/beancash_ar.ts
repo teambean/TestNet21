@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="ar">
+<TS version="2.0" language="ar">
+<defaultcodec>UTF-8</defaultcodec>
 <context>
     <name>AboutDialog</name>
     <message>
@@ -1937,7 +1938,7 @@ Address: %4
     </message>
     <message>
         <source>&amp;Display addresses in transaction list</source>
-        <translation type="vanished">عرض العناوين في قائمة الصفقة</translation>
+        <translation type="obsolete">عرض العناوين في قائمة الصفقة</translation>
     </message>
     <message>
         <location line="+147"/>
@@ -3623,7 +3624,7 @@ Address: %4
     <name>WalletModel</name>
     <message>
         <source>Sending...</source>
-        <translation type="vanished">ارسال....</translation>
+        <translation type="obsolete">ارسال....</translation>
     </message>
     <message>
         <location filename="../walletmodel.cpp" line="+217"/>

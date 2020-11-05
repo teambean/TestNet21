@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="tr">
+<TS version="2.0" language="tr">
+<defaultcodec>UTF-8</defaultcodec>
 <context>
     <name>AboutDialog</name>
     <message>
@@ -1974,35 +1975,35 @@ This label turns red, if the priority is smaller than &quot;medium&quot;.
     <name>GUIUtil::HelpMessageBox</name>
     <message>
         <source>Beancash-qt</source>
-        <translation type="vanished">Beancash-qt</translation>
+        <translation type="obsolete">Beancash-qt</translation>
     </message>
     <message>
         <source>version</source>
-        <translation type="vanished">versiyon</translation>
+        <translation type="obsolete">versiyon</translation>
     </message>
     <message>
         <source>Usage:</source>
-        <translation type="vanished">Kullanım:</translation>
+        <translation type="obsolete">Kullanım:</translation>
     </message>
     <message>
         <source>command-line options</source>
-        <translation type="vanished">komut satırı seçenekleri</translation>
+        <translation type="obsolete">komut satırı seçenekleri</translation>
     </message>
     <message>
         <source>UI options</source>
-        <translation type="vanished">GA seçenekleri</translation>
+        <translation type="obsolete">GA seçenekleri</translation>
     </message>
     <message>
         <source>Set language, for example &quot;de_DE&quot; (default: system locale)</source>
-        <translation type="vanished">Dili ayarla, örneğin &quot;de_DE&quot; (varsayılan: sistem yerel ayarları)</translation>
+        <translation type="obsolete">Dili ayarla, örneğin &quot;de_DE&quot; (varsayılan: sistem yerel ayarları)</translation>
     </message>
     <message>
         <source>Start minimized</source>
-        <translation type="vanished">Simge durumunda başlat</translation>
+        <translation type="obsolete">Simge durumunda başlat</translation>
     </message>
     <message>
         <source>Show splash screen on startup (default: 1)</source>
-        <translation type="vanished">Başlangıçta açılış ekranını göster (varsayılan: 1)</translation>
+        <translation type="obsolete">Başlangıçta açılış ekranını göster (varsayılan: 1)</translation>
     </message>
 </context>
 <context>
@@ -2325,7 +2326,7 @@ This label turns red, if the priority is smaller than &quot;medium&quot;.
     </message>
     <message>
         <source>&amp;Display addresses in transaction list</source>
-        <translation type="vanished">Muamele listesinde adresleri &amp;göster</translation>
+        <translation type="obsolete">Muamele listesinde adresleri &amp;göster</translation>
     </message>
     <message>
         <source>Whether to show coin control features or not.</source>
@@ -4239,7 +4240,7 @@ This label turns red, if the priority is smaller than &quot;medium&quot;.
     <name>WalletModel</name>
     <message>
         <source>Sending...</source>
-        <translation type="vanished">Gönderiyor...</translation>
+        <translation type="obsolete">Gönderiyor...</translation>
     </message>
     <message>
         <location filename="../walletmodel.cpp" line="+217"/>

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="nb">
+<TS version="2.0" language="nb">
+<defaultcodec>UTF-8</defaultcodec>
 <context>
     <name>AboutDialog</name>
     <message>
@@ -1819,19 +1820,19 @@ Dette betyr at det trengs en avgift på minimum %2.</translation>
     <name>GUIUtil::HelpMessageBox</name>
     <message>
         <source>Beancash-qt</source>
-        <translation type="vanished">Beancash-qt</translation>
+        <translation type="obsolete">Beancash-qt</translation>
     </message>
     <message>
         <source>version</source>
-        <translation type="vanished">versjon</translation>
+        <translation type="obsolete">versjon</translation>
     </message>
     <message>
         <source>Usage:</source>
-        <translation type="vanished">Bruk:</translation>
+        <translation type="obsolete">Bruk:</translation>
     </message>
     <message>
         <source>Start minimized</source>
-        <translation type="vanished">Start Minimert</translation>
+        <translation type="obsolete">Start Minimert</translation>
     </message>
 </context>
 <context>
@@ -2126,7 +2127,7 @@ Dette betyr at det trengs en avgift på minimum %2.</translation>
     </message>
     <message>
         <source>&amp;Display addresses in transaction list</source>
-        <translation type="vanished">&amp;Vis adresser i transaksjonslisten</translation>
+        <translation type="obsolete">&amp;Vis adresser i transaksjonslisten</translation>
     </message>
     <message>
         <source>Whether to show coin control features or not.</source>
@@ -3904,7 +3905,7 @@ Dette betyr at det trengs en avgift på minimum %2.</translation>
     <name>WalletModel</name>
     <message>
         <source>Sending...</source>
-        <translation type="vanished">Sender...</translation>
+        <translation type="obsolete">Sender...</translation>
     </message>
     <message>
         <location filename="../walletmodel.cpp" line="+217"/>

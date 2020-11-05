@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="hr">
+<TS version="2.0" language="hr">
+<defaultcodec>UTF-8</defaultcodec>
 <context>
     <name>AboutDialog</name>
     <message>
@@ -1739,7 +1740,7 @@ Adresa:%4
     </message>
     <message>
         <source>&amp;Display addresses in transaction list</source>
-        <translation type="vanished">&amp;Prikaži adrese u popisu transakcija</translation>
+        <translation type="obsolete">&amp;Prikaži adrese u popisu transakcija</translation>
     </message>
     <message>
         <location line="+147"/>

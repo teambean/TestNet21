@@ -9,17 +9,15 @@
 
 #include "bignum.h"
 #include "uint256.h"
+#include "core.h"
+#include "protocol.h"
 #include "util.h"
 
 #include <vector>
 
 using namespace std;
 
-#define MESSAGE_START_SIZE 4
 typedef unsigned char MessageStartChars[MESSAGE_START_SIZE];
-
-class CAddress;
-class CBlock;
 
 struct CDNSSeedData {
     string name, host;
@@ -55,13 +53,13 @@ public:
     const vector<unsigned char>& AlertKey() const { return vAlertPubKey; }
     int GetDefaultPort() const { return nDefaultPort; }
     const CBigNum& ProofOfWorkLimit() const { return bnProofOfWorkLimit; }
-    virtual const CBlock& GenesisBlock() const = 0;
-    virtual bool RequireRPCPassword() const { return true; }
+    const CBlock& GenesisBlock() const { return genesis; }
+    bool RequireRPCPassword() const { return fRequireRPCPassword; }
     const string& DataDir() const { return strDataDir; }
-    virtual Network NetworkID() const = 0;
+    Network NetworkID() const { return networkID; }
     const vector<CDNSSeedData>& DNSSeeds() const { return vSeeds; }
     const std::vector<unsigned char> &Base58Prefix(Base58Type type) const { return base58Prefixes[type]; }
-    virtual const vector<CAddress>& FixedSeeds() const = 0;
+    const vector<CAddress>& FixedSeeds() const { return vFixedSeeds; }
     int RPCPort() const { return nRPCPort; }
 protected:
     CChainParams() {}
@@ -76,6 +74,11 @@ protected:
     string strDataDir;
     vector<CDNSSeedData> vSeeds;
     std::vector<unsigned char> base58Prefixes[MAX_BASE58_TYPES];
+    Network networkID;
+    CBlock genesis;
+    vector<CAddress> vFixedSeeds;
+    bool fRequireRPCPassword;
+    bool fRPCisTestNet;
 };
 
 /**

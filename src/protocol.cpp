@@ -5,6 +5,7 @@
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #include "protocol.h"
+#include "chainparams.h"
 #include "util.h"
 #include "netbase.h"
 

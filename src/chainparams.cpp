@@ -46,6 +46,7 @@ static void convertSeed6(std::vector<CAddress> &vSeedsOut, const SeedSpec6 *data
 class CMainParams : public CChainParams {
 public:
     CMainParams() {
+        networkID = CChainParams::MAIN;
         // The message start string is designed to be unlikely to occur in normal data.
         // The characters are rarely used upper ASCII, not valid as UTF-8, and produce
         // a large 4-byte int at any alignment.
@@ -115,20 +116,13 @@ public:
         base58Prefixes[SECRET_KEY] = std::vector<unsigned char>(1,131);
 
         convertSeed6(vFixedSeeds, pnSeed6_main, ARRAYLEN(pnSeed6_main));
-    }
 
-    virtual const CBlock& GenesisBlock() const { return genesis; }
-    virtual Network NetworkID() const { return CChainParams::MAIN; }
-
-    virtual const vector<CAddress>& FixedSeeds() const {
-        return vFixedSeeds;
+        fRequireRPCPassword = true;
+        fRPCisTestNet = false;
     }
-protected:
-    CBlock genesis;
-    vector<CAddress> vFixedSeeds;
 };
-static CMainParams mainParams;
 
+static CMainParams mainParams;
 
 //
 // Testnet (v2)
@@ -136,6 +130,7 @@ static CMainParams mainParams;
 class CTestNetParams : public CMainParams {
 public:
     CTestNetParams() {
+        networkID = CChainParams::TESTNET;
         // The message start string is designed to be unlikely to occur in normal data.
         // The characters are rarely used upper ASCII, not valid as UTF-8, and produce
         // a large 4-byte int at any alignment.
@@ -164,11 +159,12 @@ public:
         base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1,196);
         base58Prefixes[SECRET_KEY] = std::vector<unsigned char>(1,239);
 
+        fRequireRPCPassword = true;
+        fRPCisTestNet = true;
     }
-    virtual Network NetworkID() const { return CChainParams::TESTNET; }
 };
-static CTestNetParams testNetParams;
 
+static CTestNetParams testNetParams;
 
 //
 // Regression test
@@ -176,6 +172,7 @@ static CTestNetParams testNetParams;
 class CRegTestParams : public CTestNetParams {
 public:
     CRegTestParams() {
+        networkID = CChainParams::REGTEST;
         pchMessageStart[0] = 0xfa;
         pchMessageStart[1] = 0xbf;
         pchMessageStart[2] = 0xb5;
@@ -190,11 +187,11 @@ public:
         assert(hashGenesisBlock == uint256("0x0000021cddf3e66033819044559ebf09acdb95dd79b1743d367d03224e10674b"));
 
         vSeeds.clear();  // Regtest mode doesn't have any DNS seeds.
+        fRequireRPCPassword = false;
+        fRPCisTestNet = true;
     }
-
-    virtual bool RequireRPCPassword() const { return false; }
-    virtual Network NetworkID() const { return CChainParams::REGTEST; }
 };
+
 static CRegTestParams regTestParams;
 
 static CChainParams *pCurrentParams = &mainParams;

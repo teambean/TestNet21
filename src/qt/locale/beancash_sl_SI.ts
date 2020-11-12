@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="sl_SI">
-<defaultcodec>UTF-8</defaultcodec>
+<TS version="2.1" language="sl_SI">
 <context>
     <name>AboutDialog</name>
     <message>
@@ -64,6 +63,12 @@ Ta proizvod vključuje softver razvit s strani projekta OpenSSL za uporabo v Ope
     <message>
         <location line="+0"/>
         <source>2015-%1 Bean Core www.beancash.org</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+12"/>
+        <location line="+2"/>
+        <source> (%1-bit)</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2077,7 +2082,7 @@ Ta oznaka se obarva rdeče, če je prioriteta manjša kot &quot;srednja&quot;.
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../utilitydialog.cpp" line="+30"/>
+        <location filename="../utilitydialog.cpp" line="+25"/>
         <source>Beancash-qt</source>
         <translation type="unfinished">Beancash-qt</translation>
     </message>
@@ -3560,7 +3565,7 @@ Ta oznaka se obarva rdeče, če je prioriteta manjša kot &quot;srednja&quot;.
     <name>ShutdownWindow</name>
     <message>
         <location filename="../utilitydialog.cpp" line="+48"/>
-        <source>Bitcoin Core is shutting down...</source>
+        <source>Bean Cash Core is shutting down...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

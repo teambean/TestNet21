@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="ca_ES">
-<defaultcodec>UTF-8</defaultcodec>
+<TS version="2.1" language="ca_ES">
 <context>
     <name>AboutDialog</name>
     <message>
@@ -67,6 +66,12 @@ This product includes software developed by the OpenSSL Project for use in the O
     <message>
         <location line="+0"/>
         <source>2015-%1 Bean Core www.beancash.org</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+12"/>
+        <location line="+2"/>
+        <source> (%1-bit)</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -853,7 +858,6 @@ En aquest cas es requereix una comisió d&apos;almenys 2%.</translation>
         <translation type="obsolete">
             <numerusform>%n conexió activa a la xarxa Beancash</numerusform>
             <numerusform>%n conexions actives a la xarxa Beancash</numerusform>
-            <numerusform></numerusform>
         </translation>
     </message>
     <message>
@@ -928,7 +932,6 @@ En aquest cas es requereix una comisió d&apos;almenys 2%.</translation>
         <translation type="unfinished">
             <numerusform></numerusform>
             <numerusform></numerusform>
-            <numerusform></numerusform>
         </translation>
     </message>
     <message>
@@ -940,7 +943,6 @@ En aquest cas es requereix una comisió d&apos;almenys 2%.</translation>
         <translation type="obsolete">
             <numerusform>~%n bloc restant</numerusform>
             <numerusform>~%n blocs restants</numerusform>
-            <numerusform></numerusform>
         </translation>
     </message>
     <message>
@@ -958,7 +960,6 @@ En aquest cas es requereix una comisió d&apos;almenys 2%.</translation>
         <translation type="unfinished">
             <numerusform>fa %n segon</numerusform>
             <numerusform>fa %n segons</numerusform>
-            <numerusform></numerusform>
         </translation>
     </message>
     <message numerus="yes">
@@ -967,7 +968,6 @@ En aquest cas es requereix una comisió d&apos;almenys 2%.</translation>
         <translation type="unfinished">
             <numerusform>fa %n minut</numerusform>
             <numerusform>fa %n minuts</numerusform>
-            <numerusform></numerusform>
         </translation>
     </message>
     <message numerus="yes">
@@ -976,7 +976,6 @@ En aquest cas es requereix una comisió d&apos;almenys 2%.</translation>
         <translation type="unfinished">
             <numerusform>fa %n hora</numerusform>
             <numerusform>fa %n hores</numerusform>
-            <numerusform></numerusform>
         </translation>
     </message>
     <message numerus="yes">
@@ -985,7 +984,6 @@ En aquest cas es requereix una comisió d&apos;almenys 2%.</translation>
         <translation type="unfinished">
             <numerusform>fa %n dia</numerusform>
             <numerusform>fa %n dies</numerusform>
-            <numerusform></numerusform>
         </translation>
     </message>
     <message>
@@ -1237,7 +1235,6 @@ Some or all keys from:
         <translation type="unfinished">
             <numerusform>%n segon</numerusform>
             <numerusform>%n segons</numerusform>
-            <numerusform></numerusform>
         </translation>
     </message>
     <message numerus="yes">
@@ -1246,7 +1243,6 @@ Some or all keys from:
         <translation type="unfinished">
             <numerusform>%n minut</numerusform>
             <numerusform>%n minuts</numerusform>
-            <numerusform></numerusform>
         </translation>
     </message>
     <message numerus="yes">
@@ -1255,7 +1251,6 @@ Some or all keys from:
         <translation type="unfinished">
             <numerusform>%n hora</numerusform>
             <numerusform>%n hores</numerusform>
-            <numerusform></numerusform>
         </translation>
     </message>
     <message numerus="yes">
@@ -1264,7 +1259,6 @@ Some or all keys from:
         <translation type="unfinished">
             <numerusform>%n dia</numerusform>
             <numerusform>%n dies</numerusform>
-            <numerusform></numerusform>
         </translation>
     </message>
     <message>
@@ -1410,7 +1404,6 @@ Some or all keys from:
         <translation type="obsolete">
             <numerusform>~%n bloc restant</numerusform>
             <numerusform>~%n blocs restants</numerusform>
-            <numerusform></numerusform>
         </translation>
     </message>
     <message>
@@ -1518,7 +1511,6 @@ Some or all keys from:
         <translation type="obsolete">
             <numerusform>%n conexió activa a la xarxa Beancash</numerusform>
             <numerusform>%n conexions actives a la xarxa Beancash</numerusform>
-            <numerusform></numerusform>
         </translation>
     </message>
     <message>
@@ -1550,7 +1542,6 @@ Some or all keys from:
         <translation type="obsolete">
             <numerusform>fa %n segon</numerusform>
             <numerusform>fa %n segons</numerusform>
-            <numerusform></numerusform>
         </translation>
     </message>
     <message>
@@ -1562,7 +1553,6 @@ Some or all keys from:
         <translation type="obsolete">
             <numerusform>fa %n minut</numerusform>
             <numerusform>fa %n minuts</numerusform>
-            <numerusform></numerusform>
         </translation>
     </message>
     <message numerus="yes">
@@ -1570,7 +1560,6 @@ Some or all keys from:
         <translation type="obsolete">
             <numerusform>fa %n hora</numerusform>
             <numerusform>fa %n hores</numerusform>
-            <numerusform></numerusform>
         </translation>
     </message>
     <message numerus="yes">
@@ -1578,7 +1567,6 @@ Some or all keys from:
         <translation type="obsolete">
             <numerusform>fa %n dia</numerusform>
             <numerusform>fa %n dies</numerusform>
-            <numerusform></numerusform>
         </translation>
     </message>
     <message>
@@ -1654,7 +1642,6 @@ Address: %4
         <translation type="obsolete">
             <numerusform>%n segon</numerusform>
             <numerusform>%n segons</numerusform>
-            <numerusform></numerusform>
         </translation>
     </message>
     <message numerus="yes">
@@ -1662,7 +1649,6 @@ Address: %4
         <translation type="obsolete">
             <numerusform>%n minut</numerusform>
             <numerusform>%n minuts</numerusform>
-            <numerusform></numerusform>
         </translation>
     </message>
     <message numerus="yes">
@@ -1670,7 +1656,6 @@ Address: %4
         <translation type="obsolete">
             <numerusform>%n hora</numerusform>
             <numerusform>%n hores</numerusform>
-            <numerusform></numerusform>
         </translation>
     </message>
     <message numerus="yes">
@@ -1678,7 +1663,6 @@ Address: %4
         <translation type="obsolete">
             <numerusform>%n dia</numerusform>
             <numerusform>%n dies</numerusform>
-            <numerusform></numerusform>
         </translation>
     </message>
     <message>
@@ -2051,7 +2035,7 @@ En aquest cas es requereix una comisió d&apos;almenys 2%.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../utilitydialog.cpp" line="+30"/>
+        <location filename="../utilitydialog.cpp" line="+25"/>
         <source>Beancash-qt</source>
         <translation type="unfinished">Beancash-qt</translation>
     </message>
@@ -3534,7 +3518,7 @@ En aquest cas es requereix una comisió d&apos;almenys 2%.</translation>
     <name>ShutdownWindow</name>
     <message>
         <location filename="../utilitydialog.cpp" line="+48"/>
-        <source>Bitcoin Core is shutting down...</source>
+        <source>Bean Cash Core is shutting down...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -3776,7 +3760,6 @@ En aquest cas es requereix una comisió d&apos;almenys 2%.</translation>
         <translation>
             <numerusform>Obert per a %n bloc</numerusform>
             <numerusform>Obert per a %n blocs</numerusform>
-            <numerusform></numerusform>
         </translation>
     </message>
     <message>
@@ -3810,7 +3793,6 @@ En aquest cas es requereix una comisió d&apos;almenys 2%.</translation>
         <translation>
             <numerusform>, transmès a través de %n node</numerusform>
             <numerusform>, transmès a través de %n nodes</numerusform>
-            <numerusform></numerusform>
         </translation>
     </message>
     <message>
@@ -3867,7 +3849,6 @@ En aquest cas es requereix una comisió d&apos;almenys 2%.</translation>
         <translation>
             <numerusform>madura en %n bloc més</numerusform>
             <numerusform>madura en %n blocs més</numerusform>
-            <numerusform></numerusform>
         </translation>
     </message>
     <message>
@@ -4014,7 +3995,6 @@ En aquest cas es requereix una comisió d&apos;almenys 2%.</translation>
         <translation>
             <numerusform>Obert per a %n bloc més</numerusform>
             <numerusform>Obert per a %n blocs més</numerusform>
-            <numerusform></numerusform>
         </translation>
     </message>
     <message>

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="et">
-<defaultcodec>UTF-8</defaultcodec>
+<TS version="2.1" language="et">
 <context>
     <name>AboutDialog</name>
     <message>
@@ -64,6 +63,12 @@ Toode sisaldab OpenSSL Projekti all toodetud tarkvara, mis on kasutamiseks OpenS
     <message>
         <location line="+0"/>
         <source>2015-%1 Bean Core www.beancash.org</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+12"/>
+        <location line="+2"/>
+        <source> (%1-bit)</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1517,7 +1522,7 @@ Aadress: %4⏎</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../utilitydialog.cpp" line="+30"/>
+        <location filename="../utilitydialog.cpp" line="+25"/>
         <source>Beancash-qt</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2756,7 +2761,7 @@ Aadress: %4⏎</translation>
     <name>ShutdownWindow</name>
     <message>
         <location filename="../utilitydialog.cpp" line="+48"/>
-        <source>Bitcoin Core is shutting down...</source>
+        <source>Bean Cash Core is shutting down...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="la">
-<defaultcodec>UTF-8</defaultcodec>
+<TS version="2.1" language="la">
 <context>
     <name>AboutDialog</name>
     <message>
@@ -55,6 +54,12 @@ Hoc productum continet programmata composita ab OpenSSL Project pro utendo in Op
     <message>
         <location line="+0"/>
         <source>2015-%1 Bean Core www.beancash.org</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+12"/>
+        <location line="+2"/>
+        <source> (%1-bit)</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -998,6 +1003,7 @@ Some or all keys from:
         <source>%n active connection(s) to the Bean Cash network</source>
         <translation type="unfinished">
             <numerusform></numerusform>
+            <numerusform></numerusform>
         </translation>
     </message>
     <message>
@@ -1014,12 +1020,14 @@ Some or all keys from:
         <source>%n second(s) ago</source>
         <translation type="unfinished">
             <numerusform></numerusform>
+            <numerusform></numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <location line="+4"/>
         <source>%n minute(s) ago</source>
         <translation type="unfinished">
+            <numerusform></numerusform>
             <numerusform></numerusform>
         </translation>
     </message>
@@ -1028,12 +1036,14 @@ Some or all keys from:
         <source>%n hour(s) ago</source>
         <translation type="unfinished">
             <numerusform></numerusform>
+            <numerusform></numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <location line="+4"/>
         <source>%n day(s) ago</source>
         <translation type="unfinished">
+            <numerusform></numerusform>
             <numerusform></numerusform>
         </translation>
     </message>
@@ -1116,12 +1126,14 @@ Inscriptio: %4
         <source>%n second(s)</source>
         <translation type="unfinished">
             <numerusform></numerusform>
+            <numerusform></numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <location line="+4"/>
         <source>%n minute(s)</source>
         <translation type="unfinished">
+            <numerusform></numerusform>
             <numerusform></numerusform>
         </translation>
     </message>
@@ -1130,6 +1142,7 @@ Inscriptio: %4
         <source>%n hour(s)</source>
         <translation type="unfinished">
             <numerusform>%n hora</numerusform>
+            <numerusform></numerusform>
         </translation>
     </message>
     <message numerus="yes">
@@ -1137,6 +1150,7 @@ Inscriptio: %4
         <source>%n day(s)</source>
         <translation type="unfinished">
             <numerusform>%n dies</numerusform>
+            <numerusform></numerusform>
         </translation>
     </message>
     <message>
@@ -1321,12 +1335,14 @@ Inscriptio: %4
         <source>%n hour(s)</source>
         <translation type="obsolete">
             <numerusform>%n hora</numerusform>
+            <numerusform></numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <source>%n day(s)</source>
         <translation type="obsolete">
             <numerusform>%n dies</numerusform>
+            <numerusform></numerusform>
         </translation>
     </message>
 </context>
@@ -1487,7 +1503,7 @@ Inscriptio: %4
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../utilitydialog.cpp" line="+30"/>
+        <location filename="../utilitydialog.cpp" line="+25"/>
         <source>Beancash-qt</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2726,7 +2742,7 @@ Inscriptio: %4
     <name>ShutdownWindow</name>
     <message>
         <location filename="../utilitydialog.cpp" line="+48"/>
-        <source>Bitcoin Core is shutting down...</source>
+        <source>Bean Cash Core is shutting down...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2959,6 +2975,7 @@ Inscriptio: %4
         <source>Open for %n block(s)</source>
         <translation type="unfinished">
             <numerusform></numerusform>
+            <numerusform></numerusform>
         </translation>
     </message>
     <message>
@@ -2991,6 +3008,7 @@ Inscriptio: %4
         <source>, broadcast through %n node(s)</source>
         <translation>
             <numerusform>, disseminatum per %n nodo</numerusform>
+            <numerusform></numerusform>
         </translation>
     </message>
     <message>
@@ -3046,6 +3064,7 @@ Inscriptio: %4
         <source>matures in %n more block(s)</source>
         <translation>
             <numerusform>maturum erit in %n plure frusto</numerusform>
+            <numerusform></numerusform>
         </translation>
     </message>
     <message>
@@ -3187,6 +3206,7 @@ Inscriptio: %4
         <source>Open for %n more block(s)</source>
         <translation>
             <numerusform>Aperi pro %n plure frusto</numerusform>
+            <numerusform></numerusform>
         </translation>
     </message>
     <message>

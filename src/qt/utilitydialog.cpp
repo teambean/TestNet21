@@ -53,7 +53,7 @@ void AboutDialog::on_buttonBox_accepted()
 
 
 /** "Help message" dialog box */
-HelpMessageDialog::HelpMessageDialog(QWidget *parent) :
+HelpMessageDialog::HelpMessageDialog(QWidget *parent, bool versionOnly) :
     QDialog(parent),
     ui(new Ui::HelpMessageDialog)
 {
@@ -70,14 +70,13 @@ HelpMessageDialog::HelpMessageDialog(QWidget *parent) :
     version += " " + tr("(%1-bit)").arg(32);
 #endif
 
-    header = tr("Beancash-qt") + " " + tr("version") + " " +
-        QString::fromStdString(FormatFullVersion()) + "\n\n" +
-        tr("Usage:") + "\n" +
+    QString version = tr("Bean Cash Core") + " " + tr("version") + " " + QString::fromStdString(FormatFullVersion());
+    QString header = tr("Usage:") + "\n" +
         "  Beancash-qt [" + tr("command-line options") + "]                     " + "\n";
 
-    coreOptions = QString::fromStdString(HelpMessage());
+    QString coreOptions = QString::fromStdString(HelpMessage());
 
-    uiOptions = tr("UI options") + ":\n" +
+    QString uiOptions = tr("UI options") + ":\n" +
         "  -lang=<lang>           " + tr("Set language, for example \"de_DE\" (default: system locale)") + "\n" +
         "  -min                   " + tr("Start minimized") + "\n" +
         "  -splash                " + tr("Show splash screen on startup (default: 1)") + "\n" +
@@ -86,7 +85,10 @@ HelpMessageDialog::HelpMessageDialog(QWidget *parent) :
     ui->helpMessageLabel->setFont(GUIUtil::bitbeanAddressFont());
 
     // Set help message text
-    ui->helpMessageLabel->setText(header + "\n" + coreOptions + "\n" + uiOptions);
+    if(versionOnly)
+    		ui->helpMessageLabel->setText(version);
+    else
+    		ui->helpMessageLabel->setText(version + "\n" + header + "\n" + coreOptions + "\n" + uiOptions);
 }
 
 HelpMessageDialog::~HelpMessageDialog()
@@ -98,8 +100,7 @@ HelpMessageDialog::~HelpMessageDialog()
 void HelpMessageDialog::printToConsole()
 {
     // On other operating systems, the expected action is to print the message to the console.
-    QString strUsage = header + "\n" + coreOptions + "\n" + uiOptions + "\n";
-    fprintf(stdout, "%s", strUsage.toStdString().c_str());
+    fprintf(stdout, "%s\n", qPrintable(ui->helpMessageLabel->text()));
 }
 
 void HelpMessageDialog::showOrPrint()

@@ -37,8 +37,6 @@ private slots:
     void on_openDebugLogfileButton_clicked();
     //** open Beancash.conf from current datadir */
     void on_openConfigfileButton_clicked();
-    /** display messagebox with program parameters (same as Beancash-qt --help) */
-    void on_showCLOptionsButton_clicked();
     void on_closeButton_clicked();
     /** change the time range of the network traffic graph */
         void on_sldGraphRange_valueChanged(int value);

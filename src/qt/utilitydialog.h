@@ -41,7 +41,7 @@ class HelpMessageDialog : public QDialog
     Q_OBJECT
 
 public:
-    explicit HelpMessageDialog(QWidget *parent);
+    explicit HelpMessageDialog(QWidget *parent, bool versionOnly);
     ~HelpMessageDialog();
 
     void printToConsole();
@@ -49,9 +49,6 @@ public:
 
 private:
     Ui::HelpMessageDialog *ui;
-    QString header;
-    QString coreOptions;
-    QString uiOptions;
 
 private slots:
     void on_okButton_accepted();

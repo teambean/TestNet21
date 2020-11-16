@@ -318,11 +318,15 @@ void BitbeanGUI::createActions(bool fIsTestnet)
     openRPCConsoleAction = new QAction(QIcon(":/icons/debugwindow"), tr("&Debug Window"), this);
     openRPCConsoleAction->setToolTip(tr("Open debugging and diagnostic console"));
 
+    showHelpMessageAction = new QAction(QApplication::style()->standardIcon(QStyle::SP_MessageBoxInformation), tr("&Command-line options"), this);
+    showHelpMessageAction->setStatusTip(tr("Show the Bean Cash Core help message to get a list of command-line options"));
+
     connect(quitAction, SIGNAL(triggered()), qApp, SLOT(quit()));
     connect(aboutAction, SIGNAL(triggered()), this, SLOT(aboutClicked()));
     connect(aboutQtAction, SIGNAL(triggered()), qApp, SLOT(aboutQt()));
     connect(optionsAction, SIGNAL(triggered()), this, SLOT(optionsClicked()));
     connect(toggleHideAction, SIGNAL(triggered()), this, SLOT(toggleHidden()));
+    connect(showHelpMessageAction, SIGNAL(triggered(), this, SLOT(showHelpMessageClicked()));
     connect(encryptWalletAction, SIGNAL(triggered(bool)), this, SLOT(encryptWallet(bool)));
     connect(backupWalletAction, SIGNAL(triggered()), this, SLOT(backupWallet()));
     connect(dumpWalletAction, SIGNAL(triggered()), this, SLOT(dumpWallet()));
@@ -369,6 +373,7 @@ void BitbeanGUI::createMenuBar()
 
     QMenu *help = appMenuBar->addMenu(tr("&Help"));
     help->addAction(openRPCConsoleAction);
+    help->addAction(showHelpMessageAction);
     help->addSeparator();
     help->addAction(aboutAction);
     help->addAction(aboutQtAction);
@@ -557,6 +562,13 @@ void BitbeanGUI::aboutClicked()
     AboutDialog dlg(this);
     dlg.setModel(clientModel);
     dlg.exec();
+}
+
+void BitbeanGUI::showHelpMessageClicked()
+{
+    HelpMessageDialog *help = new HelpMessageDialog(this, false);
+    help->setAttribute(Qt::WA_DeleteOnClose);
+    help->show();
 }
 
 void BitbeanGUI::setNumConnections(int count)

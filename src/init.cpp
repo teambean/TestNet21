@@ -182,17 +182,18 @@ bool AppInit(int argc, char* argv[])
             return false;
         }
 
-        if (mapArgs.count("-?") || mapArgs.count("--help"))
+        if (mapArgs.count("-?") || mapArgs.count("-help") || mapArgs.count("-version") || mapArgs.count("-h") || mapArgs.count("-v"))
         {
-            // First part of help message is specific to bitbeand / RPC client
-            std::string strUsage = _("Beancash version") + " " + FormatFullVersion() + "\n\n" +
-                _("Usage:") + "\n" +
-                  "  Beancashd [options]                     " + "\n" +
+            std::string strUsage = _("Beancash version") + " " + FormatFullVersion() + "\n";
+            if (!mapArgs.count("-version")) || (!mapArgs.count("-v"))
+            {
+                strUsage += "\n" + _("Usage:") + "\n" +
                   "  Beancashd [options] <command> [params]  " + _("Send command to -server or Beancashd") + "\n" +
                   "  Beancashd [options] help                " + _("List commands") + "\n" +
                   "  Beancashd [options] help <command>      " + _("Get help for a command") + "\n";
 
-            strUsage += "\n" + HelpMessage();
+                strUsage += "\n" + HelpMessage();
+            }
 
             fprintf(stdout, "%s", strUsage.c_str());
             return false;

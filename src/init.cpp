@@ -185,7 +185,11 @@ bool AppInit(int argc, char* argv[])
         if (mapArgs.count("-?") || mapArgs.count("-help") || mapArgs.count("-version") || mapArgs.count("-h") || mapArgs.count("-v"))
         {
             std::string strUsage = _("Beancash version") + " " + FormatFullVersion() + "\n";
-            if (!mapArgs.count("-version")) || (!mapArgs.count("-v"))
+            if (mapArgs.count("-version")) || (mapArgs.count("-v"))
+            {
+                strUsage += LicenseInfo();
+            }
+            else
             {
                 strUsage += "\n" + _("Usage:") + "\n" +
                   "  Beancashd [options] <command> [params]  " + _("Send command to -server or Beancashd") + "\n" +
@@ -394,6 +398,20 @@ strUsage += "  -rpcsslprivatekeyfile=<file.pem>         " + _("Server private ke
 strUsage += "  -rpcsslciphers=<ciphers>                 " + _("Acceptable ciphers (default: TLSv1+HIGH:!SSLv2:!aNULL:!eNULL:!AH:!3DES:@STRENGTH)") + "\n";
         
     return strUsage;
+}
+
+std::string LicenseInfo()
+{
+    return FormatParagraph(strprintf(_("Copyright (C) 2009-%i The Bitcoin Core Developers"), COPYRIGHT_YEAR)) + "\n" +
+            "\n" +
+			  FormatParagraph(strprintf(_("Copyright (C) 2012-2014 The Novacoin Developers"))) + "\n" +
+            "\n" +           
+           FormatParagraph(strprintf(_("Copyright (C) 2015-%i Bean Core www.beancash.org"), COPYRIGHT_YEAR)) + "\n" +
+            "\n" +
+           FormatParagraph(_("Distributed under the MIT/X11 software license, see accompanying file COPYING or <http://www.opensource.org/licenses/mit-license.php>.")) + "\n" +
+            "\n" +
+           FormatParagraph(_("This product includes software developed by the OpenSSL Project for use in the OpenSSL Toolkit <https://www.openssl.org/> and cryptographic software written by Eric Young.")) +
+            "\n";
 }
 
 bool LoadExternalBlockFile(FILE* fileIn)

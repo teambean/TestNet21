@@ -17,6 +17,9 @@ void StartShutdown();
 bool ShutdownRequested();
 void Shutdown();
 bool AppInit2(boost::thread_group& threadGroup);
+/** Help for options shared between UI and daemon (for -help) */
 std::string HelpMessage();
+/** Returns licensing information (for -version & -v) */
+std::string LicenseInfo();
 
 #endif

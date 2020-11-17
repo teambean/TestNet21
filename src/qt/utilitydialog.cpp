@@ -1,4 +1,3 @@
-
 // Copyright (c) 2011-2014 The Bitcoin developers
 // Copyright (c) 2020 Bean Core www.beancore.org
 // Distributed under the MIT/X11 software license, see the accompanying
@@ -37,7 +36,25 @@ void AboutDialog::setModel(ClientModel *model)
 {
     if(model)
     {
-        ui->versionLabel->setText(version);
+        QString version = tr(Bean Cash Core) + " " + tr("version") + " " + model->formatFullVersion();
+        /* On x86 add a bit specifier to the version so that users can distinguish between
+         * 32 and 64 bit builds. On other architectures, 32/64 bit may be more ambiguous.
+        */
+#if defined(__x86_64__)
+    version += " " + tr("(%1-bit)").arg(64);
+#elif defined(__i386__ )
+    version += " " + tr("(%1-bit)").arg(32);
+#endif
+
+	/// HTML-format the license message from the core
+	QString licenseInfo = QString::fromStdString(LicenseInfo());
+	// Make URLs clickable
+	QRegExp uri("<(.*)>", Qt::CaseSensitive, QRegExp::RegExp2);
+	uri.setMinimal(true); // use non-greedy matching
+	licenseInfo = licenseInfo.replace(uri, "<a href=\"\\1\">\\1</a>");
+	// Replace newlines with HTML breaks
+	licenseInfo = licenseInfo.replace("\n\n", "<br><br>");
+	ui->versionLabel->setText(version + "<br><br>" + licenseInfo);
     }
 }
 
@@ -60,16 +77,6 @@ HelpMessageDialog::HelpMessageDialog(QWidget *parent, bool versionOnly) :
     ui->setupUi(this);
     GUIUtil::restoreWindowGeometry("nHelpMessageDialogWindow", this->size(), this);
 
-    QString version = model->formatFullVersion();
-    /* On x86 add a bit specifier to the version so that users can distinguish between
-     * 32 and 64 bit builds. On other architectures, 32/64 bit may be more ambigious.
-     */
-#if defined(__x86_64__)
-    version += " " + tr("(%1-bit)").arg(64);
-#elif defined(__i386__ )
-    version += " " + tr("(%1-bit)").arg(32);
-#endif
-
     QString version = tr("Bean Cash Core") + " " + tr("version") + " " + QString::fromStdString(FormatFullVersion());
     QString header = tr("Usage:") + "\n" +
         "  Beancash-qt [" + tr("command-line options") + "]                     " + "\n";
@@ -86,7 +93,7 @@ HelpMessageDialog::HelpMessageDialog(QWidget *parent, bool versionOnly) :
 
     // Set help message text
     if(versionOnly)
-    		ui->helpMessageLabel->setText(version);
+    		ui->helpMessageLabel->setText(version + "\n" + QString::fromStdString(LicenseInfo()));
     else
     		ui->helpMessageLabel->setText(version + "\n" + header + "\n" + coreOptions + "\n" + uiOptions);
 }
